@@ -39,9 +39,8 @@ struct EntryView: View {
     init() { }
 
     init(entry: EntryPost) {
-        self.title = entry.title ?? ""
-        self.bodyString = entry.body ?? ""
-
+        _title = State(initialValue: entry.title ?? "")
+        _bodyString = State(initialValue: entry.body ?? "")
         self.entry = entry
     }
 
