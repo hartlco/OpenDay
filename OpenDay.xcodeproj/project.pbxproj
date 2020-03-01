@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C53329B0240B766B007389DF /* EntryPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53329AF240B766B007389DF /* EntryPost.swift */; };
 		C5B2BC39240ABDB6009E3E2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B2BC38240ABDB6009E3E2C /* AppDelegate.swift */; };
 		C5B2BC3B240ABDB6009E3E2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B2BC3A240ABDB6009E3E2C /* SceneDelegate.swift */; };
 		C5B2BC3E240ABDB6009E3E2C /* OpenDay.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C5B2BC3C240ABDB6009E3E2C /* OpenDay.xcdatamodeld */; };
@@ -14,9 +15,11 @@
 		C5B2BC42240ABDB7009E3E2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5B2BC41240ABDB7009E3E2C /* Assets.xcassets */; };
 		C5B2BC45240ABDB7009E3E2C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5B2BC44240ABDB7009E3E2C /* Preview Assets.xcassets */; };
 		C5B2BC48240ABDB7009E3E2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5B2BC46240ABDB7009E3E2C /* LaunchScreen.storyboard */; };
+		C5B2BC52240ABDE9009E3E2C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5B2BC51240ABDE9009E3E2C /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C53329AF240B766B007389DF /* EntryPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPost.swift; sourceTree = "<group>"; };
 		C5B2BC35240ABDB6009E3E2C /* OpenDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5B2BC38240ABDB6009E3E2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5B2BC3A240ABDB6009E3E2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +29,8 @@
 		C5B2BC44240ABDB7009E3E2C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C5B2BC47240ABDB7009E3E2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C5B2BC49240ABDB7009E3E2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5B2BC4F240ABDE3009E3E2C /* OpenDay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenDay.entitlements; sourceTree = "<group>"; };
+		C5B2BC51240ABDE9009E3E2C /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5B2BC52240ABDE9009E3E2C /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +50,7 @@
 			children = (
 				C5B2BC37240ABDB6009E3E2C /* OpenDay */,
 				C5B2BC36240ABDB6009E3E2C /* Products */,
+				C5B2BC50240ABDE9009E3E2C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +65,7 @@
 		C5B2BC37240ABDB6009E3E2C /* OpenDay */ = {
 			isa = PBXGroup;
 			children = (
+				C5B2BC4F240ABDE3009E3E2C /* OpenDay.entitlements */,
 				C5B2BC38240ABDB6009E3E2C /* AppDelegate.swift */,
 				C5B2BC3A240ABDB6009E3E2C /* SceneDelegate.swift */,
 				C5B2BC3F240ABDB6009E3E2C /* ContentView.swift */,
@@ -66,6 +74,7 @@
 				C5B2BC49240ABDB7009E3E2C /* Info.plist */,
 				C5B2BC3C240ABDB6009E3E2C /* OpenDay.xcdatamodeld */,
 				C5B2BC43240ABDB7009E3E2C /* Preview Content */,
+				C53329AF240B766B007389DF /* EntryPost.swift */,
 			);
 			path = OpenDay;
 			sourceTree = "<group>";
@@ -76,6 +85,14 @@
 				C5B2BC44240ABDB7009E3E2C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C5B2BC50240ABDE9009E3E2C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C5B2BC51240ABDE9009E3E2C /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +168,7 @@
 			files = (
 				C5B2BC3E240ABDB6009E3E2C /* OpenDay.xcdatamodeld in Sources */,
 				C5B2BC39240ABDB6009E3E2C /* AppDelegate.swift in Sources */,
+				C53329B0240B766B007389DF /* EntryPost.swift in Sources */,
 				C5B2BC40240ABDB6009E3E2C /* ContentView.swift in Sources */,
 				C5B2BC3B240ABDB6009E3E2C /* SceneDelegate.swift in Sources */,
 			);
@@ -288,6 +306,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = OpenDay/OpenDay.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"OpenDay/Preview Content\"";
 				DEVELOPMENT_TEAM = 9E8SXF3Y36;
@@ -308,6 +327,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = OpenDay/OpenDay.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"OpenDay/Preview Content\"";
 				DEVELOPMENT_TEAM = 9E8SXF3Y36;
