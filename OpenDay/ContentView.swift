@@ -1,5 +1,7 @@
 import SwiftUI
 import KingfisherSwiftUI
+import TextView
+import KeyboardObserving
 
 struct ContentView: View {
     @FetchRequest(fetchRequest: EntryPost.allPostsFetchRequest()) var posts: FetchedResults<EntryPost>
@@ -47,6 +49,7 @@ struct EntryView: View {
     @State var images = [EntryImage]()
     @State var entryDate = Date()
     @State var pickerIsActive: Bool = false
+    @State var isEditingContent: Bool = false
 
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -75,8 +78,9 @@ struct EntryView: View {
                 Section(header: Text("Modify")) {
                     TextField("Title", text: $title)
                         .font(.headline)
-                    TextField("Content", text: $bodyString)
-                        .font(.body)
+                    NavigationLink(destination: ContentEntryView(bodyString: $bodyString)) {
+                        Text(bodyString)
+                    }
                     DatePicker(selection: $entryDate,
                                in: Date(timeIntervalSince1970: 0)...,
                                displayedComponents: .date) {
@@ -122,6 +126,15 @@ struct EntryView: View {
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Edit")
         }
+    }
+}
+
+struct ContentEntryView: View {
+    @Binding var bodyString: String
+
+    var body: some View {
+        TextView(text: $bodyString)
+        .keyboardObserving()
     }
 }
 

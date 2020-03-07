@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C53329B0240B766B007389DF /* EntryPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53329AF240B766B007389DF /* EntryPost.swift */; };
+		C558AAF7241392D300DBB148 /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = C558AAF6241392D300DBB148 /* KeyboardObserving */; };
 		C5859DEB240B9EE900711C16 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C5859DEA240B9EE900711C16 /* KingfisherSwiftUI */; };
 		C5B2BC39240ABDB6009E3E2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B2BC38240ABDB6009E3E2C /* AppDelegate.swift */; };
 		C5B2BC3B240ABDB6009E3E2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B2BC3A240ABDB6009E3E2C /* SceneDelegate.swift */; };
@@ -18,6 +19,7 @@
 		C5B2BC48240ABDB7009E3E2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5B2BC46240ABDB7009E3E2C /* LaunchScreen.storyboard */; };
 		C5B2BC52240ABDE9009E3E2C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5B2BC51240ABDE9009E3E2C /* CloudKit.framework */; };
 		C5DA7A902412DEF400F4F398 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DA7A8F2412DEF400F4F398 /* ImagePicker.swift */; };
+		C5DA7A93241386A200F4F398 /* TextView in Frameworks */ = {isa = PBXBuildFile; productRef = C5DA7A92241386A200F4F398 /* TextView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,7 @@
 		C5B2BC4F240ABDE3009E3E2C /* OpenDay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenDay.entitlements; sourceTree = "<group>"; };
 		C5B2BC51240ABDE9009E3E2C /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		C5DA7A8F2412DEF400F4F398 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		C5DA7A912413853800F4F398 /* TextView */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TextView; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +45,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5859DEB240B9EE900711C16 /* KingfisherSwiftUI in Frameworks */,
+				C558AAF7241392D300DBB148 /* KeyboardObserving in Frameworks */,
+				C5DA7A93241386A200F4F398 /* TextView in Frameworks */,
 				C5B2BC52240ABDE9009E3E2C /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -52,6 +57,7 @@
 		C5B2BC2C240ABDB5009E3E2C = {
 			isa = PBXGroup;
 			children = (
+				C5DA7A912413853800F4F398 /* TextView */,
 				C5B2BC37240ABDB6009E3E2C /* OpenDay */,
 				C5B2BC36240ABDB6009E3E2C /* Products */,
 				C5B2BC50240ABDE9009E3E2C /* Frameworks */,
@@ -118,6 +124,8 @@
 			name = OpenDay;
 			packageProductDependencies = (
 				C5859DEA240B9EE900711C16 /* KingfisherSwiftUI */,
+				C5DA7A92241386A200F4F398 /* TextView */,
+				C558AAF6241392D300DBB148 /* KeyboardObserving */,
 			);
 			productName = OpenDay;
 			productReference = C5B2BC35240ABDB6009E3E2C /* OpenDay.app */;
@@ -149,6 +157,7 @@
 			mainGroup = C5B2BC2C240ABDB5009E3E2C;
 			packageReferences = (
 				C5859DE9240B9EE900711C16 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				C558AAF5241392D300DBB148 /* XCRemoteSwiftPackageReference "KeyboardObserving" */,
 			);
 			productRefGroup = C5B2BC36240ABDB6009E3E2C /* Products */;
 			projectDirPath = "";
@@ -380,6 +389,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C558AAF5241392D300DBB148 /* XCRemoteSwiftPackageReference "KeyboardObserving" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nickffox/KeyboardObserving.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.1;
+			};
+		};
 		C5859DE9240B9EE900711C16 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
@@ -391,10 +408,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C558AAF6241392D300DBB148 /* KeyboardObserving */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C558AAF5241392D300DBB148 /* XCRemoteSwiftPackageReference "KeyboardObserving" */;
+			productName = KeyboardObserving;
+		};
 		C5859DEA240B9EE900711C16 /* KingfisherSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C5859DE9240B9EE900711C16 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = KingfisherSwiftUI;
+		};
+		C5DA7A92241386A200F4F398 /* TextView */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TextView;
 		};
 /* End XCSwiftPackageProductDependency section */
 
