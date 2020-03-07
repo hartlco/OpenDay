@@ -13,15 +13,28 @@ struct ContentView: View {
                 })
                 List(posts) { post in
                     NavigationLink(destination: EntryView(entry: post)) {
-                        VStack(alignment: .leading) {
-                            Text(post.title ?? "")
-                                .font(.headline)
-                            Text(post.body ?? "")
-                            Text(post.entryDate?.description ?? "")
-                                .font(.footnote)
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(post.title ?? "")
+                                    .font(.headline)
+                                Text(post.body ?? "")
+                                Text(post.entryDate?.description ?? "")
+                                    .font(.footnote)
+                            }
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack {
+                                    ForEach(Array(post.images ?? [])) { entryImage in
+                                        Image(uiImage: entryImage.uiimage)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(maxHeight: 50)
+                                    }
+                                }
+                            }
                         }
                     }
                 }
+                .listStyle(GroupedListStyle())
             }
             .navigationBarTitle("Entries")
         }
@@ -31,7 +44,16 @@ struct ContentView: View {
 struct EntryView: View {
     @State var title = ""
     @State var bodyString = ""
-    @State var images = [UIImage]()
+    @State var images = [EntryImage]()
+    @State var entryDate = Date()
+    @State var pickerIsActive: Bool = false
+
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter
+    }
+
     @Environment(\.managedObjectContext) var managedObjectContext
 
     private var entry: EntryPost?
@@ -41,21 +63,46 @@ struct EntryView: View {
     init(entry: EntryPost) {
         _title = State(initialValue: entry.title ?? "")
         _bodyString = State(initialValue: entry.body ?? "")
+        _entryDate = State(initialValue: entry.entryDate ?? Date())
+        _images = State(initialValue: Array(entry.images ?? []))
+
         self.entry = entry
     }
 
     var body: some View {
         VStack {
             List {
-                Section {
+                Section(header: Text("Modify")) {
                     TextField("Title", text: $title)
                         .font(.headline)
                     TextField("Content", text: $bodyString)
                         .font(.body)
-                    Button(action: {
+                    DatePicker(selection: $entryDate,
+                               in: Date(timeIntervalSince1970: 0)...,
+                               displayedComponents: .date) {
+                                Text("Date is \(entryDate, formatter: dateFormatter)")
+                    }
+                    ForEach(images) { entryImage in
+                        Image(uiImage: entryImage.uiimage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxHeight: 200)
 
+                    }
+                    Button(action: {
+                        self.pickerIsActive = true
                     }) {
-                        Text("Add Image")
+                        Text("Import image")
+                    }
+                    .sheet(isPresented: $pickerIsActive) {
+                        ImagePicker(imagePicked: { image in
+                            if let image = image {
+                                let entryImage = EntryImage(context: self.managedObjectContext)
+                                entryImage.data = image.jpegData(compressionQuality: 90)
+                                entryImage.imageDate = Date()
+                                self.images.append(entryImage)
+                            }
+                        })
                     }
                 }
                 Section {
@@ -63,13 +110,17 @@ struct EntryView: View {
                         let entry = EntryPost(context: self.managedObjectContext)
                         entry.title = self.title
                         entry.body = self.bodyString
-                        entry.entryDate = Date()
+                        entry.entryDate = self.entryDate
+                        entry.images = Set(self.images)
                         try? self.managedObjectContext.save()
                     }) {
                         Text("Save")
                     }
                 }
-            }.listStyle(GroupedListStyle())
+
+            }
+            .listStyle(GroupedListStyle())
+            .navigationBarTitle("Edit")
         }
     }
 }

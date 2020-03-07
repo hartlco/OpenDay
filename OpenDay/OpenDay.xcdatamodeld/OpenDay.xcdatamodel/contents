@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="EntryImage" representedClassName="EntryImage" syncable="YES" codeGenerationType="class">
-        <attribute name="data" optional="YES" attributeType="Binary"/>
+        <attribute name="data" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="imageDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="post" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryPost" inverseName="images" inverseEntity="EntryPost"/>
     </entity>
@@ -12,7 +12,7 @@
         <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EntryImage" inverseName="post" inverseEntity="EntryImage"/>
     </entity>
     <elements>
-        <element name="EntryPost" positionX="-54" positionY="-9" width="128" height="103"/>
         <element name="EntryImage" positionX="-54" positionY="18" width="128" height="88"/>
+        <element name="EntryPost" positionX="-54" positionY="-9" width="128" height="103"/>
     </elements>
 </model>
