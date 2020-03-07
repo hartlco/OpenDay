@@ -8,15 +8,6 @@ public class EntryPost: NSManagedObject, Identifiable {
     @NSManaged public var images: Set<EntryImage>?
 }
 
-extension EntryPost {
-    static func allPostsFetchRequest() -> NSFetchRequest<EntryPost> {
-        let request: NSFetchRequest<EntryPost> = EntryPost.fetchRequest() as! NSFetchRequest<EntryPost>
-        request.sortDescriptors = [NSSortDescriptor(key: "entryDate", ascending: true)]
-
-        return request
-    }
-}
-
 extension EntryImage: Identifiable { }
 
 extension EntryImage {

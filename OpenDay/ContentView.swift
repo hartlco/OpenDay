@@ -4,17 +4,22 @@ import TextView
 import KeyboardObserving
 
 struct ContentView: View {
-    @FetchRequest(fetchRequest: EntryPost.allPostsFetchRequest()) var posts: FetchedResults<EntryPost>
+    @EnvironmentObject var store: EntriesStore
+    @FetchRequest var posts: FetchedResults<EntryPost>
+
+    init() {
+        self._posts = FetchRequest(fetchRequest: EntriesStore.allPostsFetchRequest())
+    }
 
     var body: some View {
         NavigationView {
             VStack {
-                NavigationLink(destination: EntryView(),
+                NavigationLink(destination: EntryView().environmentObject(store.storeForNewEntry()),
                                label: {
                                 Text("Add")
                 })
                 List(posts) { post in
-                    NavigationLink(destination: EntryView(entry: post)) {
+                    NavigationLink(destination: EntryView().environmentObject(self.store.store(for: post))) {
                         HStack {
                             VStack(alignment: .leading) {
                                 Text(post.title ?? "")
@@ -44,10 +49,9 @@ struct ContentView: View {
 }
 
 struct EntryView: View {
-    @State var title = ""
+    @EnvironmentObject var store: EntryStore
+
     @State var bodyString = ""
-    @State var images = [EntryImage]()
-    @State var entryDate = Date()
     @State var pickerIsActive: Bool = false
     @State var isEditingContent: Bool = false
 
@@ -57,36 +61,21 @@ struct EntryView: View {
         return formatter
     }
 
-    @Environment(\.managedObjectContext) var managedObjectContext
-
-    private var entry: EntryPost?
-
-    init() { }
-
-    init(entry: EntryPost) {
-        _title = State(initialValue: entry.title ?? "")
-        _bodyString = State(initialValue: entry.body ?? "")
-        _entryDate = State(initialValue: entry.entryDate ?? Date())
-        _images = State(initialValue: Array(entry.images ?? []))
-
-        self.entry = entry
-    }
-
     var body: some View {
         VStack {
             List {
                 Section(header: Text("Modify")) {
-                    TextField("Title", text: $title)
+                    TextField("Title", text: self.$store.title)
                         .font(.headline)
-                    NavigationLink(destination: ContentEntryView(bodyString: $bodyString)) {
-                        Text(bodyString)
+                    NavigationLink(destination: ContentEntryView(bodyString: self.$store.bodyString)) {
+                        Text(self.store.bodyString)
                     }
-                    DatePicker(selection: $entryDate,
+                    DatePicker(selection: self.$store.entryDate,
                                in: Date(timeIntervalSince1970: 0)...,
                                displayedComponents: .date) {
-                                Text("Date is \(entryDate, formatter: dateFormatter)")
+                                Text("Date is")
                     }
-                    ForEach(images) { entryImage in
+                    ForEach(self.store.images) { entryImage in
                         Image(uiImage: entryImage.uiimage)
                             .resizable()
                             .scaledToFit()
@@ -101,22 +90,14 @@ struct EntryView: View {
                     .sheet(isPresented: $pickerIsActive) {
                         ImagePicker(imagePicked: { image in
                             if let image = image {
-                                let entryImage = EntryImage(context: self.managedObjectContext)
-                                entryImage.data = image.jpegData(compressionQuality: 90)
-                                entryImage.imageDate = Date()
-                                self.images.append(entryImage)
+                                self.store.append(image: image)
                             }
                         })
                     }
                 }
                 Section {
                     Button(action: {
-                        let entry = EntryPost(context: self.managedObjectContext)
-                        entry.title = self.title
-                        entry.body = self.bodyString
-                        entry.entryDate = self.entryDate
-                        entry.images = Set(self.images)
-                        try? self.managedObjectContext.save()
+                        self.store.save()
                     }) {
                         Text("Save")
                     }
@@ -126,6 +107,7 @@ struct EntryView: View {
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Edit")
         }
+        .keyboardObserving()
     }
 }
 
