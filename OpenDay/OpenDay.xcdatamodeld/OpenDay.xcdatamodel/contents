@@ -5,14 +5,24 @@
         <attribute name="imageDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="post" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryPost" inverseName="images" inverseEntity="EntryPost"/>
     </entity>
+    <entity name="EntryLocation" representedClassName="EntryLocation" syncable="YES" codeGenerationType="class">
+        <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="isoCountryCode" optional="YES" attributeType="String"/>
+        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="street" optional="YES" attributeType="String"/>
+        <relationship name="post" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryPost" inverseName="location" inverseEntity="EntryPost"/>
+    </entity>
     <entity name="EntryPost" representedClassName=".EntryPost" syncable="YES">
         <attribute name="body" optional="YES" attributeType="String"/>
         <attribute name="entryDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EntryImage" inverseName="post" inverseEntity="EntryImage"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryLocation" inverseName="post" inverseEntity="EntryLocation"/>
     </entity>
     <elements>
         <element name="EntryImage" positionX="-54" positionY="18" width="128" height="88"/>
-        <element name="EntryPost" positionX="-54" positionY="-9" width="128" height="103"/>
+        <element name="EntryPost" positionX="-54" positionY="-9" width="128" height="118"/>
+        <element name="EntryLocation" positionX="-45" positionY="36" width="128" height="133"/>
     </elements>
 </model>

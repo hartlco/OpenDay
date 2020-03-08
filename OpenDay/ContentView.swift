@@ -73,7 +73,7 @@ struct EntryView: View {
                     DatePicker(selection: self.$store.entryDate,
                                in: Date(timeIntervalSince1970: 0)...,
                                displayedComponents: .date) {
-                                Text("Date is")
+                                Text("Date is \(self.store.entryDate, formatter: dateFormatter)")
                     }
                     ForEach(self.store.images) { entryImage in
                         Image(uiImage: entryImage.uiimage)
@@ -87,6 +87,11 @@ struct EntryView: View {
                     }) {
                         Text("Import image")
                     }
+                    Button(action: {
+                        self.store.updateLocation()
+                    }, label: {
+                        Text("Update Location: \(self.store.currentLocation?.street ?? ""), \(self.store.currentLocation?.city ?? "")")
+                    })
                     .sheet(isPresented: $pickerIsActive) {
                         ImagePicker(imagePicked: { image in
                             if let image = image {
@@ -95,17 +100,12 @@ struct EntryView: View {
                         })
                     }
                 }
-                Section {
-                    Button(action: {
-                        self.store.save()
-                    }) {
-                        Text("Save")
-                    }
-                }
-
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Edit")
+            .onDisappear {
+                self.store.save()
+            }
         }
         .keyboardObserving()
     }
