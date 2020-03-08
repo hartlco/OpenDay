@@ -33,6 +33,13 @@ struct EntryView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(maxHeight: 200)
+                            .contextMenu {
+                                Button(action: {
+                                    self.store.delete(image: entryImage)
+                                }, label: {
+                                    Text("Delete")
+                                })
+                        }
 
                     }
                     Button(action: {

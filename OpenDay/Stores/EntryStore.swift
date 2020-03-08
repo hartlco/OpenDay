@@ -76,6 +76,15 @@ final class EntryStore: ObservableObject {
         })
     }
 
+    func delete(image: EntryImage) {
+        guard let index = images.firstIndex(of: image) else {
+            return
+        }
+
+        images.remove(at: index)
+        managedObjectContext.delete(image)
+    }
+
     func save() {
         var entry = self.entry
 
