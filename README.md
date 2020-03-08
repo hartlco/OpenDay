@@ -1,0 +1,3 @@
+## Installation
+
+`brew install mint`

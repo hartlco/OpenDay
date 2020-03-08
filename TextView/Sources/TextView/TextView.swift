@@ -11,7 +11,7 @@ import AppKit
 @available (macOS 10.15, iOS 13, *)
 @available (tvOS, unavailable)
 @available (watchOS, unavailable)
-fileprivate struct JustifiedTextEnvironmentKey: EnvironmentKey {
+private struct JustifiedTextEnvironmentKey: EnvironmentKey {
     typealias Value = Bool
     static var defaultValue: Bool = false
 }
@@ -26,7 +26,7 @@ fileprivate extension EnvironmentValues {
     }
 }
 
-fileprivate func _alignment(from environment: EnvironmentValues) -> NSTextAlignment {
+private func _alignment(from environment: EnvironmentValues) -> NSTextAlignment {
     switch environment.multilineTextAlignment {
     case .center:
         return .center
@@ -43,13 +43,13 @@ fileprivate func _alignment(from environment: EnvironmentValues) -> NSTextAlignm
     }
 }
 
-fileprivate struct TextDidChangePublisherKey: EnvironmentKey {
+private struct TextDidChangePublisherKey: EnvironmentKey {
     typealias Value = PassthroughSubject<Bool, Never>?
-    static var defaultValue: PassthroughSubject<Bool, Never>? = nil
+    static var defaultValue: PassthroughSubject<Bool, Never>?
 }
-fileprivate struct TextDidCommitPublisherKey: EnvironmentKey {
+private struct TextDidCommitPublisherKey: EnvironmentKey {
     typealias Value = PassthroughSubject<Void, Never>?
-    static var defaultValue: PassthroughSubject<Void, Never>? = nil
+    static var defaultValue: PassthroughSubject<Void, Never>?
 }
 
 fileprivate extension EnvironmentValues {
@@ -86,21 +86,22 @@ public struct TextView: View {
     }
 }
 
-fileprivate struct SubjectSinkView<Output, Content: View>: View {
+private struct SubjectSinkView<Output, Content: View>: View {
     typealias Publisher = PassthroughSubject<Output, Never>
     let subject: AnyPublisher<Output, Never>
     var cancellable: Set<AnyCancellable> = []
     let body: AnyView
 
-    init(_ body: Content, keyPath: WritableKeyPath<EnvironmentValues, Publisher?>, perform action: ((Output) -> Void)?) {
+    init(_ body: Content,
+         keyPath: WritableKeyPath<EnvironmentValues, Publisher?>,
+         perform action: ((Output) -> Void)?) {
         if let action = action {
             let subject = Publisher()
             self.subject = AnyPublisher(subject)
             self.body = AnyView(body.environment(keyPath, subject))
             subject.sink(receiveValue: action)
                 .store(in: &cancellable)
-        }
-        else {
+        } else {
             self.subject = AnyPublisher(Empty(completeImmediately: false))
             self.body = AnyView(body)
         }
@@ -117,8 +118,7 @@ extension SubjectSinkView where Output == Void {
             self.body = AnyView(body.environment(keyPath, subject))
             subject.sink(receiveValue: action)
                 .store(in: &cancellable)
-        }
-        else {
+        } else {
             self.subject = AnyPublisher(Empty(completeImmediately: false))
             self.body = AnyView(body)
         }
@@ -143,6 +143,7 @@ public extension View {
 @available (tvOS, unavailable)
 @available (watchOS, unavailable)
 extension UIContentSizeCategory {
+    //swiftlint:disable cyclomatic_complexity
     fileprivate init(_ swiftuiValue: ContentSizeCategory) {
         switch swiftuiValue {
         case .extraSmall:
@@ -189,7 +190,7 @@ extension UITraitCollection {
 @available (macOS, unavailable)
 @available (tvOS, unavailable)
 @available (watchOS, unavailable)
-fileprivate struct _UIKitTextView: UIViewRepresentable {
+private struct _UIKitTextView: UIViewRepresentable {
     @Binding var text: String
     @State var justified: Bool = false
 
@@ -252,7 +253,7 @@ fileprivate struct _UIKitTextView: UIViewRepresentable {
 @available (iOS, unavailable)
 @available (tvOS, unavailable)
 @available (watchOS, unavailable)
-fileprivate struct _AppKitTextView: NSViewRepresentable {
+private struct _AppKitTextView: NSViewRepresentable {
     @Binding var text: String
 
     func makeNSView(context: Context) -> NSTextView {

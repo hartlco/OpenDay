@@ -84,12 +84,13 @@ struct EntryView: View {
                     }
                     Button(action: {
                         self.pickerIsActive = true
-                    }) {
+                    }, label: {
                         Text("Import image")
-                    }
+                    })
                     Button(action: {
                         self.store.updateLocation()
                     }, label: {
+                        //swiftlint:disable line_length
                         Text("Update Location: \(self.store.currentLocation?.street ?? ""), \(self.store.currentLocation?.city ?? "")")
                     })
                     .sheet(isPresented: $pickerIsActive) {

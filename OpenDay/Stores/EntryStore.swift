@@ -45,11 +45,11 @@ final class EntryStore: ObservableObject {
     func updateLocation() {
         locationCancellable = self.locationService.getLocation().sink(receiveCompletion: { _ in
 
-        }) { [weak self] location in
+        }, receiveValue: { [weak self] location in
             guard let self = self else { return }
 
             self.currentLocation = location
-        }
+        })
     }
 
     func save() {

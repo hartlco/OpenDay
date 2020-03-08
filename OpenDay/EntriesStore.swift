@@ -11,6 +11,7 @@ final class EntriesStore: ObservableObject {
     }
 
     static func allPostsFetchRequest() -> NSFetchRequest<EntryPost> {
+        //swiftlint:disable force_cast
         let request: NSFetchRequest<EntryPost> = EntryPost.fetchRequest() as! NSFetchRequest<EntryPost>
         request.sortDescriptors = [NSSortDescriptor(key: "entryDate", ascending: true)]
 

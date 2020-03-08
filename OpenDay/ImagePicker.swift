@@ -5,6 +5,7 @@ struct ImagePickerViewController: UIViewControllerRepresentable {
 
     var imagePicked: ((UIImage?) -> Void)?
 
+    //swiftlint:disable line_length
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePickerViewController>) -> UIImagePickerController {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
@@ -13,7 +14,8 @@ struct ImagePickerViewController: UIViewControllerRepresentable {
         return imagePicker
     }
 
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePickerViewController>) {
+    func updateUIViewController(_ uiViewController: UIImagePickerController,
+                                context: UIViewControllerRepresentableContext<ImagePickerViewController>) {
     }
 
     func makeCoordinator() -> Coordinator {
@@ -28,8 +30,12 @@ struct ImagePickerViewController: UIViewControllerRepresentable {
             self.parent = parent
         }
 
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            let image = info[.originalImage] as! UIImage
+        func imagePickerController(_ picker: UIImagePickerController,
+                                   didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+            guard let image = info[.originalImage] as? UIImage else {
+                return
+            }
+
             parent.imagePicked?(image)
             parent.presentationMode.dismiss()
             picker.dismiss(animated: true, completion: nil)
@@ -42,7 +48,7 @@ struct ImagePickerViewController: UIViewControllerRepresentable {
     }
 }
 
-struct ImagePicker : View {
+struct ImagePicker: View {
     var imagePicked: ((UIImage?) -> Void)?
     @Environment(\.presentationMode) var presentationMode
 
