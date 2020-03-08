@@ -14,10 +14,6 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                NavigationLink(destination: EntryView().environmentObject(store.storeForNewEntry()),
-                               label: {
-                                Text("Add")
-                })
                 List(posts) { post in
                     NavigationLink(destination: EntryView().environmentObject(self.store.store(for: post))) {
                         HStack {
@@ -42,6 +38,17 @@ struct ContentView: View {
                     }
                 }
                 .listStyle(GroupedListStyle())
+                HStack {
+                    Spacer()
+                    NavigationLink(destination: EntryView().environmentObject(store.storeForNewEntry()),
+                                   label: {
+                                    Image(systemName: "plus.circle.fill")
+                                        .resizable()
+                                        .frame(width: 32.0, height: 32.0, alignment: .center)
+                                        .padding()
+                    })
+                    Spacer()
+                }
             }
             .navigationBarTitle("Entries")
         }
