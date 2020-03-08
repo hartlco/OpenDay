@@ -25,4 +25,18 @@ final class EntriesStore: ObservableObject {
     func storeForNewEntry() -> EntryStore {
         return EntryStore(managedObjectContext: managedObjectContext)
     }
+
+    func delete(entry: EntryPost) {
+        let images = entry.images
+        let location = entry.location
+        managedObjectContext.delete(entry)
+
+        if let location = location {
+            managedObjectContext.delete(location)
+        }
+
+        for image in images ?? [] {
+            managedObjectContext.delete(image)
+        }
+    }
 }

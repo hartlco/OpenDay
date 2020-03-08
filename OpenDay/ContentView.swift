@@ -47,6 +47,14 @@ struct ContentView: View {
                     NavigationLink(destination: EntryView().environmentObject(self.store.store(for: post))) {
                         EntryCellContent(post: post)
                     }
+                    .contextMenu {
+                        Button(action: {
+                            self.store.delete(entry: post)
+                        }, label: {
+                            Text("Delete")
+                            Image(systemName: "trash")
+                        })
+                    }
                 }
                 .listStyle(GroupedListStyle())
                 HStack {
