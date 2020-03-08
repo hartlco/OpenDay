@@ -14,9 +14,12 @@ final class EntryStore: ObservableObject {
     @Published var entryDate = Date()
     @Published var currentLocation: Location?
 
+    private var lastInsertedImageAsset: ImageAsset?
+
     private let managedObjectContext: NSManagedObjectContext
     private let locationService: LocationService
     private var locationCancellable: AnyCancellable?
+    private var locationFromImageCancellable: AnyCancellable?
 
     init(managedObjectContext: NSManagedObjectContext) {
         self.managedObjectContext = managedObjectContext
@@ -35,15 +38,36 @@ final class EntryStore: ObservableObject {
         self.locationService = LocationService(locationManager: CLLocationManager())
     }
 
-    func append(image: UIImage) {
+    func append(imageAsset: ImageAsset) {
+        lastInsertedImageAsset = imageAsset
         let entryImage = EntryImage(context: self.managedObjectContext)
-        entryImage.data = image.jpegData(compressionQuality: 90)
-        entryImage.imageDate = Date()
+        entryImage.data = imageAsset.image.jpegData(compressionQuality: 90)
+        entryImage.imageDate = imageAsset.creationDate
         images.append(entryImage)
     }
 
     func updateLocation() {
-        locationCancellable = self.locationService.getLocation().sink(receiveCompletion: { _ in
+        locationCancellable = locationService.getLocation().sink(receiveCompletion: { _ in
+
+        }, receiveValue: { [weak self] location in
+            guard let self = self else { return }
+
+            self.currentLocation = location
+        })
+    }
+
+    func useLastImageAssetsDateAndLocation() {
+        guard let lastAsset = lastInsertedImageAsset else {
+            return
+        }
+
+        entryDate = lastAsset.creationDate ?? entryDate
+
+        guard let assetLocation = lastAsset.location else {
+            return
+        }
+
+        locationFromImageCancellable = locationService.getLocation(from: assetLocation).sink(receiveCompletion: { _ in
 
         }, receiveValue: { [weak self] location in
             guard let self = self else { return }

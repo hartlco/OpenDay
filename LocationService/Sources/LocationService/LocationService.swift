@@ -37,6 +37,32 @@ public final class LocationService: NSObject {
 
         }
     }
+
+    public func getLocation(from location: CLLocation) -> Future<Location, Error> {
+        return Future<Location, Error> { promise in
+            let geocoder = CLGeocoder()
+            geocoder.reverseGeocodeLocation(location,
+                                            completionHandler: { placemarks, error in
+                                                if error == nil {
+                                                    let placemark = placemarks?[0]
+
+                                                    let location = Location(latitude: location.coordinate.latitude,
+                                                                            longitude: location.coordinate.longitude,
+                                                                            isoCountryCode: placemark?.isoCountryCode,
+                                                                            street: placemark?.postalAddress?.street,
+                                                                            city: placemark?.postalAddress?.city)
+
+                                                    promise(Result.success(location))
+                                                } else {
+                                                    let location = Location(latitude: location.coordinate.latitude,
+                                                                            longitude: location.coordinate.longitude)
+
+                                                    promise(Result.success(location))
+                                                }
+            })
+
+        }
+    }
 }
 
 extension LocationService: CLLocationManagerDelegate {

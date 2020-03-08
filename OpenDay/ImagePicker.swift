@@ -1,9 +1,17 @@
 import SwiftUI
+import Photos
+import CoreLocation
+
+struct ImageAsset {
+    let image: UIImage
+    let location: CLLocation?
+    let creationDate: Date?
+}
 
 struct ImagePickerViewController: UIViewControllerRepresentable {
     @Binding var presentationMode: PresentationMode
 
-    var imagePicked: ((UIImage?) -> Void)?
+    var imagePicked: ((ImageAsset) -> Void)?
 
     //swiftlint:disable line_length
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePickerViewController>) -> UIImagePickerController {
@@ -11,6 +19,14 @@ struct ImagePickerViewController: UIViewControllerRepresentable {
         imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
         imagePicker.allowsEditing = false
         imagePicker.delegate = context.coordinator
+
+        let status = PHPhotoLibrary.authorizationStatus()
+        if status == .notDetermined {
+            PHPhotoLibrary.requestAuthorization { _ in
+
+            }
+        }
+
         return imagePicker
     }
 
@@ -36,7 +52,13 @@ struct ImagePickerViewController: UIViewControllerRepresentable {
                 return
             }
 
-            parent.imagePicked?(image)
+            guard let asset = info[.phAsset] as? PHAsset else {
+                return
+            }
+
+            parent.imagePicked?(ImageAsset(image: image,
+                                           location: asset.location,
+                                           creationDate: asset.creationDate))
             parent.presentationMode.dismiss()
             picker.dismiss(animated: true, completion: nil)
         }
@@ -49,7 +71,7 @@ struct ImagePickerViewController: UIViewControllerRepresentable {
 }
 
 struct ImagePicker: View {
-    var imagePicked: ((UIImage?) -> Void)?
+    var imagePicked: ((ImageAsset) -> Void)?
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {

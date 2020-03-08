@@ -33,7 +33,7 @@ struct ContentView: View {
                                     ForEach(Array(post.images ?? [])) { entryImage in
                                         Image(uiImage: entryImage.uiimage)
                                             .resizable()
-                                            .scaledToFit()
+                                            .scaledToFill()
                                             .frame(maxHeight: 50)
                                     }
                                 }
@@ -54,6 +54,7 @@ struct EntryView: View {
     @State var bodyString = ""
     @State var pickerIsActive: Bool = false
     @State var isEditingContent: Bool = false
+    @State var showDateLocationPopup = false
 
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -94,11 +95,18 @@ struct EntryView: View {
                         Text("Update Location: \(self.store.currentLocation?.street ?? ""), \(self.store.currentLocation?.city ?? "")")
                     })
                     .sheet(isPresented: $pickerIsActive) {
-                        ImagePicker(imagePicked: { image in
-                            if let image = image {
-                                self.store.append(image: image)
-                            }
+                        ImagePicker(imagePicked: { imageAsset in
+                            self.store.append(imageAsset: imageAsset)
+                            self.showDateLocationPopup = true
                         })
+                    }
+                    .alert(isPresented: self.$showDateLocationPopup) { () -> Alert in
+                        Alert(title: Text("Use Location/Date"),
+                              primaryButton: .default(Text("Yes"),
+                                                      action: {
+                                                        self.store.useLastImageAssetsDateAndLocation()
+                              }),
+                              secondaryButton: .cancel())
                     }
                 }
             }
