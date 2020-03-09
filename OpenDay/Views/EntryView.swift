@@ -38,6 +38,7 @@ struct EntryView: View {
                                     self.store.delete(image: entryImage)
                                 }, label: {
                                     Text("Delete")
+                                    Image(systemName: "trash")
                                 })
                         }
 
