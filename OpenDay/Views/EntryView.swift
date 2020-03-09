@@ -26,7 +26,12 @@ struct EntryView: View {
                     DatePicker(selection: self.$store.entryDate,
                                in: Date(timeIntervalSince1970: 0)...,
                                displayedComponents: .date) {
-                                Text("Date is \(self.store.entryDate, formatter: dateFormatter)")
+                                Text("Date")
+                    }
+                    DatePicker(selection: self.$store.entryDate,
+                               in: Date(timeIntervalSince1970: 0)...,
+                               displayedComponents: .hourAndMinute) {
+                                Text("Time")
                     }
                     ForEach(self.store.images) { entryImage in
                         Image(uiImage: entryImage.uiimage)
