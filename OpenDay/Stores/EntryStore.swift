@@ -86,6 +86,10 @@ final class EntryStore: ObservableObject {
     }
 
     func save() {
+        guard needsToSave else {
+            return
+        }
+
         var entry = self.entry
 
         if entry == nil {
@@ -106,5 +110,22 @@ final class EntryStore: ObservableObject {
         }
 
         try? self.managedObjectContext.save()
+    }
+
+    private var needsToSave: Bool {
+        guard let entry = entry else {
+            return true
+        }
+
+        if entry.title != title ||
+            entry.body != bodyString ||
+            entry.entryDate != entryDate ||
+            entry.location?.latitude != currentLocation?.latitude ||
+            entry.location?.latitude != currentLocation?.latitude ||
+            entry.images != Set(images) {
+            return true
+        }
+
+        return false
     }
 }
