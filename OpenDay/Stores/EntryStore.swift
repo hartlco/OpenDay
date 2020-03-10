@@ -18,15 +18,20 @@ final class EntryStore: ObservableObject {
 
     private let managedObjectContext: NSManagedObjectContext
     private let locationService: LocationService
+    private let locale: Locale
     private var locationCancellable: AnyCancellable?
     private var locationFromImageCancellable: AnyCancellable?
+    private var searchFromImageCancellable: AnyCancellable?
 
-    init(managedObjectContext: NSManagedObjectContext) {
+    init(managedObjectContext: NSManagedObjectContext,
+         locale: Locale = .current) {
         self.managedObjectContext = managedObjectContext
         self.locationService = LocationService(locationManager: CLLocationManager())
+        self.locale = locale
     }
 
     init(managedObjectContext: NSManagedObjectContext,
+         locale: Locale = .current,
          entry: EntryPost) {
         self.managedObjectContext = managedObjectContext
         self.entry = entry
@@ -36,6 +41,7 @@ final class EntryStore: ObservableObject {
         self.entryDate = entry.entryDate ?? Date()
         self.currentLocation = entry.location?.locationServiceLocation
         self.locationService = LocationService(locationManager: CLLocationManager())
+        self.locale = locale
     }
 
     func append(imageAsset: ImageAsset) {
@@ -110,6 +116,18 @@ final class EntryStore: ObservableObject {
         }
 
         try? self.managedObjectContext.save()
+    }
+
+    var locationSearchViewModel: LocationSearchViewModel {
+        return LocationSearchViewModel(locationService: locationService)
+    }
+
+    var locationText: String? {
+        guard let currentLocation = currentLocation else {
+            return nil
+        }
+
+        return currentLocation.localizedString(from: locale)
     }
 
     private var needsToSave: Bool {

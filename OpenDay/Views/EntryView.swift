@@ -48,16 +48,15 @@ struct EntryView: View {
                         }
 
                     }
-                    Button(action: {
-                        self.pickerIsActive = true
-                    }, label: {
-                        Text("Import image")
-                    })
+                }
+                Section(header: Text("Location")) {
+                    store.locationText.map {
+                        Text($0)
+                    }
                     Button(action: {
                         self.store.updateLocation()
                     }, label: {
-                        //swiftlint:disable line_length
-                        Text("Update Location: \(self.store.currentLocation?.street ?? ""), \(self.store.currentLocation?.city ?? "")")
+                        Text("Current Location")
                     })
                     .sheet(isPresented: $pickerIsActive) {
                         ImagePicker(imagePicked: { imageAsset in
@@ -73,9 +72,19 @@ struct EntryView: View {
                               }),
                               secondaryButton: .cancel())
                     }
+                    NavigationLink(destination: LocationSearchView { location in
+                        self.store.currentLocation = location
+                    }.environmentObject(store.locationSearchViewModel)) {
+                                    Text("Search Location")
+                    }.buttonStyle(DefaultButtonStyle())
                 }
             }
             .listStyle(GroupedListStyle())
+            .navigationBarItems(trailing: Button(action: {
+                self.pickerIsActive = true
+            }, label: {
+                Image(systemName: "photo")
+            }))
             .navigationBarTitle("Edit")
             .onDisappear {
                 self.store.save()

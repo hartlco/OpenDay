@@ -23,6 +23,8 @@
 		C5B2BC45240ABDB7009E3E2C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5B2BC44240ABDB7009E3E2C /* Preview Assets.xcassets */; };
 		C5B2BC48240ABDB7009E3E2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5B2BC46240ABDB7009E3E2C /* LaunchScreen.storyboard */; };
 		C5B2BC52240ABDE9009E3E2C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5B2BC51240ABDE9009E3E2C /* CloudKit.framework */; };
+		C5C39F922416D7B200309AC2 /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F912416D7B200309AC2 /* LocationSearchView.swift */; };
+		C5C39F942416D93600309AC2 /* LocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F932416D93600309AC2 /* LocationSearchViewModel.swift */; };
 		C5DA7A902412DEF400F4F398 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DA7A8F2412DEF400F4F398 /* ImagePicker.swift */; };
 		C5DA7A93241386A200F4F398 /* TextView in Frameworks */ = {isa = PBXBuildFile; productRef = C5DA7A92241386A200F4F398 /* TextView */; };
 /* End PBXBuildFile section */
@@ -45,6 +47,8 @@
 		C5B2BC49240ABDB7009E3E2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5B2BC4F240ABDE3009E3E2C /* OpenDay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenDay.entitlements; sourceTree = "<group>"; };
 		C5B2BC51240ABDE9009E3E2C /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		C5C39F912416D7B200309AC2 /* LocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchView.swift; sourceTree = "<group>"; };
+		C5C39F932416D93600309AC2 /* LocationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationSearchViewModel.swift; path = Stores/LocationSearchViewModel.swift; sourceTree = "<group>"; };
 		C5DA7A8F2412DEF400F4F398 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		C5DA7A912413853800F4F398 /* TextView */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TextView; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,6 +74,7 @@
 			children = (
 				C558AAF82413974C00DBB148 /* EntriesStore.swift */,
 				C558AAFC24139D5500DBB148 /* EntryStore.swift */,
+				C5C39F932416D93600309AC2 /* LocationSearchViewModel.swift */,
 			);
 			name = Stores;
 			sourceTree = "<group>";
@@ -79,6 +84,7 @@
 			children = (
 				C558AB0324153EAC00DBB148 /* EntryView.swift */,
 				C558AB0524153ED900DBB148 /* ContentEntryView.swift */,
+				C5C39F912416D7B200309AC2 /* LocationSearchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -244,7 +250,9 @@
 				C5B2BC3E240ABDB6009E3E2C /* OpenDay.xcdatamodeld in Sources */,
 				C5B2BC39240ABDB6009E3E2C /* AppDelegate.swift in Sources */,
 				C558AAFD24139D5500DBB148 /* EntryStore.swift in Sources */,
+				C5C39F942416D93600309AC2 /* LocationSearchViewModel.swift in Sources */,
 				C558AB0624153ED900DBB148 /* ContentEntryView.swift in Sources */,
+				C5C39F922416D7B200309AC2 /* LocationSearchView.swift in Sources */,
 				C53329B0240B766B007389DF /* EntryPost.swift in Sources */,
 				C558AAF92413974C00DBB148 /* EntriesStore.swift in Sources */,
 				C5DA7A902412DEF400F4F398 /* ImagePicker.swift in Sources */,

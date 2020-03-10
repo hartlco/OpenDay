@@ -63,6 +63,31 @@ public final class LocationService: NSObject {
 
         }
     }
+
+    public func getLocations(from addressString: String) -> Future<[Location], Error> {
+        return Future<[Location], Error> { promise in
+            let geocoder = CLGeocoder()
+            geocoder.geocodeAddressString(addressString) { placemarks, _ in
+                guard let placemarks = placemarks else {
+                    return
+                }
+
+                let locations: [Location] = placemarks.compactMap { placemark in
+                    guard let location = placemark.location else {
+                        return nil
+                    }
+
+                    return Location(latitude: location.coordinate.latitude,
+                                    longitude: location.coordinate.longitude,
+                                    isoCountryCode: placemark.isoCountryCode,
+                                    street: placemark.postalAddress?.street,
+                                    city: placemark.postalAddress?.city)
+                }
+
+                promise(Result.success(locations))
+            }
+        }
+    }
 }
 
 extension LocationService: CLLocationManagerDelegate {
@@ -107,7 +132,12 @@ extension LocationService: CLLocationManagerDelegate {
     }
 }
 
-public struct Location {
+public struct Location: Identifiable {
+    //swiftlint:disable identifier_name
+    public var id: String {
+        return "\(longitude)-\(latitude)"
+    }
+
     public let latitude: Double
     public let longitude: Double
     public let isoCountryCode: String?
@@ -124,5 +154,17 @@ public struct Location {
         self.isoCountryCode = isoCountryCode
         self.street = street
         self.city = city
+    }
+
+    public func localizedString(from locale: Locale) -> String {
+        let values = [
+            street,
+            city,
+            locale.localizedString(forRegionCode: isoCountryCode ?? "")
+        ]
+
+        return values.compactMap {
+            $0
+        }.joined(separator: ", ")
     }
 }
