@@ -3,16 +3,11 @@ import KeyboardObserving
 
 struct ContentView: View {
     @EnvironmentObject var store: EntriesStore
-    @FetchRequest var posts: FetchedResults<EntryPost>
-
-    init() {
-        self._posts = FetchRequest(fetchRequest: EntriesStore.allPostsFetchRequest())
-    }
 
     var body: some View {
         NavigationView {
             VStack {
-                List(posts) { post in
+                List(store.entries) { (post: EntryPost) in
                     NavigationLink(destination: EntryView().environmentObject(self.store.store(for: post))) {
                         HStack {
                             if (post.images?.count ?? 0) > 0 {

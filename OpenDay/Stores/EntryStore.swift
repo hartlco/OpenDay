@@ -16,24 +16,23 @@ final class EntryStore: ObservableObject {
 
     private var lastInsertedImageAsset: ImageAsset?
 
-    private let managedObjectContext: NSManagedObjectContext
+    private let repository: EntryRepository
     private let locationService: LocationService
     private let locale: Locale
     private var locationCancellable: AnyCancellable?
     private var locationFromImageCancellable: AnyCancellable?
     private var searchFromImageCancellable: AnyCancellable?
 
-    init(managedObjectContext: NSManagedObjectContext,
+    init(repository: EntryRepository,
          locale: Locale = .current) {
-        self.managedObjectContext = managedObjectContext
         self.locationService = LocationService(locationManager: CLLocationManager())
         self.locale = locale
+        self.repository = repository
     }
 
-    init(managedObjectContext: NSManagedObjectContext,
+    init(repository: EntryRepository,
          locale: Locale = .current,
          entry: EntryPost) {
-        self.managedObjectContext = managedObjectContext
         self.entry = entry
         self.images = Array(entry.images ?? [])
         self.title = entry.title ?? ""
@@ -42,11 +41,12 @@ final class EntryStore: ObservableObject {
         self.currentLocation = entry.location?.locationServiceLocation
         self.locationService = LocationService(locationManager: CLLocationManager())
         self.locale = locale
+        self.repository = repository
     }
 
     func append(imageAsset: ImageAsset) {
         lastInsertedImageAsset = imageAsset
-        let entryImage = EntryImage(context: self.managedObjectContext)
+        let entryImage = repository.newImage()
         entryImage.data = imageAsset.image.jpegData(compressionQuality: 90)
         entryImage.imageDate = imageAsset.creationDate
         images.append(entryImage)
@@ -88,7 +88,7 @@ final class EntryStore: ObservableObject {
         }
 
         images.remove(at: index)
-        managedObjectContext.delete(image)
+        repository.delete(image: image)
     }
 
     func save() {
@@ -99,7 +99,7 @@ final class EntryStore: ObservableObject {
         var entry = self.entry
 
         if entry == nil {
-            entry = EntryPost(context: managedObjectContext)
+            entry = repository.newEntry()
         }
 
         entry?.title = self.title
@@ -109,13 +109,13 @@ final class EntryStore: ObservableObject {
 
         if let currentLocation = currentLocation {
             if entry?.location == nil {
-                entry?.location = EntryLocation(context: managedObjectContext)
+                entry?.location = repository.newLocation()
             }
 
             entry?.location?.update(from: currentLocation)
         }
 
-        try? self.managedObjectContext.save()
+        repository.save()
     }
 
     var locationSearchViewModel: LocationSearchViewModel {

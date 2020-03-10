@@ -4,39 +4,36 @@ import Combine
 import SwiftUI
 
 final class EntriesStore: ObservableObject {
-    private let managedObjectContext: NSManagedObjectContext
+    private var repository: EntryRepository
 
-    init(managedObjectContext: NSManagedObjectContext) {
-        self.managedObjectContext = managedObjectContext
+    @Published var entries: [EntryPost] = [] {
+        willSet {
+            objectWillChange.send()
+        }
     }
+    var objectWillChange = PassthroughSubject<Void, Never>()
+    var cancel: AnyCancellable?
 
-    static func allPostsFetchRequest() -> NSFetchRequest<EntryPost> {
-        //swiftlint:disable force_cast
-        let request: NSFetchRequest<EntryPost> = EntryPost.fetchRequest() as! NSFetchRequest<EntryPost>
-        request.sortDescriptors = [NSSortDescriptor(key: "entryDate", ascending: false)]
+    init(repository: EntryRepository) {
+        self.repository = repository
+        self.repository.didChange = { [weak self] entries in
+            guard let self = self else { return }
 
-        return request
+            self.entries = entries
+        }
+
+        repository.load()
     }
 
     func store(for entry: EntryPost) -> EntryStore {
-        return EntryStore(managedObjectContext: managedObjectContext, entry: entry)
+        return EntryStore(repository: repository, entry: entry)
     }
 
     func storeForNewEntry() -> EntryStore {
-        return EntryStore(managedObjectContext: managedObjectContext)
+        return EntryStore(repository: repository)
     }
 
     func delete(entry: EntryPost) {
-        let images = entry.images
-        let location = entry.location
-        managedObjectContext.delete(entry)
-
-        if let location = location {
-            managedObjectContext.delete(location)
-        }
-
-        for image in images ?? [] {
-            managedObjectContext.delete(image)
-        }
+        repository.delete(entry: entry)
     }
 }

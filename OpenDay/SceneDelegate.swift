@@ -21,8 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
 
         let context = delegate.persistentContainer.viewContext
+        let repository = CoreDataEntryRepository(context: context)
 
-        let store = EntriesStore(managedObjectContext: context)
+        let store = EntriesStore(repository: repository)
 
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
