@@ -9,27 +9,23 @@ struct ContentView: View {
             VStack {
                 List(store.entries) { (post: EntryPost) in
                     NavigationLink(destination: EntryView().environmentObject(self.store.store(for: post))) {
-                        HStack {
-                            if (post.images?.count ?? 0) > 0 {
-                                VStack {
-                                    Image(uiImage: post.images!.first!.uiimage)
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(maxWidth: 50, maxHeight: 50)
-                                        .clipped()
-                                    if (post.images?.count ?? 0) > 1 {
-                                        Text("More")
-                                    }
-                                }
-                            }
+                        VStack(alignment: .leading) {
                             VStack(alignment: .leading) {
                                 Text(post.title ?? "")
                                     .font(.headline)
                                 Text(post.body ?? "")
-                                    .font(.footnote)
-                                    .lineLimit(2)
+                                    .font(.body)
+                                    .lineLimit(4)
                                 Text(post.entryDate?.description ?? "")
                                     .font(.caption)
+                            }
+                            if (post.images?.count ?? 0) > 0 {
+                                Image(uiImage: post.images!.first!.uiimage)
+                                .resizable()
+                                .scaledToFit()
+                                .aspectRatio(contentMode: ContentMode.fill)
+                                .frame(maxHeight: 140)
+                                .clipped()
                             }
                         }
                         .contextMenu {
@@ -42,7 +38,7 @@ struct ContentView: View {
                         }
                     }
                 }
-                .listStyle(GroupedListStyle())
+                .listStyle(DefaultListStyle())
                 HStack {
                     Spacer()
                     NavigationLink(destination: EntryView().environmentObject(store.storeForNewEntry()),

@@ -3,7 +3,6 @@ import SwiftUI
 struct EntryView: View {
     @EnvironmentObject var store: EntryStore
 
-    @State var bodyString = ""
     @State var pickerIsActive: Bool = false
     @State var isEditingContent: Bool = false
     @State var showDateLocationPopup = false
@@ -23,21 +22,11 @@ struct EntryView: View {
                     NavigationLink(destination: ContentEntryView(bodyString: self.$store.bodyString)) {
                         Text(self.store.bodyString)
                     }
-                    DatePicker(selection: self.$store.entryDate,
-                               in: Date(timeIntervalSince1970: 0)...,
-                               displayedComponents: .date) {
-                                Text("Date")
-                    }
-                    DatePicker(selection: self.$store.entryDate,
-                               in: Date(timeIntervalSince1970: 0)...,
-                               displayedComponents: .hourAndMinute) {
-                                Text("Time")
-                    }
                     ForEach(self.store.images) { entryImage in
                         Image(uiImage: entryImage.uiimage)
                             .resizable()
                             .scaledToFit()
-                            .frame(maxHeight: 200)
+                            .aspectRatio(contentMode: .fill)
                             .contextMenu {
                                 Button(action: {
                                     self.store.delete(image: entryImage)
@@ -47,6 +36,18 @@ struct EntryView: View {
                                 })
                         }
 
+                    }
+                }
+                Section(header: Text("Date")) {
+                    DatePicker(selection: self.$store.entryDate,
+                               in: Date(timeIntervalSince1970: 0)...,
+                               displayedComponents: .date) {
+                                Text("Date")
+                    }
+                    DatePicker(selection: self.$store.entryDate,
+                               in: Date(timeIntervalSince1970: 0)...,
+                               displayedComponents: .hourAndMinute) {
+                                Text("Time")
                     }
                 }
                 Section(header: Text("Location")) {
@@ -85,7 +86,7 @@ struct EntryView: View {
             }, label: {
                 Image(systemName: "photo")
             }))
-            .navigationBarTitle("Edit")
+            .navigationBarTitle("Edit", displayMode: .inline)
             .onDisappear {
                 self.store.save()
             }
