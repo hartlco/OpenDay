@@ -1,7 +1,17 @@
 import Foundation
 
+final class EntriesSection: Identifiable {
+    let title: String
+    let posts: [EntryPost]
+
+    init(title: String, posts: [EntryPost]) {
+        self.title = title
+        self.posts = posts
+    }
+}
+
 protocol EntryRepository {
-    var didChange: (([EntryPost]) -> Void)? { get set }
+    var didChange: (([EntriesSection]) -> Void)? { get set }
     func load()
     func newEntry() -> EntryPost
     func newImage() -> EntryImage

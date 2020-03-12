@@ -8,6 +8,16 @@ public class EntryPost: NSManagedObject, Identifiable {
     @NSManaged public var entryDate: Date?
     @NSManaged public var images: Set<EntryImage>?
     @NSManaged public var location: EntryLocation?
+
+    static let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM"
+        return formatter
+    }()
+
+    @objc var sectionDate: String {
+        return EntryPost.formatter.string(from: entryDate ?? Date())
+    }
 }
 
 extension EntryImage: Identifiable { }

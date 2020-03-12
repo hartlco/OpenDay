@@ -5,7 +5,7 @@ final class CoreDataEntryRepository: NSObject, EntryRepository {
     private let context: NSManagedObjectContext
     private let fetchedResultController: NSFetchedResultsController<EntryPost>
 
-    var didChange: (([EntryPost]) -> Void)?
+    var didChange: (([EntriesSection]) -> Void)?
 
     init(context: NSManagedObjectContext) {
         self.context = context
@@ -13,7 +13,8 @@ final class CoreDataEntryRepository: NSObject, EntryRepository {
         let fetchRequest = CoreDataEntryRepository.allPostsFetchRequest()
         self.fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                    managedObjectContext: context,
-                                                                   sectionNameKeyPath: nil, cacheName: nil)
+                                                                   sectionNameKeyPath: #keyPath(EntryPost.sectionDate),
+                                                                   cacheName: "Main")
         super.init()
         fetchedResultController.delegate = self
     }
@@ -26,9 +27,7 @@ final class CoreDataEntryRepository: NSObject, EntryRepository {
           fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
 
-        if let fetchedObjects = fetchedResultController.fetchedObjects {
-            didChange?(fetchedObjects)
-        }
+        didChange?(data)
     }
 
     func newEntry() -> EntryPost {
@@ -69,6 +68,21 @@ final class CoreDataEntryRepository: NSObject, EntryRepository {
         try? context.save()
     }
 
+    private var data: [EntriesSection] {
+        guard let sections = fetchedResultController.sections else {
+            return []
+        }
+
+        return sections.compactMap { sectionInfo in
+            guard let data = sectionInfo.objects as? [EntryPost] else {
+                return nil
+            }
+
+            return EntriesSection(title: sectionInfo.name,
+                                  posts: data)
+        }
+    }
+
     static func allPostsFetchRequest() -> NSFetchRequest<EntryPost> {
         //swiftlint:disable force_cast
         let request: NSFetchRequest<EntryPost> = EntryPost.fetchRequest() as! NSFetchRequest<EntryPost>
@@ -79,9 +93,7 @@ final class CoreDataEntryRepository: NSObject, EntryRepository {
 }
 
 extension CoreDataEntryRepository: NSFetchedResultsControllerDelegate {
-  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    //swiftlint:disable force_cast
-    let entries = controller.sections![0].objects as! [EntryPost]
-    didChange?(entries)
-  }
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        didChange?(data)
+    }
 }

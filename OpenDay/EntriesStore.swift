@@ -6,7 +6,7 @@ import SwiftUI
 final class EntriesStore: ObservableObject {
     private var repository: EntryRepository
 
-    @Published var entries: [EntryPost] = [] {
+    @Published var sections: [EntriesSection] = [] {
         willSet {
             objectWillChange.send()
         }
@@ -19,7 +19,7 @@ final class EntriesStore: ObservableObject {
         self.repository.didChange = { [weak self] entries in
             guard let self = self else { return }
 
-            self.entries = entries
+            self.sections = entries
         }
 
         repository.load()
