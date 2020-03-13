@@ -7,7 +7,7 @@ struct EntryListContent: View {
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
-                HStack {
+                HStack(alignment: .firstTextBaseline) {
                     Text(post.title ?? "")
                         .font(.headline)
                     Spacer()
@@ -21,7 +21,6 @@ struct EntryListContent: View {
             if (post.images?.count ?? 0) > 0 {
                 Image(uiImage: post.images!.first!.uiimage)
                     .resizable()
-                    .scaledToFit()
                     .aspectRatio(contentMode: ContentMode.fill)
                     .frame(maxHeight: 160)
                     .cornerRadius(4.0)
