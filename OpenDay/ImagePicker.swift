@@ -2,12 +2,6 @@ import SwiftUI
 import Photos
 import CoreLocation
 
-struct ImageAsset {
-    let image: UIImage
-    let location: CLLocation?
-    let creationDate: Date?
-}
-
 struct ImagePickerViewController: UIViewControllerRepresentable {
     @Binding var presentationMode: PresentationMode
 

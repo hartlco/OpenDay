@@ -1,6 +1,10 @@
-import UIKit
+import Foundation
 import CoreData
 import LocationService
+
+#if os(macOS)
+import AppKit
+#endif
 
 public class EntryPost: NSManagedObject, Identifiable {
     @NSManaged public var title: String?
@@ -23,9 +27,17 @@ public class EntryPost: NSManagedObject, Identifiable {
 extension EntryImage: Identifiable { }
 
 extension EntryImage {
+    #if os(iOS)
     var uiimage: UIImage {
         return UIImage(data: data!)!
     }
+    #endif
+
+    #if os(macOS)
+    var nsimage: NSImage {
+        return NSImage(data: data!)!
+    }
+    #endif
 }
 
 extension EntryLocation {

@@ -1,9 +1,40 @@
 import Foundation
 import CoreData
-import UIKit
 import LocationService
 import CoreLocation
 import Combine
+
+#if os(macOS)
+import AppKit
+#endif
+
+struct ImageAsset {
+    #if os(iOS)
+    let image: UIImage
+    #endif
+
+    #if os(macOS)
+    let image: NSImage
+    #endif
+    let location: CLLocation?
+    let creationDate: Date?
+
+    var data: Data? {
+        #if os(macOS)
+        let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil)!
+        let bitmapRep = NSBitmapImageRep(cgImage: cgImage)
+        guard let jpegData = bitmapRep.representation(using: .jpeg, properties: [:]) else {
+            return nil
+        }
+
+        return jpegData
+        #endif
+
+        #if os(iOS)
+        return image.jpegData(compressionQuality: 90)
+        #endif
+    }
+}
 
 final class EntryStore: ObservableObject {
     @Published var images: [EntryImage] = []
@@ -46,7 +77,7 @@ final class EntryStore: ObservableObject {
     func append(imageAsset: ImageAsset) {
         lastInsertedImageAsset = imageAsset
         let entryImage = repository.newImage()
-        entryImage.data = imageAsset.image.jpegData(compressionQuality: 90)
+        entryImage.data = imageAsset.data
         entryImage.imageDate = imageAsset.creationDate
         images.append(entryImage)
     }

@@ -8,6 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		C5205599241B483200FE0AB6 /* EntryListContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5205598241B483200FE0AB6 /* EntryListContent.swift */; };
+		C52055A1241C23A900FE0AB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52055A0241C23A900FE0AB6 /* AppDelegate.swift */; };
+		C52055A3241C23A900FE0AB6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52055A2241C23A900FE0AB6 /* ContentView.swift */; };
+		C52055A8241C23AB00FE0AB6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C52055A7241C23AB00FE0AB6 /* Assets.xcassets */; };
+		C52055AB241C23AB00FE0AB6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C52055AA241C23AB00FE0AB6 /* Preview Assets.xcassets */; };
+		C52055AE241C23AB00FE0AB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C52055AC241C23AB00FE0AB6 /* Main.storyboard */; };
+		C52055B5241C23CB00FE0AB6 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52055B4241C23CB00FE0AB6 /* CloudKit.framework */; };
+		C52055B6241C242500FE0AB6 /* OpenDay.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C5B2BC3C240ABDB6009E3E2C /* OpenDay.xcdatamodeld */; };
+		C52055B7241C244600FE0AB6 /* EntryPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53329AF240B766B007389DF /* EntryPost.swift */; };
+		C52055B9241C246200FE0AB6 /* LocationService in Frameworks */ = {isa = PBXBuildFile; productRef = C52055B8241C246200FE0AB6 /* LocationService */; };
+		C52055BB241C258D00FE0AB6 /* EntryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F962417714700309AC2 /* EntryRepository.swift */; };
+		C52055BC241C259000FE0AB6 /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F982417800D00309AC2 /* CoreDataRepository.swift */; };
+		C52055BD241C261300FE0AB6 /* EntriesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C558AAF82413974C00DBB148 /* EntriesStore.swift */; };
+		C52055BE241C262B00FE0AB6 /* EntryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C558AAFC24139D5500DBB148 /* EntryStore.swift */; };
+		C52055BF241C273C00FE0AB6 /* LocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F932416D93600309AC2 /* LocationSearchViewModel.swift */; };
 		C53329B0240B766B007389DF /* EntryPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53329AF240B766B007389DF /* EntryPost.swift */; };
 		C558AAF7241392D300DBB148 /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = C558AAF6241392D300DBB148 /* KeyboardObserving */; };
 		C558AAF92413974C00DBB148 /* EntriesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C558AAF82413974C00DBB148 /* EntriesStore.swift */; };
@@ -34,6 +48,15 @@
 
 /* Begin PBXFileReference section */
 		C5205598241B483200FE0AB6 /* EntryListContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListContent.swift; sourceTree = "<group>"; };
+		C520559E241C23A900FE0AB6 /* OpenDay-Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenDay-Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C52055A0241C23A900FE0AB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C52055A2241C23A900FE0AB6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C52055A7241C23AB00FE0AB6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C52055AA241C23AB00FE0AB6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C52055AD241C23AB00FE0AB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C52055AF241C23AB00FE0AB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C52055B0241C23AB00FE0AB6 /* OpenDay_Mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenDay_Mac.entitlements; sourceTree = "<group>"; };
+		C52055B4241C23CB00FE0AB6 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		C53329AF240B766B007389DF /* EntryPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPost.swift; sourceTree = "<group>"; };
 		C558AAF82413974C00DBB148 /* EntriesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesStore.swift; sourceTree = "<group>"; };
 		C558AAFC24139D5500DBB148 /* EntryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EntryStore.swift; path = Stores/EntryStore.swift; sourceTree = "<group>"; };
@@ -60,6 +83,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C520559B241C23A900FE0AB6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C52055B5241C23CB00FE0AB6 /* CloudKit.framework in Frameworks */,
+				C52055B9241C246200FE0AB6 /* LocationService in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C5B2BC32240ABDB6009E3E2C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -75,6 +107,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C520559F241C23A900FE0AB6 /* OpenDay-Mac */ = {
+			isa = PBXGroup;
+			children = (
+				C52055A0241C23A900FE0AB6 /* AppDelegate.swift */,
+				C52055A2241C23A900FE0AB6 /* ContentView.swift */,
+				C52055A7241C23AB00FE0AB6 /* Assets.xcassets */,
+				C52055AC241C23AB00FE0AB6 /* Main.storyboard */,
+				C52055AF241C23AB00FE0AB6 /* Info.plist */,
+				C52055B0241C23AB00FE0AB6 /* OpenDay_Mac.entitlements */,
+				C52055A9241C23AB00FE0AB6 /* Preview Content */,
+			);
+			path = "OpenDay-Mac";
+			sourceTree = "<group>";
+		};
+		C52055A9241C23AB00FE0AB6 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				C52055AA241C23AB00FE0AB6 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		C558AAFB24139B5F00DBB148 /* Stores */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +156,7 @@
 				C558AAFE2414C23100DBB148 /* LocationService */,
 				C5DA7A912413853800F4F398 /* TextView */,
 				C5B2BC37240ABDB6009E3E2C /* OpenDay */,
+				C520559F241C23A900FE0AB6 /* OpenDay-Mac */,
 				C5B2BC36240ABDB6009E3E2C /* Products */,
 				C5B2BC50240ABDE9009E3E2C /* Frameworks */,
 			);
@@ -111,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				C5B2BC35240ABDB6009E3E2C /* OpenDay.app */,
+				C520559E241C23A900FE0AB6 /* OpenDay-Mac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -147,6 +203,7 @@
 		C5B2BC50240ABDE9009E3E2C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C52055B4241C23CB00FE0AB6 /* CloudKit.framework */,
 				C5B2BC51240ABDE9009E3E2C /* CloudKit.framework */,
 			);
 			name = Frameworks;
@@ -164,6 +221,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C520559D241C23A900FE0AB6 /* OpenDay-Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C52055B1241C23AB00FE0AB6 /* Build configuration list for PBXNativeTarget "OpenDay-Mac" */;
+			buildPhases = (
+				C520559A241C23A900FE0AB6 /* Sources */,
+				C520559B241C23A900FE0AB6 /* Frameworks */,
+				C520559C241C23A900FE0AB6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OpenDay-Mac";
+			packageProductDependencies = (
+				C52055B8241C246200FE0AB6 /* LocationService */,
+			);
+			productName = "OpenDay-Mac";
+			productReference = C520559E241C23A900FE0AB6 /* OpenDay-Mac.app */;
+			productType = "com.apple.product-type.application";
+		};
 		C5B2BC34240ABDB6009E3E2C /* OpenDay */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C5B2BC4C240ABDB7009E3E2C /* Build configuration list for PBXNativeTarget "OpenDay" */;
@@ -198,6 +275,9 @@
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Martin Hartl";
 				TargetAttributes = {
+					C520559D241C23A900FE0AB6 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
 					C5B2BC34240ABDB6009E3E2C = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
@@ -221,11 +301,22 @@
 			projectRoot = "";
 			targets = (
 				C5B2BC34240ABDB6009E3E2C /* OpenDay */,
+				C520559D241C23A900FE0AB6 /* OpenDay-Mac */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C520559C241C23A900FE0AB6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C52055AE241C23AB00FE0AB6 /* Main.storyboard in Resources */,
+				C52055AB241C23AB00FE0AB6 /* Preview Assets.xcassets in Resources */,
+				C52055A8241C23AB00FE0AB6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C5B2BC33240ABDB6009E3E2C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -260,6 +351,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C520559A241C23A900FE0AB6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C52055BF241C273C00FE0AB6 /* LocationSearchViewModel.swift in Sources */,
+				C52055B6241C242500FE0AB6 /* OpenDay.xcdatamodeld in Sources */,
+				C52055A3241C23A900FE0AB6 /* ContentView.swift in Sources */,
+				C52055BE241C262B00FE0AB6 /* EntryStore.swift in Sources */,
+				C52055B7241C244600FE0AB6 /* EntryPost.swift in Sources */,
+				C52055BD241C261300FE0AB6 /* EntriesStore.swift in Sources */,
+				C52055A1241C23A900FE0AB6 /* AppDelegate.swift in Sources */,
+				C52055BC241C259000FE0AB6 /* CoreDataRepository.swift in Sources */,
+				C52055BB241C258D00FE0AB6 /* EntryRepository.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C5B2BC31240ABDB6009E3E2C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -285,6 +392,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		C52055AC241C23AB00FE0AB6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C52055AD241C23AB00FE0AB6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		C5B2BC46240ABDB7009E3E2C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -296,6 +411,54 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		C52055B2241C23AB00FE0AB6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "OpenDay-Mac/OpenDay_Mac.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"OpenDay-Mac/Preview Content\"";
+				DEVELOPMENT_TEAM = 9E8SXF3Y36;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "OpenDay-Mac/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "co.hartl.OpenDay-Mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C52055B3241C23AB00FE0AB6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "OpenDay-Mac/OpenDay_Mac.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"OpenDay-Mac/Preview Content\"";
+				DEVELOPMENT_TEAM = 9E8SXF3Y36;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "OpenDay-Mac/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "co.hartl.OpenDay-Mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		C5B2BC4A240ABDB7009E3E2C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -455,6 +618,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C52055B1241C23AB00FE0AB6 /* Build configuration list for PBXNativeTarget "OpenDay-Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C52055B2241C23AB00FE0AB6 /* Debug */,
+				C52055B3241C23AB00FE0AB6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C5B2BC30240ABDB5009E3E2C /* Build configuration list for PBXProject "OpenDay" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -495,6 +667,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C52055B8241C246200FE0AB6 /* LocationService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LocationService;
+		};
 		C558AAF6241392D300DBB148 /* KeyboardObserving */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C558AAF5241392D300DBB148 /* XCRemoteSwiftPackageReference "KeyboardObserving" */;

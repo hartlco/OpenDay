@@ -28,7 +28,7 @@ public final class LocationService: NSObject {
 
             switch CLLocationManager.authorizationStatus() {
             case .notDetermined:
-                self.locationManager.requestWhenInUseAuthorization()
+                self.locationManager.requestAlwaysAuthorization()
             case .authorizedWhenInUse:
                 self.locationManager.startUpdatingLocation()
             default:
