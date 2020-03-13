@@ -6,8 +6,6 @@ import CoreLocation
 import Combine
 
 final class EntryStore: ObservableObject {
-    var entry: EntryPost?
-
     @Published var images: [EntryImage] = []
     @Published var title = ""
     @Published var bodyString = ""
@@ -15,6 +13,7 @@ final class EntryStore: ObservableObject {
     @Published var currentLocation: Location?
 
     private var lastInsertedImageAsset: ImageAsset?
+    private var entry: EntryPost?
 
     private let repository: EntryRepository
     private let locationService: LocationService

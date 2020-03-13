@@ -5,6 +5,7 @@ import SwiftUI
 
 final class EntriesStore: ObservableObject {
     private var repository: EntryRepository
+    private let dateFormatter: DateFormatter
 
     @Published var sections: [EntriesSection] = [] {
         willSet {
@@ -12,9 +13,9 @@ final class EntriesStore: ObservableObject {
         }
     }
     var objectWillChange = PassthroughSubject<Void, Never>()
-    var cancel: AnyCancellable?
 
     init(repository: EntryRepository) {
+        self.dateFormatter = DateFormatter()
         self.repository = repository
         self.repository.didChange = { [weak self] entries in
             guard let self = self else { return }
@@ -23,6 +24,15 @@ final class EntriesStore: ObservableObject {
         }
 
         repository.load()
+        dateFormatter.dateFormat = "EEE dd"
+    }
+
+    func dateString(for entry: EntryPost) -> String {
+        guard let date = entry.entryDate else {
+            return ""
+        }
+
+        return dateFormatter.string(from: date)
     }
 
     func store(for entry: EntryPost) -> EntryStore {
