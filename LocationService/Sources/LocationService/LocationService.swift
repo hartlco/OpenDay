@@ -7,7 +7,7 @@ public final class LocationService: NSObject {
     var text = "Hello, World!"
 
     private let locationManager: CLLocationManager
-    private var runningPromise: ((Result<Location, Error>) -> Void)?
+    private var runningPromise: ((Result<LocationServiceLocation, Error>) -> Void)?
 
     public init(locationManager: CLLocationManager) {
         self.locationManager = locationManager
@@ -16,8 +16,8 @@ public final class LocationService: NSObject {
         self.locationManager.delegate = self
     }
 
-    public func getLocation() -> Future<Location, Error> {
-        return Future<Location, Error> { [weak self] promise in
+    public func getLocation() -> Future<LocationServiceLocation, Error> {
+        return Future<LocationServiceLocation, Error> { [weak self] promise in
             guard let self = self else { return }
 
             guard CLLocationManager.locationServicesEnabled() else {
@@ -38,15 +38,15 @@ public final class LocationService: NSObject {
         }
     }
 
-    public func getLocation(from location: CLLocation) -> Future<Location, Error> {
-        return Future<Location, Error> { promise in
+    public func getLocation(from location: CLLocation) -> Future<LocationServiceLocation, Error> {
+        return Future<LocationServiceLocation, Error> { promise in
             let geocoder = CLGeocoder()
             geocoder.reverseGeocodeLocation(location,
                                             completionHandler: { placemarks, error in
                                                 if error == nil {
                                                     let placemark = placemarks?[0]
 
-                                                    let location = Location(latitude: location.coordinate.latitude,
+                                                    let location = LocationServiceLocation(latitude: location.coordinate.latitude,
                                                                             longitude: location.coordinate.longitude,
                                                                             isoCountryCode: placemark?.isoCountryCode,
                                                                             street: placemark?.postalAddress?.street,
@@ -54,7 +54,7 @@ public final class LocationService: NSObject {
 
                                                     promise(Result.success(location))
                                                 } else {
-                                                    let location = Location(latitude: location.coordinate.latitude,
+                                                    let location = LocationServiceLocation(latitude: location.coordinate.latitude,
                                                                             longitude: location.coordinate.longitude)
 
                                                     promise(Result.success(location))
@@ -64,20 +64,20 @@ public final class LocationService: NSObject {
         }
     }
 
-    public func getLocations(from addressString: String) -> Future<[Location], Error> {
-        return Future<[Location], Error> { promise in
+    public func getLocations(from addressString: String) -> Future<[LocationServiceLocation], Error> {
+        return Future<[LocationServiceLocation], Error> { promise in
             let geocoder = CLGeocoder()
             geocoder.geocodeAddressString(addressString) { placemarks, _ in
                 guard let placemarks = placemarks else {
                     return
                 }
 
-                let locations: [Location] = placemarks.compactMap { placemark in
+                let locations: [LocationServiceLocation] = placemarks.compactMap { placemark in
                     guard let location = placemark.location else {
                         return nil
                     }
 
-                    return Location(latitude: location.coordinate.latitude,
+                    return LocationServiceLocation(latitude: location.coordinate.latitude,
                                     longitude: location.coordinate.longitude,
                                     isoCountryCode: placemark.isoCountryCode,
                                     street: placemark.postalAddress?.street,
@@ -115,7 +115,7 @@ extension LocationService: CLLocationManagerDelegate {
                                             if error == nil {
                                                 let placemark = placemarks?[0]
 
-                                                let location = Location(latitude: firstLocation.coordinate.latitude,
+                                                let location = LocationServiceLocation(latitude: firstLocation.coordinate.latitude,
                                                                         longitude: firstLocation.coordinate.longitude,
                                                                         isoCountryCode: placemark?.isoCountryCode,
                                                                         street: placemark?.postalAddress?.street,
@@ -123,7 +123,7 @@ extension LocationService: CLLocationManagerDelegate {
 
                                                 self.runningPromise?(Result.success(location))
                                             } else {
-                                                let location = Location(latitude: firstLocation.coordinate.latitude,
+                                                let location = LocationServiceLocation(latitude: firstLocation.coordinate.latitude,
                                                                         longitude: firstLocation.coordinate.longitude)
 
                                                 self.runningPromise?(Result.success(location))
@@ -132,7 +132,7 @@ extension LocationService: CLLocationManagerDelegate {
     }
 }
 
-public struct Location: Identifiable {
+public struct LocationServiceLocation: Identifiable {
     //swiftlint:disable identifier_name
     public var id: String {
         return "\(longitude)-\(latitude)"

@@ -10,7 +10,7 @@ final class LocationSearchViewModel: ObservableObject {
             }
         }
     }
-    @Published var locations = [Location]()
+    @Published var locations = [LocationServiceLocation]()
 
     private var throttleCancellable: AnyCancellable?
     private var loadLocationsCancellable: AnyCancellable?
@@ -26,7 +26,7 @@ final class LocationSearchViewModel: ObservableObject {
         loadLocationsCancellable = $searchText
             .debounce(for: .seconds(0.8), scheduler: RunLoop.main)
             .setFailureType(to: Error.self)
-            .flatMap({ [unowned self] (text) -> Future<[Location], Error> in
+            .flatMap({ [unowned self] (text) -> Future<[LocationServiceLocation], Error> in
                 return self.locationService.getLocations(from: text)
             })
             .sink(receiveCompletion: { _ in
@@ -36,7 +36,7 @@ final class LocationSearchViewModel: ObservableObject {
             })
     }
 
-    func text(for location: Location) -> String {
+    func text(for location: LocationServiceLocation) -> String {
         return location.localizedString(from: locale)
     }
 }

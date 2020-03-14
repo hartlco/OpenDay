@@ -2,6 +2,7 @@ import Foundation
 import CoreData
 import LocationService
 import OpenKit
+import Models
 
 #if os(macOS)
 import AppKit
@@ -25,17 +26,29 @@ public class EntryPost: NSManagedObject, Identifiable {
     }
 }
 
+extension EntryPost: Models.Post {
+    public func getLocation() -> Location? {
+        return location
+    }
+
+    public var orderedImages: [Image]? {
+        return Array(images ?? [])
+    }
+}
+
 public class EntryImage: NSManagedObject, Identifiable {
     @NSManaged public var data: Data?
     @NSManaged public var imageDate: Date?
     @NSManaged public var post: EntryPost?
 }
 
-extension EntryImage {
+extension Models.Image {
     var openImage: OKImage {
         return OKImage(data: data!)!
     }
 }
+
+extension EntryImage: Models.Image { }
 
 public class EntryLocation: NSManagedObject, Identifiable {
     @NSManaged public var city: String?
@@ -46,8 +59,10 @@ public class EntryLocation: NSManagedObject, Identifiable {
     @NSManaged public var post: EntryPost?
 }
 
+extension EntryLocation: Models.Location { }
+
 extension EntryLocation {
-    func update(from location: Location) {
+    func update(from location: LocationServiceLocation) {
         self.city = location.city
         self.longitude = location.longitude
         self.latitude = location.latitude
@@ -55,11 +70,11 @@ extension EntryLocation {
         self.street = location.street
     }
 
-    var locationServiceLocation: Location {
-        return Location(latitude: latitude,
-                        longitude: longitude,
-                        isoCountryCode: isoCountryCode,
-                        street: street,
-                        city: city)
+    var locationServiceLocation: LocationServiceLocation {
+        return LocationServiceLocation(latitude: latitude,
+                                       longitude: longitude,
+                                       isoCountryCode: isoCountryCode,
+                                       street: street,
+                                       city: city)
     }
 }

@@ -16,7 +16,7 @@ final class EntryStore: ObservableObject {
     @Published var title = ""
     @Published var bodyString = ""
     @Published var entryDate = Date()
-    @Published var currentLocation: Location?
+    @Published var currentLocation: LocationServiceLocation?
 
     private var lastInsertedImageAsset: ImageAsset?
     private var entry: EntryPost?

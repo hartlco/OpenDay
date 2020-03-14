@@ -24,6 +24,8 @@
 		C52055BF241C273C00FE0AB6 /* LocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F932416D93600309AC2 /* LocationSearchViewModel.swift */; };
 		C52055C2241C9B9400FE0AB6 /* OpenKit in Frameworks */ = {isa = PBXBuildFile; productRef = C52055C1241C9B9400FE0AB6 /* OpenKit */; };
 		C52055C4241C9B9B00FE0AB6 /* OpenKit in Frameworks */ = {isa = PBXBuildFile; productRef = C52055C3241C9B9B00FE0AB6 /* OpenKit */; };
+		C52055C7241CA31000FE0AB6 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = C52055C6241CA31000FE0AB6 /* Models */; };
+		C52055C9241CA83600FE0AB6 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = C52055C8241CA83600FE0AB6 /* Models */; };
 		C53329B0240B766B007389DF /* EntryPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53329AF240B766B007389DF /* EntryPost.swift */; };
 		C558AAF7241392D300DBB148 /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = C558AAF6241392D300DBB148 /* KeyboardObserving */; };
 		C558AAF92413974C00DBB148 /* EntriesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C558AAF82413974C00DBB148 /* EntriesStore.swift */; };
@@ -60,6 +62,7 @@
 		C52055B0241C23AB00FE0AB6 /* OpenDay_Mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenDay_Mac.entitlements; sourceTree = "<group>"; };
 		C52055B4241C23CB00FE0AB6 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		C52055C0241C9A1A00FE0AB6 /* OpenKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = OpenKit; sourceTree = "<group>"; };
+		C52055C5241C9FEC00FE0AB6 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Models; sourceTree = "<group>"; };
 		C53329AF240B766B007389DF /* EntryPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPost.swift; sourceTree = "<group>"; };
 		C558AAF82413974C00DBB148 /* EntriesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesStore.swift; sourceTree = "<group>"; };
 		C558AAFC24139D5500DBB148 /* EntryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EntryStore.swift; path = Stores/EntryStore.swift; sourceTree = "<group>"; };
@@ -92,6 +95,7 @@
 			files = (
 				C52055C2241C9B9400FE0AB6 /* OpenKit in Frameworks */,
 				C52055B5241C23CB00FE0AB6 /* CloudKit.framework in Frameworks */,
+				C52055C9241CA83600FE0AB6 /* Models in Frameworks */,
 				C52055B9241C246200FE0AB6 /* LocationService in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,6 +109,7 @@
 				C5DA7A93241386A200F4F398 /* TextView in Frameworks */,
 				C52055C4241C9B9B00FE0AB6 /* OpenKit in Frameworks */,
 				C558AB002414C28600DBB148 /* LocationService in Frameworks */,
+				C52055C7241CA31000FE0AB6 /* Models in Frameworks */,
 				C5B2BC52240ABDE9009E3E2C /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,6 +163,7 @@
 		C5B2BC2C240ABDB5009E3E2C = {
 			isa = PBXGroup;
 			children = (
+				C52055C5241C9FEC00FE0AB6 /* Models */,
 				C52055C0241C9A1A00FE0AB6 /* OpenKit */,
 				C558AAFE2414C23100DBB148 /* LocationService */,
 				C5DA7A912413853800F4F398 /* TextView */,
@@ -243,6 +249,7 @@
 			packageProductDependencies = (
 				C52055B8241C246200FE0AB6 /* LocationService */,
 				C52055C1241C9B9400FE0AB6 /* OpenKit */,
+				C52055C8241CA83600FE0AB6 /* Models */,
 			);
 			productName = "OpenDay-Mac";
 			productReference = C520559E241C23A900FE0AB6 /* OpenDay-Mac.app */;
@@ -268,6 +275,7 @@
 				C558AAF6241392D300DBB148 /* KeyboardObserving */,
 				C558AAFF2414C28600DBB148 /* LocationService */,
 				C52055C3241C9B9B00FE0AB6 /* OpenKit */,
+				C52055C6241CA31000FE0AB6 /* Models */,
 			);
 			productName = OpenDay;
 			productReference = C5B2BC35240ABDB6009E3E2C /* OpenDay.app */;
@@ -686,6 +694,14 @@
 		C52055C3241C9B9B00FE0AB6 /* OpenKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OpenKit;
+		};
+		C52055C6241CA31000FE0AB6 /* Models */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Models;
+		};
+		C52055C8241CA83600FE0AB6 /* Models */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Models;
 		};
 		C558AAF6241392D300DBB148 /* KeyboardObserving */ = {
 			isa = XCSwiftPackageProductDependency;

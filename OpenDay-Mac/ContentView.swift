@@ -12,15 +12,15 @@ struct EntryRowView: View {
                     Text(post.title ?? "")
                         .font(.headline)
                     Spacer()
-                    Text(store.dateString(for: post))
+                    Text(store.dateString(for: post.entryDate))
                         .font(Font.caption.smallCaps())
                 }
                 Text(post.body ?? "")
                     .font(.body)
                     .lineLimit(4)
             }
-            if (post.images?.count ?? 0) > 0 {
-                Image(okImage: post.images!.first!.openImage)
+            if (post.orderedImages?.count ?? 0) > 0 {
+                Image(okImage: post.orderedImages!.first!.openImage)
                     .resizable()
                     .aspectRatio(contentMode: ContentMode.fill)
                     .frame(maxHeight: 160)
