@@ -27,14 +27,6 @@ final class EntriesStore: ObservableObject {
         dateFormatter.dateFormat = "EEE dd"
     }
 
-    func dateString(for date: Date?) -> String {
-        guard let date = date else {
-            return ""
-        }
-
-        return dateFormatter.string(from: date)
-    }
-
     func store(for entry: EntryPost) -> EntryStore {
         return EntryStore(repository: repository, entry: entry)
     }

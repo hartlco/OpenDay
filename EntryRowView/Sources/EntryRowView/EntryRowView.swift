@@ -1,19 +1,22 @@
 import SwiftUI
-import OpenKit
 import Models
+import OpenKit
 
-struct EntryListContent: View {
-    @EnvironmentObject var store: EntriesStore
-    let post: Models.Post
+public struct EntryRowView: View {
+    public let post: Models.Post
 
-    var body: some View {
+    public init(post: Models.Post) {
+        self.post = post
+    }
+
+    public var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 HStack(alignment: .firstTextBaseline) {
                     Text(post.title ?? "")
                         .font(.headline)
                     Spacer()
-                    Text(store.dateString(for: post.entryDate))
+                    Text(EntryRowView.string(from: post.entryDate))
                         .font(Font.caption.smallCaps())
                 }
                 Text(post.body ?? "")
@@ -21,7 +24,7 @@ struct EntryListContent: View {
                     .lineLimit(4)
             }
             if (post.orderedImages?.count ?? 0) > 0 {
-                Image(okImage: post.orderedImages!.first!.openImage)
+                Image(okImageData: post.orderedImages!.first!.data!)
                     .resizable()
                     .aspectRatio(contentMode: ContentMode.fill)
                     .frame(maxHeight: 160)
@@ -30,4 +33,19 @@ struct EntryListContent: View {
             }
         }
     }
+
+    private static let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE dd"
+        return dateFormatter
+    }()
+
+    private static func string(from date: Date?) -> String {
+        guard let date = date else {
+            return ""
+        }
+
+        return dateFormatter.string(from: date)
+    }
+
 }

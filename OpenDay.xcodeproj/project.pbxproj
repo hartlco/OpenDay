@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C5205599241B483200FE0AB6 /* EntryListContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5205598241B483200FE0AB6 /* EntryListContent.swift */; };
 		C52055A1241C23A900FE0AB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52055A0241C23A900FE0AB6 /* AppDelegate.swift */; };
 		C52055A3241C23A900FE0AB6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52055A2241C23A900FE0AB6 /* ContentView.swift */; };
 		C52055A8241C23AB00FE0AB6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C52055A7241C23AB00FE0AB6 /* Assets.xcassets */; };
@@ -26,6 +25,8 @@
 		C52055C4241C9B9B00FE0AB6 /* OpenKit in Frameworks */ = {isa = PBXBuildFile; productRef = C52055C3241C9B9B00FE0AB6 /* OpenKit */; };
 		C52055C7241CA31000FE0AB6 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = C52055C6241CA31000FE0AB6 /* Models */; };
 		C52055C9241CA83600FE0AB6 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = C52055C8241CA83600FE0AB6 /* Models */; };
+		C52055CC241CBB6600FE0AB6 /* EntryRowView in Frameworks */ = {isa = PBXBuildFile; productRef = C52055CB241CBB6600FE0AB6 /* EntryRowView */; };
+		C52055CE241CBCFE00FE0AB6 /* EntryRowView in Frameworks */ = {isa = PBXBuildFile; productRef = C52055CD241CBCFE00FE0AB6 /* EntryRowView */; };
 		C53329B0240B766B007389DF /* EntryPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53329AF240B766B007389DF /* EntryPost.swift */; };
 		C558AAF7241392D300DBB148 /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = C558AAF6241392D300DBB148 /* KeyboardObserving */; };
 		C558AAF92413974C00DBB148 /* EntriesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C558AAF82413974C00DBB148 /* EntriesStore.swift */; };
@@ -51,7 +52,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C5205598241B483200FE0AB6 /* EntryListContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListContent.swift; sourceTree = "<group>"; };
 		C520559E241C23A900FE0AB6 /* OpenDay-Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenDay-Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C52055A0241C23A900FE0AB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C52055A2241C23A900FE0AB6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,6 +63,7 @@
 		C52055B4241C23CB00FE0AB6 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		C52055C0241C9A1A00FE0AB6 /* OpenKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = OpenKit; sourceTree = "<group>"; };
 		C52055C5241C9FEC00FE0AB6 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Models; sourceTree = "<group>"; };
+		C52055CA241CBAB200FE0AB6 /* EntryRowView */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EntryRowView; sourceTree = "<group>"; };
 		C53329AF240B766B007389DF /* EntryPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPost.swift; sourceTree = "<group>"; };
 		C558AAF82413974C00DBB148 /* EntriesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesStore.swift; sourceTree = "<group>"; };
 		C558AAFC24139D5500DBB148 /* EntryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EntryStore.swift; path = Stores/EntryStore.swift; sourceTree = "<group>"; };
@@ -93,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C52055CE241CBCFE00FE0AB6 /* EntryRowView in Frameworks */,
 				C52055C2241C9B9400FE0AB6 /* OpenKit in Frameworks */,
 				C52055B5241C23CB00FE0AB6 /* CloudKit.framework in Frameworks */,
 				C52055C9241CA83600FE0AB6 /* Models in Frameworks */,
@@ -105,6 +107,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5859DEB240B9EE900711C16 /* KingfisherSwiftUI in Frameworks */,
+				C52055CC241CBB6600FE0AB6 /* EntryRowView in Frameworks */,
 				C558AAF7241392D300DBB148 /* KeyboardObserving in Frameworks */,
 				C5DA7A93241386A200F4F398 /* TextView in Frameworks */,
 				C52055C4241C9B9B00FE0AB6 /* OpenKit in Frameworks */,
@@ -155,7 +158,6 @@
 				C558AB0324153EAC00DBB148 /* EntryView.swift */,
 				C558AB0524153ED900DBB148 /* ContentEntryView.swift */,
 				C5C39F912416D7B200309AC2 /* LocationSearchView.swift */,
-				C5205598241B483200FE0AB6 /* EntryListContent.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -163,6 +165,7 @@
 		C5B2BC2C240ABDB5009E3E2C = {
 			isa = PBXGroup;
 			children = (
+				C52055CA241CBAB200FE0AB6 /* EntryRowView */,
 				C52055C5241C9FEC00FE0AB6 /* Models */,
 				C52055C0241C9A1A00FE0AB6 /* OpenKit */,
 				C558AAFE2414C23100DBB148 /* LocationService */,
@@ -250,6 +253,7 @@
 				C52055B8241C246200FE0AB6 /* LocationService */,
 				C52055C1241C9B9400FE0AB6 /* OpenKit */,
 				C52055C8241CA83600FE0AB6 /* Models */,
+				C52055CD241CBCFE00FE0AB6 /* EntryRowView */,
 			);
 			productName = "OpenDay-Mac";
 			productReference = C520559E241C23A900FE0AB6 /* OpenDay-Mac.app */;
@@ -276,6 +280,7 @@
 				C558AAFF2414C28600DBB148 /* LocationService */,
 				C52055C3241C9B9B00FE0AB6 /* OpenKit */,
 				C52055C6241CA31000FE0AB6 /* Models */,
+				C52055CB241CBB6600FE0AB6 /* EntryRowView */,
 			);
 			productName = OpenDay;
 			productReference = C5B2BC35240ABDB6009E3E2C /* OpenDay.app */;
@@ -398,7 +403,6 @@
 				C53329B0240B766B007389DF /* EntryPost.swift in Sources */,
 				C558AAF92413974C00DBB148 /* EntriesStore.swift in Sources */,
 				C5DA7A902412DEF400F4F398 /* ImagePicker.swift in Sources */,
-				C5205599241B483200FE0AB6 /* EntryListContent.swift in Sources */,
 				C5B2BC40240ABDB6009E3E2C /* ContentView.swift in Sources */,
 				C5B2BC3B240ABDB6009E3E2C /* SceneDelegate.swift in Sources */,
 				C558AB0424153EAC00DBB148 /* EntryView.swift in Sources */,
@@ -702,6 +706,14 @@
 		C52055C8241CA83600FE0AB6 /* Models */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Models;
+		};
+		C52055CB241CBB6600FE0AB6 /* EntryRowView */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = EntryRowView;
+		};
+		C52055CD241CBCFE00FE0AB6 /* EntryRowView */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = EntryRowView;
 		};
 		C558AAF6241392D300DBB148 /* KeyboardObserving */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,5 +1,6 @@
 import SwiftUI
 import KeyboardObserving
+import EntryRowView
 
 struct ContentView: View {
     @EnvironmentObject var store: EntriesStore
@@ -13,7 +14,7 @@ struct ContentView: View {
                             ForEach(section.posts) { (post: EntryPost) in
                                 //swiftlint:disable line_length
                                 NavigationLink(destination: EntryView().environmentObject(self.store.store(for: post))) {
-                                    EntryListContent(post: post)
+                                    EntryRowView(post: post)
                                     .contextMenu {
                                         Button(action: {
                                             self.store.delete(entry: post)

@@ -42,12 +42,6 @@ public class EntryImage: NSManagedObject, Identifiable {
     @NSManaged public var post: EntryPost?
 }
 
-extension Models.Image {
-    var openImage: OKImage {
-        return OKImage(data: data!)!
-    }
-}
-
 extension EntryImage: Models.Image { }
 
 public class EntryLocation: NSManagedObject, Identifiable {

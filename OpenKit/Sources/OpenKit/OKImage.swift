@@ -41,4 +41,9 @@ public extension Image {
         self.init(uiImage: okImage)
         #endif
     }
+
+    init(okImageData: Data) {
+        let image = OKImage(data: okImageData)!
+        self.init(okImage: image)
+    }
 }
