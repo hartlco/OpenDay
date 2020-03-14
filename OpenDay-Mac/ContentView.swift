@@ -1,4 +1,5 @@
 import SwiftUI
+import OpenKit
 
 struct EntryRowView: View {
     @EnvironmentObject var store: EntriesStore
@@ -19,7 +20,7 @@ struct EntryRowView: View {
                     .lineLimit(4)
             }
             if (post.images?.count ?? 0) > 0 {
-                Image(nsImage: post.images!.first!.nsimage)
+                Image(okImage: post.images!.first!.openImage)
                     .resizable()
                     .aspectRatio(contentMode: ContentMode.fill)
                     .frame(maxHeight: 160)

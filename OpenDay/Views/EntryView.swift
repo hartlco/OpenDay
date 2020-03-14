@@ -1,4 +1,5 @@
 import SwiftUI
+import OpenKit
 
 struct EntryView: View {
     @EnvironmentObject var store: EntryStore
@@ -23,7 +24,7 @@ struct EntryView: View {
                         Text(self.store.bodyString)
                     }
                     ForEach(self.store.images) { entryImage in
-                        Image(uiImage: entryImage.uiimage)
+                        Image(uiImage: entryImage.openImage)
                             .resizable()
                             .scaledToFit()
                             .aspectRatio(contentMode: .fill)

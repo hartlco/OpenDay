@@ -1,6 +1,7 @@
 import Foundation
 import CoreData
 import LocationService
+import OpenKit
 
 #if os(macOS)
 import AppKit
@@ -27,17 +28,9 @@ public class EntryPost: NSManagedObject, Identifiable {
 extension EntryImage: Identifiable { }
 
 extension EntryImage {
-    #if os(iOS)
-    var uiimage: UIImage {
-        return UIImage(data: data!)!
+    var openImage: OKImage {
+        return OKImage(data: data!)!
     }
-    #endif
-
-    #if os(macOS)
-    var nsimage: NSImage {
-        return NSImage(data: data!)!
-    }
-    #endif
 }
 
 extension EntryLocation {
