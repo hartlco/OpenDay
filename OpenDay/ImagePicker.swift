@@ -42,13 +42,11 @@ struct ImagePickerViewController: UIViewControllerRepresentable {
 
         func imagePickerController(_ picker: UIImagePickerController,
                                    didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-            guard let image = info[.originalImage] as? UIImage else {
-                return
-            }
-
             guard let asset = info[.phAsset] as? PHAsset else {
                 return
             }
+
+            let image = asset.image
 
             parent.imagePicked?(ImageAsset(image: image,
                                            location: asset.location,
@@ -71,5 +69,31 @@ struct ImagePicker: View {
     var body: some View {
         ImagePickerViewController(presentationMode: presentationMode,
                                   imagePicked: imagePicked)
+    }
+}
+
+extension PHAsset {
+    var image: UIImage {
+        var readImage = UIImage()
+        let imageManager = PHCachingImageManager()
+        let requestOptions = PHImageRequestOptions()
+
+        requestOptions.resizeMode = PHImageRequestOptionsResizeMode.fast
+        requestOptions.deliveryMode = PHImageRequestOptionsDeliveryMode.highQualityFormat
+        requestOptions.isNetworkAccessAllowed = true
+        requestOptions.isSynchronous = true
+
+        imageManager.requestImage(for: self,
+                                  targetSize: PHImageManagerMaximumSize,
+                                  contentMode: PHImageContentMode.default,
+                                  options: requestOptions,
+                                  resultHandler: { image, _ in
+                                    guard let image = image else {
+                                        return
+                                    }
+            readImage = image
+        })
+
+        return readImage
     }
 }
