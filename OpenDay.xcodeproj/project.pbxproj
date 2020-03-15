@@ -34,6 +34,8 @@
 		C558AB002414C28600DBB148 /* LocationService in Frameworks */ = {isa = PBXBuildFile; productRef = C558AAFF2414C28600DBB148 /* LocationService */; };
 		C558AB0424153EAC00DBB148 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C558AB0324153EAC00DBB148 /* EntryView.swift */; };
 		C558AB0624153ED900DBB148 /* ContentEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C558AB0524153ED900DBB148 /* ContentEntryView.swift */; };
+		C57C0DBB241E61230056EB2F /* 1.json in Resources */ = {isa = PBXBuildFile; fileRef = C57C0DBA241E61230056EB2F /* 1.json */; };
+		C57C0DBD241E625F0056EB2F /* DayOneKit in Frameworks */ = {isa = PBXBuildFile; productRef = C57C0DBC241E625F0056EB2F /* DayOneKit */; };
 		C5859DEB240B9EE900711C16 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C5859DEA240B9EE900711C16 /* KingfisherSwiftUI */; };
 		C5B2BC39240ABDB6009E3E2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B2BC38240ABDB6009E3E2C /* AppDelegate.swift */; };
 		C5B2BC3B240ABDB6009E3E2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B2BC3A240ABDB6009E3E2C /* SceneDelegate.swift */; };
@@ -72,6 +74,8 @@
 		C558AAFE2414C23100DBB148 /* LocationService */ = {isa = PBXFileReference; lastKnownFileType = folder; path = LocationService; sourceTree = "<group>"; };
 		C558AB0324153EAC00DBB148 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		C558AB0524153ED900DBB148 /* ContentEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentEntryView.swift; sourceTree = "<group>"; };
+		C57C0DB9241E5F9A0056EB2F /* DayOneKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DayOneKit; sourceTree = "<group>"; };
+		C57C0DBA241E61230056EB2F /* 1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = 1.json; path = "../../../Documents/Export - All Entries (2020-03-15)/1.json"; sourceTree = "<group>"; };
 		C5B2BC35240ABDB6009E3E2C /* OpenDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5B2BC38240ABDB6009E3E2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5B2BC3A240ABDB6009E3E2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C57C0DBD241E625F0056EB2F /* DayOneKit in Frameworks */,
 				C5D45EDF241DFD0900B5F109 /* MapView in Frameworks */,
 				C52055CE241CBCFE00FE0AB6 /* EntryRowView in Frameworks */,
 				C52055C2241C9B9400FE0AB6 /* OpenKit in Frameworks */,
@@ -128,6 +133,7 @@
 		C520559F241C23A900FE0AB6 /* OpenDay-Mac */ = {
 			isa = PBXGroup;
 			children = (
+				C57C0DBA241E61230056EB2F /* 1.json */,
 				C52055A0241C23A900FE0AB6 /* AppDelegate.swift */,
 				C52055A2241C23A900FE0AB6 /* ContentView.swift */,
 				C52055A7241C23AB00FE0AB6 /* Assets.xcassets */,
@@ -170,6 +176,7 @@
 		C5B2BC2C240ABDB5009E3E2C = {
 			isa = PBXGroup;
 			children = (
+				C57C0DB9241E5F9A0056EB2F /* DayOneKit */,
 				C5D45EDB241DF6A800B5F109 /* MapView */,
 				C52055CA241CBAB200FE0AB6 /* EntryRowView */,
 				C52055C5241C9FEC00FE0AB6 /* Models */,
@@ -261,6 +268,7 @@
 				C52055C8241CA83600FE0AB6 /* Models */,
 				C52055CD241CBCFE00FE0AB6 /* EntryRowView */,
 				C5D45EDE241DFD0900B5F109 /* MapView */,
+				C57C0DBC241E625F0056EB2F /* DayOneKit */,
 			);
 			productName = "OpenDay-Mac";
 			productReference = C520559E241C23A900FE0AB6 /* OpenDay-Mac.app */;
@@ -343,6 +351,7 @@
 				C52055AE241C23AB00FE0AB6 /* Main.storyboard in Resources */,
 				C52055AB241C23AB00FE0AB6 /* Preview Assets.xcassets in Resources */,
 				C52055A8241C23AB00FE0AB6 /* Assets.xcassets in Resources */,
+				C57C0DBB241E61230056EB2F /* 1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,6 +740,10 @@
 		C558AAFF2414C28600DBB148 /* LocationService */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LocationService;
+		};
+		C57C0DBC241E625F0056EB2F /* DayOneKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DayOneKit;
 		};
 		C5859DEA240B9EE900711C16 /* KingfisherSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;

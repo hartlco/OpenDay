@@ -8,12 +8,12 @@
 
 import Cocoa
 import SwiftUI
+import DayOneKit
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
-
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
@@ -21,6 +21,57 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let repositroy = CoreDataEntryRepository(context: persistentContainer.viewContext)
         let store = EntriesStore(repository: repositroy)
         let contentView = ContentView().environmentObject(store)
+
+        let openPanel = NSOpenPanel()
+        openPanel.allowsMultipleSelection = false
+        openPanel.canChooseDirectories = true
+        openPanel.canCreateDirectories = false
+        openPanel.canChooseFiles = false
+        openPanel.begin { result in
+            if result == NSApplication.ModalResponse.OK {
+                guard let url = openPanel.url else {
+                    return
+                }
+
+                let manager = DayOneKitDataReader(fileURL: url)
+                let data = manager.importedData(for: "Japnisch")
+
+                for entry in data.entries {
+                    let newEntry =  repositroy.newEntry()
+                    newEntry.title = entry.title
+                    newEntry.body = entry.body
+                    newEntry.entryDate = entry.convertedDate
+
+                    if let location = entry.location {
+                        let newLocation = repositroy.newLocation()
+                        newLocation.longitude = location.longitude ?? 0.0
+                        newLocation.latitude = location.latitude ?? 0.0
+                        newLocation.city = location.administrativeArea
+                        newLocation.street = location.placeName
+                        // TODO: Country name
+
+                        newEntry.location = newLocation
+                    }
+
+                    if let photos = entry.photos {
+                        var images = Set<EntryImage>()
+                        for photo in photos {
+                            guard let data = try? Data(contentsOf: photo.fileURL(for: url)) else {
+                                continue
+                            }
+
+                            let newPhoto = repositroy.newImage()
+                            newPhoto.data = data
+                            images.insert(newPhoto)
+                        }
+
+                        newEntry.images = images
+                    }
+                }
+
+                repositroy.save()
+            }
+        }
 
         // Create the window and set the content view. 
         window = NSWindow(
