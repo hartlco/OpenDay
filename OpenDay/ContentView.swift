@@ -1,6 +1,7 @@
 import SwiftUI
 import KeyboardObserving
 import EntryRowView
+import MapView
 
 struct ContentView: View {
     @EnvironmentObject var store: EntriesStore
@@ -31,6 +32,13 @@ struct ContentView: View {
                 .listStyle(DefaultListStyle())
                 HStack {
                     Spacer()
+                    NavigationLink(destination: MapView(locations: $store.locations).edgesIgnoringSafeArea(.vertical),
+                                   label: {
+                                    Image(systemName: "map")
+                                        .resizable()
+                                        .frame(width: 32.0, height: 32.0, alignment: .center)
+                                        .padding()
+                    })
                     NavigationLink(destination: EntryView().environmentObject(store.storeForNewEntry()),
                                    label: {
                                     Image(systemName: "plus.circle.fill")

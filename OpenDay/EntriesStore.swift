@@ -2,6 +2,7 @@ import Foundation
 import CoreData
 import Combine
 import SwiftUI
+import Models
 
 final class EntriesStore: ObservableObject {
     private var repository: EntryRepository
@@ -12,6 +13,13 @@ final class EntriesStore: ObservableObject {
             objectWillChange.send()
         }
     }
+
+    @Published var locations: [Location] = [] {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+
     var objectWillChange = PassthroughSubject<Void, Never>()
 
     init(repository: EntryRepository) {
@@ -21,6 +29,14 @@ final class EntriesStore: ObservableObject {
             guard let self = self else { return }
 
             self.sections = entries
+
+            self.locations = entries.map {
+                return $0.posts
+            }.flatMap {
+                return $0
+            }.compactMap { post in
+                return post.location
+            }
         }
 
         repository.load()

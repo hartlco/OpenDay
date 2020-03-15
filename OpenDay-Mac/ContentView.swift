@@ -1,6 +1,7 @@
 import SwiftUI
 import OpenKit
 import EntryRowView
+import MapView
 
 struct DetailView: View {
     let text: String
@@ -37,7 +38,7 @@ struct ContentView: View {
                 }
             }
             .frame(minWidth: 380, maxWidth: 480)
-            DetailView(text: "")
+            MapView(locations: $store.locations)
         }
     }
 }

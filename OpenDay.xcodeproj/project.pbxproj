@@ -47,6 +47,8 @@
 		C5C39F942416D93600309AC2 /* LocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F932416D93600309AC2 /* LocationSearchViewModel.swift */; };
 		C5C39F972417714700309AC2 /* EntryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F962417714700309AC2 /* EntryRepository.swift */; };
 		C5C39F992417800D00309AC2 /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F982417800D00309AC2 /* CoreDataRepository.swift */; };
+		C5D45EDD241DF76B00B5F109 /* MapView in Frameworks */ = {isa = PBXBuildFile; productRef = C5D45EDC241DF76B00B5F109 /* MapView */; };
+		C5D45EDF241DFD0900B5F109 /* MapView in Frameworks */ = {isa = PBXBuildFile; productRef = C5D45EDE241DFD0900B5F109 /* MapView */; };
 		C5DA7A902412DEF400F4F398 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DA7A8F2412DEF400F4F398 /* ImagePicker.swift */; };
 		C5DA7A93241386A200F4F398 /* TextView in Frameworks */ = {isa = PBXBuildFile; productRef = C5DA7A92241386A200F4F398 /* TextView */; };
 /* End PBXBuildFile section */
@@ -85,6 +87,7 @@
 		C5C39F932416D93600309AC2 /* LocationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationSearchViewModel.swift; path = Stores/LocationSearchViewModel.swift; sourceTree = "<group>"; };
 		C5C39F962417714700309AC2 /* EntryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryRepository.swift; sourceTree = "<group>"; };
 		C5C39F982417800D00309AC2 /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
+		C5D45EDB241DF6A800B5F109 /* MapView */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MapView; sourceTree = "<group>"; };
 		C5DA7A8F2412DEF400F4F398 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		C5DA7A912413853800F4F398 /* TextView */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TextView; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5D45EDF241DFD0900B5F109 /* MapView in Frameworks */,
 				C52055CE241CBCFE00FE0AB6 /* EntryRowView in Frameworks */,
 				C52055C2241C9B9400FE0AB6 /* OpenKit in Frameworks */,
 				C52055B5241C23CB00FE0AB6 /* CloudKit.framework in Frameworks */,
@@ -106,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5D45EDD241DF76B00B5F109 /* MapView in Frameworks */,
 				C5859DEB240B9EE900711C16 /* KingfisherSwiftUI in Frameworks */,
 				C52055CC241CBB6600FE0AB6 /* EntryRowView in Frameworks */,
 				C558AAF7241392D300DBB148 /* KeyboardObserving in Frameworks */,
@@ -165,6 +170,7 @@
 		C5B2BC2C240ABDB5009E3E2C = {
 			isa = PBXGroup;
 			children = (
+				C5D45EDB241DF6A800B5F109 /* MapView */,
 				C52055CA241CBAB200FE0AB6 /* EntryRowView */,
 				C52055C5241C9FEC00FE0AB6 /* Models */,
 				C52055C0241C9A1A00FE0AB6 /* OpenKit */,
@@ -254,6 +260,7 @@
 				C52055C1241C9B9400FE0AB6 /* OpenKit */,
 				C52055C8241CA83600FE0AB6 /* Models */,
 				C52055CD241CBCFE00FE0AB6 /* EntryRowView */,
+				C5D45EDE241DFD0900B5F109 /* MapView */,
 			);
 			productName = "OpenDay-Mac";
 			productReference = C520559E241C23A900FE0AB6 /* OpenDay-Mac.app */;
@@ -281,6 +288,7 @@
 				C52055C3241C9B9B00FE0AB6 /* OpenKit */,
 				C52055C6241CA31000FE0AB6 /* Models */,
 				C52055CB241CBB6600FE0AB6 /* EntryRowView */,
+				C5D45EDC241DF76B00B5F109 /* MapView */,
 			);
 			productName = OpenDay;
 			productReference = C5B2BC35240ABDB6009E3E2C /* OpenDay.app */;
@@ -728,6 +736,14 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C5859DE9240B9EE900711C16 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = KingfisherSwiftUI;
+		};
+		C5D45EDC241DF76B00B5F109 /* MapView */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MapView;
+		};
+		C5D45EDE241DFD0900B5F109 /* MapView */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MapView;
 		};
 		C5DA7A92241386A200F4F398 /* TextView */ = {
 			isa = XCSwiftPackageProductDependency;
