@@ -67,6 +67,14 @@ public struct Location: Codable {
     public let placeName: String?
     public let administrativeArea: String?
     public let country: String?
+
+    public var countryCode: String? {
+        guard let country = country else {
+            return nil
+        }
+
+        return isoCountryCode(for: country)
+    }
 }
 
 public struct Photo: Codable {
@@ -105,4 +113,15 @@ extension NSRegularExpression {
             preconditionFailure("Illegal regular expression: \(pattern).")
         }
     }
+}
+
+func isoCountryCode(for englishCountryName: String) -> String? {
+    for localeCode in NSLocale.isoCountryCodes {
+        let countryName = NSLocale(localeIdentifier: "en-US").displayName(forKey: NSLocale.Key.countryCode, value: localeCode)
+        if englishCountryName.lowercased() == countryName?.lowercased() {
+            return localeCode
+        }
+    }
+
+    return nil
 }

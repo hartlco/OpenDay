@@ -48,7 +48,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                         newLocation.latitude = location.latitude ?? 0.0
                         newLocation.city = location.administrativeArea
                         newLocation.street = location.placeName
-                        // TODO: Country name
+                        newLocation.isoCountryCode = location.countryCode
 
                         newEntry.location = newLocation
                     }
