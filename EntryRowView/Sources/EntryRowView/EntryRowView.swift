@@ -14,7 +14,8 @@ public struct EntryRowView: View {
             VStack(alignment: .leading) {
                 HStack(alignment: .firstTextBaseline) {
                     Text(post.title ?? "")
-                        .font(.headline)
+                        .font(Font.headline.smallCaps())
+                        .bold()
                     Spacer()
                     Text(EntryRowView.string(from: post.entryDate))
                         .font(Font.caption.smallCaps())

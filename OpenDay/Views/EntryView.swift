@@ -24,7 +24,7 @@ struct EntryView: View {
                         Text(self.store.bodyString)
                     }
                     ForEach(self.store.images) { entryImage in
-                        Image(uiImage: entryImage.openImage)
+                        Image(okImageData: entryImage.data!)
                             .resizable()
                             .scaledToFit()
                             .aspectRatio(contentMode: .fill)

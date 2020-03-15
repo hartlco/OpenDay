@@ -55,7 +55,8 @@ public final class LocationService: NSObject {
                                                     promise(Result.success(location))
                                                 } else {
                                                     let location = LocationServiceLocation(latitude: location.coordinate.latitude,
-                                                                            longitude: location.coordinate.longitude)
+
+                                                                                           longitude: location.coordinate.longitude)
 
                                                     promise(Result.success(location))
                                                 }
