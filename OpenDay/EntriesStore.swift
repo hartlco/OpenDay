@@ -43,7 +43,11 @@ final class EntriesStore: ObservableObject {
         dateFormatter.dateFormat = "EEE dd"
     }
 
-    func store(for entry: EntryPost) -> EntryStore {
+    func store(for entry: Post) -> EntryStore {
+        guard let entry = entry as? EntryPost else {
+            fatalError("Missmatched Typed")
+        }
+
         return EntryStore(repository: repository, entry: entry)
     }
 

@@ -2,9 +2,24 @@ import SwiftUI
 import KeyboardObserving
 import EntryRowView
 import MapView
+import Models
 
 struct ContentView: View {
     @EnvironmentObject var store: EntriesStore
+
+    @State var isModal: Bool = false
+    @State var selectedModalEntry: Post?
+
+    var modal: some View {
+        Text("Modal")
+    }
+
+    var mapView: some View {
+        return MapView(locations: $store.locations) { location in
+            self.isModal = true
+            self.selectedModalEntry = location.getPost()
+        }.edgesIgnoringSafeArea(.vertical)
+    }
 
     var body: some View {
         NavigationView {
@@ -32,13 +47,16 @@ struct ContentView: View {
                 .listStyle(DefaultListStyle())
                 HStack {
                     Spacer()
-                    NavigationLink(destination: MapView(locations: $store.locations).edgesIgnoringSafeArea(.vertical),
-                                   label: {
-                                    Image(systemName: "map")
-                                        .resizable()
-                                        .frame(width: 32.0, height: 32.0, alignment: .center)
-                                        .padding()
-                    })
+                    NavigationLink(destination: mapView.sheet(isPresented: $isModal, content: {
+                        self.selectedModalEntry.map { post in
+                            EntryView().environmentObject(self.store.store(for: post))
+                        }
+                    })) {
+                        Image(systemName: "map")
+                        .resizable()
+                        .frame(width: 32.0, height: 32.0, alignment: .center)
+                        .padding()
+                    }
                     NavigationLink(destination: EntryView().environmentObject(store.storeForNewEntry()),
                                    label: {
                                     Image(systemName: "plus.circle.fill")

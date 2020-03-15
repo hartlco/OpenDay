@@ -53,7 +53,11 @@ public class EntryLocation: NSManagedObject, Identifiable {
     @NSManaged public var post: EntryPost?
 }
 
-extension EntryLocation: Models.Location { }
+extension EntryLocation: Models.Location {
+    public func getPost() -> Post? {
+        return post
+    }
+}
 
 extension EntryLocation {
     func update(from location: LocationServiceLocation) {

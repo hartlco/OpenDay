@@ -20,4 +20,6 @@ public protocol Location: class {
     var latitude: Double { get set}
     var longitude: Double { get set}
     var street: String? { get set}
+
+    func getPost() -> Post?
 }
