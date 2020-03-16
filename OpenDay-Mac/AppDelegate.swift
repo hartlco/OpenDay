@@ -7,20 +7,22 @@
 //
 
 import Cocoa
+import Foundation
 import SwiftUI
 import DayOneKit
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 
     var window: NSWindow!
+    var entriesStore: EntriesStore!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
         let repositroy = CoreDataEntryRepository(context: persistentContainer.viewContext)
-        let store = EntriesStore(repository: repositroy)
-        let contentView = ContentView().environmentObject(store)
+        entriesStore = EntriesStore(repository: repositroy)
+        let contentView = ContentView().environmentObject(entriesStore)
 
         let openPanel = NSOpenPanel()
         openPanel.allowsMultipleSelection = false
@@ -34,7 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 }
 
                 let manager = DayOneKitDataReader(fileURL: url)
-                let data = manager.importedData(for: "Japnisch")
+                let data = manager.importedData(for: "1")
 
                 for entry in data.entries {
                     let newEntry =  repositroy.newEntry()
@@ -185,5 +187,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return .terminateNow
     }
 
-}
+    func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
+        switch item.action {
+        case #selector(delete(_:)):
+            return entriesStore.hasSelectedEntry
+        default:
+            return true
+        }
+    }
 
+    @IBAction func delete(_ sender: AnyObject) {
+        entriesStore.deleteSelectedEntry()
+    }
+}

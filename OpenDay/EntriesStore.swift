@@ -20,6 +20,8 @@ final class EntriesStore: ObservableObject {
         }
     }
 
+    @Published var selection: EntryPost? = nil
+
     var objectWillChange = PassthroughSubject<Void, Never>()
 
     init(repository: EntryRepository) {
@@ -57,5 +59,26 @@ final class EntriesStore: ObservableObject {
 
     func delete(entry: EntryPost) {
         repository.delete(entry: entry)
+    }
+
+    func deleteAll() {
+        for section in sections {
+            for entry in section.posts {
+                delete(entry: entry)
+            }
+        }
+    }
+
+    var hasSelectedEntry: Bool {
+        return selection != nil
+    }
+
+    func deleteSelectedEntry() {
+        guard let selectedEntry = selection else {
+            return
+        }
+
+        delete(entry: selectedEntry)
+        selection = nil
     }
 }

@@ -17,11 +17,11 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            List {
+            List(selection: $store.selection) {
                 ForEach(store.sections) { section in
                     Section(header: Text(section.title)) {
                         ForEach(section.posts) { (post: EntryPost) in
-                            NavigationLink(destination: DetailView(text: post.title ?? "")) {
+                            NavigationLink(destination: DetailView(text: post.title ?? ""), tag: post, selection: self.$store.selection) {
                                 EntryRowView(post: post)
                             }
                             .navigationViewStyle(DoubleColumnNavigationViewStyle())
@@ -38,6 +38,7 @@ struct ContentView: View {
                 }
             }
             .frame(minWidth: 380, maxWidth: 480)
+            .navigationViewStyle(DoubleColumnNavigationViewStyle())
             MapView(locations: $store.locations)
         }
     }
