@@ -24,6 +24,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
         entriesStore = EntriesStore(repository: repositroy)
         let contentView = ContentView().environmentObject(entriesStore)
 
+        entriesStore.deleteAll()
+
         let openPanel = NSOpenPanel()
         openPanel.allowsMultipleSelection = false
         openPanel.canChooseDirectories = true
@@ -36,7 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
                 }
 
                 let manager = DayOneKitDataReader(fileURL: url)
-                let data = manager.importedData(for: "1")
+                let data = manager.importedData(for: "Journal")
 
                 for entry in data.entries {
                     let newEntry =  repositroy.newEntry()

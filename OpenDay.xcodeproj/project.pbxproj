@@ -76,6 +76,7 @@
 		C558AB0524153ED900DBB148 /* ContentEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentEntryView.swift; sourceTree = "<group>"; };
 		C57C0DB9241E5F9A0056EB2F /* DayOneKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DayOneKit; sourceTree = "<group>"; };
 		C57C0DBA241E61230056EB2F /* 1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = 1.json; path = "../../../Documents/Export - All Entries (2020-03-15)/1.json"; sourceTree = "<group>"; };
+		C5A895FD242098FF00025403 /* WeatherService */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WeatherService; sourceTree = "<group>"; };
 		C5B2BC35240ABDB6009E3E2C /* OpenDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5B2BC38240ABDB6009E3E2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5B2BC3A240ABDB6009E3E2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -176,6 +177,7 @@
 		C5B2BC2C240ABDB5009E3E2C = {
 			isa = PBXGroup;
 			children = (
+				C5A895FD242098FF00025403 /* WeatherService */,
 				C57C0DB9241E5F9A0056EB2F /* DayOneKit */,
 				C5D45EDB241DF6A800B5F109 /* MapView */,
 				C52055CA241CBAB200FE0AB6 /* EntryRowView */,
