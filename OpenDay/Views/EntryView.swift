@@ -80,6 +80,11 @@ struct EntryView: View {
                                     Text("Search Location")
                     }.buttonStyle(DefaultButtonStyle())
                 }
+                store.weatherString.map { weather in
+                    Section(header: Text("Weather")) {
+                        Text(weather)
+                    }
+                }
             }
             .listStyle(GroupedListStyle())
             .navigationBarItems(trailing: Button(action: {
@@ -88,6 +93,9 @@ struct EntryView: View {
                 Image(systemName: "photo")
             }))
             .navigationBarTitle("Edit", displayMode: .inline)
+            .onAppear {
+                self.store.onAppear()
+            }
             .onDisappear {
                 self.store.save()
             }

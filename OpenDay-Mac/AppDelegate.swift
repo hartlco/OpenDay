@@ -10,12 +10,17 @@ import Cocoa
 import Foundation
 import SwiftUI
 import DayOneKit
+import WeatherService
+import Combine
+import Secrets
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 
     var window: NSWindow!
     var entriesStore: EntriesStore!
+
+    var weatherCancellable: AnyCancellable?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
@@ -25,6 +30,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
         let contentView = ContentView().environmentObject(entriesStore)
 
         entriesStore.deleteAll()
+
+        weatherCancellable = WeatherService().getData(key: Secrets.darkSkyKey,
+                                                      latitude: 52.520008,
+                                                      longitude: 13.404954).sink(receiveCompletion: { _ in
+
+                                                      }, receiveValue: { data in
+                                                        print(data)
+                                                      })
 
         let openPanel = NSOpenPanel()
         openPanel.allowsMultipleSelection = false

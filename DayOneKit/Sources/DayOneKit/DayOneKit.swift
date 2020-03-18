@@ -98,12 +98,13 @@ public class DayOneKitDataReader {
     }
 
     public func importedData(for journalName: String) -> Import {
+        //swiftlint:disable force_try
         let data = try! Data(contentsOf: fileURL.appendingPathComponent("\(journalName).json"))
+        //swiftlint:disable force_try
         let importedData = try! JSONDecoder().decode(Import.self, from: data)
         return importedData
     }
 }
-
 
 extension NSRegularExpression {
     convenience init(_ pattern: String) {

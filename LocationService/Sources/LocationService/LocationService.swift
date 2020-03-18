@@ -126,7 +126,6 @@ extension LocationService: CLLocationManagerDelegate {
                                             } else {
                                                 let location = LocationServiceLocation(latitude: firstLocation.coordinate.latitude,
                                                                         longitude: firstLocation.coordinate.longitude)
-
                                                 self.runningPromise?(Result.success(location))
                                             }
         })

@@ -4,6 +4,8 @@ import LocationService
 import CoreLocation
 import Combine
 import OpenKit
+import Secrets
+import WeatherService
 
 struct ImageAsset {
     let image: OKImage
@@ -17,6 +19,7 @@ final class EntryStore: ObservableObject {
     @Published var bodyString = ""
     @Published var entryDate = Date()
     @Published var currentLocation: LocationServiceLocation?
+    @Published var weatherString: String?
 
     private var lastInsertedImageAsset: ImageAsset?
     private var entry: EntryPost?
@@ -27,12 +30,15 @@ final class EntryStore: ObservableObject {
     private var locationCancellable: AnyCancellable?
     private var locationFromImageCancellable: AnyCancellable?
     private var searchFromImageCancellable: AnyCancellable?
+    private var weatherServiceCancellable: AnyCancellable?
 
     init(repository: EntryRepository,
          locale: Locale = .current) {
         self.locationService = LocationService(locationManager: CLLocationManager())
         self.locale = locale
         self.repository = repository
+
+        setupWeatherBinding()
     }
 
     init(repository: EntryRepository,
@@ -47,6 +53,12 @@ final class EntryStore: ObservableObject {
         self.locationService = LocationService(locationManager: CLLocationManager())
         self.locale = locale
         self.repository = repository
+
+        setupWeatherBinding()
+    }
+
+    func onAppear() {
+        setupWeatherBinding()
     }
 
     func append(imageAsset: ImageAsset) {
@@ -58,7 +70,7 @@ final class EntryStore: ObservableObject {
     }
 
     func updateLocation() {
-        locationCancellable = locationService.getLocation().sink(receiveCompletion: { _ in
+        locationCancellable = locationService.getLocation().receive(on: RunLoop.main).sink(receiveCompletion: { _ in
 
         }, receiveValue: { [weak self] location in
             guard let self = self else { return }
@@ -78,7 +90,7 @@ final class EntryStore: ObservableObject {
             return
         }
 
-        locationFromImageCancellable = locationService.getLocation(from: assetLocation).sink(receiveCompletion: { _ in
+        locationFromImageCancellable = locationService.getLocation(from: assetLocation).receive(on: RunLoop.main).sink(receiveCompletion: { _ in
 
         }, receiveValue: { [weak self] location in
             guard let self = self else { return }
@@ -150,5 +162,29 @@ final class EntryStore: ObservableObject {
         }
 
         return false
+    }
+
+    private func setupWeatherBinding() {
+        weatherServiceCancellable = $currentLocation.compactMap { location in
+            return location
+        }
+        .setFailureType(to: Error.self)
+        .combineLatest($entryDate.setFailureType(to: Error.self))
+        .flatMap { (data: (LocationServiceLocation, Date)) in
+            return WeatherService().getData(key: Secrets.darkSkyKey,
+                                            date: data.1,
+                                            latitude: data.0.latitude,
+                                            longitude: data.0.longitude)
+                .catch { _ in
+                    Empty<WeatherService.WeatherData, Error>()
+            }
+        }
+        .sink(receiveCompletion: { _ in
+
+        }, receiveValue: { [weak self] weatherData in
+            guard let self = self else { return }
+
+            self.weatherString = "\(weatherData.icon.rawValue) - \(weatherData.temperatureCelcius)"
+        })
     }
 }
