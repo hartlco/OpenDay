@@ -16,8 +16,10 @@ protocol EntryRepository {
     func newEntry() -> EntryPost
     func newImage() -> EntryImage
     func newLocation() -> EntryLocation
+    func newWeather() -> EntryWeather
     func delete(entry: EntryPost)
     func delete(image: EntryImage)
     func delete(location: EntryLocation)
+    func delete(weather: EntryWeather)
     func save()
 }

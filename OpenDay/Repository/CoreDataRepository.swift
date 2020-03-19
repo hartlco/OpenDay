@@ -42,6 +42,10 @@ final class CoreDataEntryRepository: NSObject, EntryRepository {
         EntryLocation(context: context)
     }
 
+    func newWeather() -> EntryWeather {
+        EntryWeather(context: context)
+    }
+
     func delete(image: EntryImage) {
         context.delete(image)
     }
@@ -50,13 +54,22 @@ final class CoreDataEntryRepository: NSObject, EntryRepository {
         context.delete(location)
     }
 
+    func delete(weather: EntryWeather) {
+        context.delete(weather)
+    }
+
     func delete(entry: EntryPost) {
         let images = entry.images
         let location = entry.location
+        let weather = entry.weather
         context.delete(entry)
 
         if let location = location {
             context.delete(location)
+        }
+
+        if let weather = weather {
+            context.delete(weather)
         }
 
         for image in images ?? [] {

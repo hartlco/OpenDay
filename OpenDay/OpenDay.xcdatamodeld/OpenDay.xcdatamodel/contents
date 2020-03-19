@@ -19,10 +19,17 @@
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EntryImage" inverseName="post" inverseEntity="EntryImage"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryLocation" inverseName="post" inverseEntity="EntryLocation"/>
+        <relationship name="weather" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryWeather" inverseName="post" inverseEntity="EntryWeather"/>
+    </entity>
+    <entity name="EntryWeather" representedClassName=".EntryWeather" syncable="YES">
+        <attribute name="temperature" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="weatherIconString" optional="YES" attributeType="String"/>
+        <relationship name="post" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryPost" inverseName="weather" inverseEntity="EntryPost"/>
     </entity>
     <elements>
         <element name="EntryImage" positionX="-54" positionY="18" width="128" height="88"/>
         <element name="EntryLocation" positionX="-45" positionY="36" width="128" height="133"/>
-        <element name="EntryPost" positionX="-54" positionY="-9" width="128" height="118"/>
+        <element name="EntryPost" positionX="-54" positionY="-9" width="128" height="133"/>
+        <element name="EntryWeather" positionX="-45" positionY="63" width="128" height="88"/>
     </elements>
 </model>

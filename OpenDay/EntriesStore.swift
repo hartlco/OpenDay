@@ -20,7 +20,7 @@ final class EntriesStore: ObservableObject {
         }
     }
 
-    @Published var selection: EntryPost? = nil
+    @Published var selection: EntryPost?
 
     var objectWillChange = PassthroughSubject<Void, Never>()
 

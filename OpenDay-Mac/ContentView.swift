@@ -4,11 +4,14 @@ import EntryRowView
 import MapView
 
 struct DetailView: View {
-    let text: String
+    let post: EntryPost
 
     var body: some View {
-        Text(text)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        VStack {
+            Text(post.title ?? "")
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            Text(post.weather?.weatherIcon?.rawValue ?? "")
+        }
     }
 }
 
@@ -21,7 +24,7 @@ struct ContentView: View {
                 ForEach(store.sections) { section in
                     Section(header: Text(section.title)) {
                         ForEach(section.posts) { (post: EntryPost) in
-                            NavigationLink(destination: DetailView(text: post.title ?? ""), tag: post, selection: self.$store.selection) {
+                            NavigationLink(destination: DetailView(post: post)) {
                                 EntryRowView(post: post)
                             }
                             .navigationViewStyle(DoubleColumnNavigationViewStyle())

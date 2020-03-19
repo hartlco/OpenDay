@@ -13,6 +13,7 @@ import DayOneKit
 import WeatherService
 import Combine
 import Secrets
+import Models
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
@@ -30,14 +31,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
         let contentView = ContentView().environmentObject(entriesStore)
 
         entriesStore.deleteAll()
-
-        weatherCancellable = WeatherService().getData(key: Secrets.darkSkyKey,
-                                                      latitude: 52.520008,
-                                                      longitude: 13.404954).sink(receiveCompletion: { _ in
-
-                                                      }, receiveValue: { data in
-                                                        print(data)
-                                                      })
 
         let openPanel = NSOpenPanel()
         openPanel.allowsMultipleSelection = false
@@ -83,6 +76,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
                         }
 
                         newEntry.images = images
+                    }
+
+                    if let weather = entry.weather {
+                        let newWeather = repositroy.newWeather()
+                        newWeather.temperature = EntryWeather.convertToFahrenheit(from: Double(weather.temperatureCelsius))
+                        newWeather.weatherIconString = Models.WeatherIcon.matched(from: weather.weatherCode)?.rawValue
+                        newEntry.weather = newWeather
                     }
                 }
 

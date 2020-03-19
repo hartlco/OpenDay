@@ -7,6 +7,7 @@ public protocol Post: class {
     var orderedImages: [Image]? { get }
 
     func getLocation() -> Location?
+    func getWeather() -> Weather?
 }
 
 public protocol Image: class {

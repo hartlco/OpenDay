@@ -80,9 +80,9 @@ struct EntryView: View {
                                     Text("Search Location")
                     }.buttonStyle(DefaultButtonStyle())
                 }
-                store.weatherString.map { weather in
+                store.currentWeather.map { (weather: EntryWeather) in
                     Section(header: Text("Weather")) {
-                        Text(weather)
+                        Text(weather.weatherIconString ?? "")
                     }
                 }
             }

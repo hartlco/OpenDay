@@ -14,6 +14,7 @@ public class EntryPost: NSManagedObject, Identifiable {
     @NSManaged public var entryDate: Date?
     @NSManaged public var images: Set<EntryImage>?
     @NSManaged public var location: EntryLocation?
+    @NSManaged public var weather: EntryWeather?
 
     static let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -27,6 +28,10 @@ public class EntryPost: NSManagedObject, Identifiable {
 }
 
 extension EntryPost: Models.Post {
+    public func getWeather() -> Weather? {
+        return weather
+    }
+
     public func getLocation() -> Location? {
         return location
     }
@@ -74,5 +79,21 @@ extension EntryLocation {
                                        isoCountryCode: isoCountryCode,
                                        street: street,
                                        city: city)
+    }
+}
+
+public class EntryWeather: NSManagedObject, Identifiable {
+    @NSManaged public var temperature: Double
+    @NSManaged public var weatherIconString: String?
+    @NSManaged public var post: EntryPost?
+}
+
+extension EntryWeather: Models.Weather {
+    public var weatherIcon: WeatherIcon? {
+        guard let weatherIconString = weatherIconString else {
+            return nil
+        }
+
+        return .matched(from: weatherIconString)
     }
 }

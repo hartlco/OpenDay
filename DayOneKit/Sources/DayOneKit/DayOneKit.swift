@@ -15,6 +15,7 @@ public struct Entry: Codable {
     public let text: String?
     public let location: Location?
     public let photos: [Photo]?
+    public let weather: Weather?
 
     var cleanedText: String? {
         guard let text = text else {
@@ -75,6 +76,11 @@ public struct Location: Codable {
 
         return isoCountryCode(for: country)
     }
+}
+
+public struct Weather: Codable {
+    public let weatherCode: String
+    public let temperatureCelsius: Int
 }
 
 public struct Photo: Codable {

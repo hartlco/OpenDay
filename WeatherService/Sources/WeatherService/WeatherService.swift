@@ -4,7 +4,7 @@ import Combine
 public final class WeatherService {
     public enum WeatherIcon: String, Codable {
         case clearDay = "clear-day"
-        case clearNight = "clear-nigh"
+        case clearNight = "clear-night"
         case rain
         case snow
         case sleet

@@ -19,7 +19,7 @@ final class EntryStore: ObservableObject {
     @Published var bodyString = ""
     @Published var entryDate = Date()
     @Published var currentLocation: LocationServiceLocation?
-    @Published var weatherString: String?
+    @Published var currentWeather: EntryWeather?
 
     private var lastInsertedImageAsset: ImageAsset?
     private var entry: EntryPost?
@@ -50,6 +50,7 @@ final class EntryStore: ObservableObject {
         self.bodyString = entry.body ?? ""
         self.entryDate = entry.entryDate ?? Date()
         self.currentLocation = entry.location?.locationServiceLocation
+        self.currentWeather = entry.weather
         self.locationService = LocationService(locationManager: CLLocationManager())
         self.locale = locale
         self.repository = repository
@@ -90,13 +91,15 @@ final class EntryStore: ObservableObject {
             return
         }
 
-        locationFromImageCancellable = locationService.getLocation(from: assetLocation).receive(on: RunLoop.main).sink(receiveCompletion: { _ in
+        locationFromImageCancellable = locationService.getLocation(from: assetLocation)
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { _ in
 
-        }, receiveValue: { [weak self] location in
-            guard let self = self else { return }
+            }, receiveValue: { [weak self] location in
+                guard let self = self else { return }
 
-            self.currentLocation = location
-        })
+                self.currentLocation = location
+            })
     }
 
     func delete(image: EntryImage) {
@@ -122,6 +125,7 @@ final class EntryStore: ObservableObject {
         entry?.title = self.title
         entry?.body = self.bodyString
         entry?.entryDate = self.entryDate
+        entry?.weather = self.currentWeather
         entry?.images = Set(self.images)
 
         if let currentLocation = currentLocation {
@@ -184,7 +188,12 @@ final class EntryStore: ObservableObject {
         }, receiveValue: { [weak self] weatherData in
             guard let self = self else { return }
 
-            self.weatherString = "\(weatherData.icon.rawValue) - \(weatherData.temperatureCelcius)"
+            if self.currentWeather == nil {
+                self.currentWeather = self.repository.newWeather()
+            }
+
+            self.currentWeather?.temperature = weatherData.temperatureFahrenheit
+            self.currentWeather?.weatherIconString = weatherData.icon.rawValue
         })
     }
 }
