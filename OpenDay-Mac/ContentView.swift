@@ -10,6 +10,7 @@ struct DetailView: View {
         VStack {
             Text(post.title ?? "")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+            Text(post.body ?? "")
             Text(post.weather?.weatherIcon?.rawValue ?? "")
         }
     }

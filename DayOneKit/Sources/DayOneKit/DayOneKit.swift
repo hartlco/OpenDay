@@ -44,7 +44,7 @@ public struct Entry: Codable {
     }
 
     public var body: String {
-        guard let text = text else {
+        guard let text = cleanedText else {
             return ""
         }
 
@@ -115,7 +115,7 @@ public class DayOneKitDataReader {
 extension NSRegularExpression {
     convenience init(_ pattern: String) {
         do {
-            try self.init(pattern: pattern)
+            try self.init(pattern: pattern, options: [.anchorsMatchLines, .allowCommentsAndWhitespace])
         } catch {
             preconditionFailure("Illegal regular expression: \(pattern).")
         }
