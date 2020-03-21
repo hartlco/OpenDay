@@ -66,6 +66,7 @@ final class EntryStore: ObservableObject {
         lastInsertedImageAsset = imageAsset
         let entryImage = repository.newImage()
         entryImage.data = imageAsset.image.data
+        entryImage.thumbnail = imageAsset.image.thumbnail
         entryImage.imageDate = imageAsset.creationDate
         images.append(entryImage)
     }

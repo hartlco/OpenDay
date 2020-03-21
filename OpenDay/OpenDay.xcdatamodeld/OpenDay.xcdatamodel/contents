@@ -3,6 +3,7 @@
     <entity name="EntryImage" representedClassName=".EntryImage" syncable="YES">
         <attribute name="data" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="imageDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="thumbnail" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <relationship name="post" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryPost" inverseName="images" inverseEntity="EntryPost"/>
     </entity>
     <entity name="EntryLocation" representedClassName=".EntryLocation" syncable="YES">
@@ -27,7 +28,7 @@
         <relationship name="post" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryPost" inverseName="weather" inverseEntity="EntryPost"/>
     </entity>
     <elements>
-        <element name="EntryImage" positionX="-54" positionY="18" width="128" height="88"/>
+        <element name="EntryImage" positionX="-54" positionY="18" width="128" height="103"/>
         <element name="EntryLocation" positionX="-45" positionY="36" width="128" height="133"/>
         <element name="EntryPost" positionX="-54" positionY="-9" width="128" height="133"/>
         <element name="EntryWeather" positionX="-45" positionY="63" width="128" height="88"/>

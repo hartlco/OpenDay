@@ -43,6 +43,7 @@ extension EntryPost: Models.Post {
 
 public class EntryImage: NSManagedObject, Identifiable {
     @NSManaged public var data: Data?
+    @NSManaged public var thumbnail: Data?
     @NSManaged public var imageDate: Date?
     @NSManaged public var post: EntryPost?
 }

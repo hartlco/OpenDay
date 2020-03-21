@@ -12,6 +12,7 @@ public protocol Post: class {
 
 public protocol Image: class {
     var data: Data? { get set }
+    var thumbnail: Data? { get set }
     var imageDate: Date? { get set }
 }
 

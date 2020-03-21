@@ -14,6 +14,7 @@ import WeatherService
 import Combine
 import Secrets
 import Models
+import OpenKit
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
@@ -28,9 +29,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
         let repositroy = CoreDataEntryRepository(context: persistentContainer.viewContext)
         entriesStore = EntriesStore(repository: repositroy)
-        let contentView = ContentView().environmentObject(entriesStore)
 
         entriesStore.deleteAll()
+
+        let contentView = ContentView().environmentObject(entriesStore)
 
         let openPanel = NSOpenPanel()
         openPanel.allowsMultipleSelection = false
@@ -73,6 +75,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 
                             let newPhoto = repositroy.newImage()
                             newPhoto.data = data
+                            newPhoto.thumbnail = OKImage(data: data)?.thumbnail
                             images.insert(newPhoto)
                         }
 

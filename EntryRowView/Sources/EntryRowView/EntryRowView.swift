@@ -25,12 +25,14 @@ public struct EntryRowView: View {
                     .lineLimit(4)
             }
             if (post.orderedImages?.count ?? 0) > 0 {
-                Image(okImageData: post.orderedImages!.first!.data!)
+                post.orderedImages!.first?.thumbnail.map({ data in
+                    Image(okImageData: data)
                     .resizable()
                     .aspectRatio(contentMode: ContentMode.fill)
                     .frame(maxHeight: 160)
                     .cornerRadius(4.0)
                     .clipped()
+                })
             }
         }
     }
