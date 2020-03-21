@@ -10,6 +10,6 @@ final class DayOneKitTests: XCTestCase {
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testExample", testExample)
     ]
 }

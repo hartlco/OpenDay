@@ -43,14 +43,17 @@ public final class WeatherService {
         self.urlSession = urlSession
     }
 
-    public func getData(key: String, date: Date? = nil, latitude: Double, longitude: Double) -> Future<WeatherData, Error> {
+    public func getData(key: String,
+                        date: Date? = nil,
+                        latitude: Double,
+                        longitude: Double) -> Future<WeatherData, Error> {
         let date = date ?? Date()
         let timestamp = Int(date.timeIntervalSince1970)
 
         return Future<WeatherData, Error> { promise in
             let url = URL(string: "https://api.darksky.net/forecast/\(key)/\(latitude),\(longitude),\(timestamp)?units=us")!
 
-            self.urlSession.dataTask(with: url) { data, response, error in
+            self.urlSession.dataTask(with: url) { data, _, _ in
                 guard let data = data else {
                     DispatchQueue.main.async {
                         promise(.failure(WeatherServiceError.connectionError))
@@ -63,7 +66,7 @@ public final class WeatherService {
                     DispatchQueue.main.async {
                         promise(.failure(WeatherServiceError.unableToParse))
                     }
-                    
+
                     return
                 }
 

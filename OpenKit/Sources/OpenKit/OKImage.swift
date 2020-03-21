@@ -51,7 +51,8 @@ public extension OKImage {
             bitmapRep.size = canvas
             NSGraphicsContext.saveGraphicsState()
             NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmapRep)
-            draw(in: NSRect(x: 0, y: 0, width: canvas.width, height: canvas.height), from: .zero, operation: .copy, fraction: 1.0)
+            draw(in: NSRect(x: 0, y: 0, width: canvas.width, height: canvas.height),
+                 from: .zero, operation: .copy, fraction: 1.0)
             NSGraphicsContext.restoreGraphicsState()
 
             let resizedImage = NSImage(size: canvas)

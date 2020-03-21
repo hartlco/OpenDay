@@ -124,7 +124,8 @@ extension NSRegularExpression {
 
 func isoCountryCode(for englishCountryName: String) -> String? {
     for localeCode in NSLocale.isoCountryCodes {
-        let countryName = NSLocale(localeIdentifier: "en-US").displayName(forKey: NSLocale.Key.countryCode, value: localeCode)
+        let countryName = NSLocale(localeIdentifier: "en-US").displayName(forKey: NSLocale.Key.countryCode,
+                                                                          value: localeCode)
         if englishCountryName.lowercased() == countryName?.lowercased() {
             return localeCode
         }
