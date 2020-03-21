@@ -117,8 +117,6 @@ final class EntryStore: ObservableObject {
             return
         }
 
-        var entry = self.entry
-
         if entry == nil {
             entry = repository.newEntry()
         }

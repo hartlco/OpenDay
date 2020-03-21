@@ -50,6 +50,38 @@
             endingLineNumber = "56"
             landmarkName = "getData(key:date:latitude:longitude:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "158D996E-9152-468F-A359-24841EBBC5B7 - 3e39e446233398c9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 ((Swift.Result&lt;WeatherService.WeatherService.WeatherData, Swift.Error&gt;) -&gt; ()) -&gt; () in WeatherService.WeatherService.getData(key: Swift.String, date: Swift.Optional&lt;Foundation.Date&gt;, latitude: Swift.Double, longitude: Swift.Double) -&gt; Combine.Future&lt;WeatherService.WeatherService.WeatherData, Swift.Error&gt;"
+                  moduleName = "OpenDay"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/martinhartl/Code/OpenDay/WeatherService/Sources/WeatherService/WeatherService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "1264">
+               </Location>
+               <Location
+                  uuid = "158D996E-9152-468F-A359-24841EBBC5B7 - 572c67e572f39b00"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 ((Swift.Result&lt;WeatherService.WeatherService.WeatherData, Swift.Error&gt;) -&gt; ()) -&gt; () in WeatherService.WeatherService.getData(key: Swift.String, date: Swift.Optional&lt;Foundation.Date&gt;, latitude: Swift.Double, longitude: Swift.Double) -&gt; Combine.Future&lt;WeatherService.WeatherService.WeatherData, Swift.Error&gt;"
+                  moduleName = "OpenDay"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/martinhartl/Code/OpenDay/WeatherService/Sources/WeatherService/WeatherService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "238">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -66,6 +98,22 @@
             endingLineNumber = "11"
             landmarkName = "body"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FD956A1D-A889-4211-9969-5C7D6D4940FF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OpenDay/Repository/CoreDataRepository.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "newEntry()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
