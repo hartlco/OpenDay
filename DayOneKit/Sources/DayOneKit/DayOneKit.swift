@@ -54,7 +54,7 @@ public struct Entry: Codable {
             return String(splits[1])
         }
 
-        return ""
+        return text
     }
 
     public var convertedDate: Date? {
@@ -84,11 +84,11 @@ public struct Weather: Codable {
 }
 
 public struct Photo: Codable {
-    let type: String
+    let type: String?
     let md5: String
 
     public func fileURL(for exportFolder: URL) -> URL {
-        return exportFolder.appendingPathComponent("photos/\(md5).\(type)")
+        return exportFolder.appendingPathComponent("photos/\(md5).\(type ?? "")")
     }
 }
 

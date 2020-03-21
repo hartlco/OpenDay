@@ -11,7 +11,7 @@ struct DetailView: View {
             Text(post.title ?? "")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             Text(post.body ?? "")
-            Text(post.weather?.weatherIcon?.rawValue ?? "")
+            Text(post.weather?.weatherIconString ?? "")
         }
     }
 }

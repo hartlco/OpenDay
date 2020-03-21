@@ -44,7 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
                 }
 
                 let manager = DayOneKitDataReader(fileURL: url)
-                let data = manager.importedData(for: "Journal")
+                let data = manager.importedData(for: "J")
 
                 for entry in data.entries {
                     let newEntry =  repositroy.newEntry()
@@ -67,6 +67,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
                         var images = Set<EntryImage>()
                         for photo in photos {
                             guard let data = try? Data(contentsOf: photo.fileURL(for: url)) else {
+                                print("Coudlnt read file: \(photo.fileURL(for: url))")
                                 continue
                             }
 
