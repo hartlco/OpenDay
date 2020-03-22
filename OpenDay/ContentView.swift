@@ -14,6 +14,13 @@ struct ContentView: View {
         Text("Modal")
     }
 
+    func tapGesture(for post: Post) -> some Gesture {
+        return TapGesture().onEnded {
+            self.isModal = true
+            self.selectedModalEntry = post
+        }
+    }
+
     var mapView: some View {
         return MapView(locations: $store.locations) { location in
             self.isModal = true
@@ -24,21 +31,28 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                List {
-                    ForEach(store.sections) { (section: EntriesSection) in
-                        Section(header: Text(section.title)) {
+                ScrollView(.vertical) {
+                    VStack {
+                        ForEach(store.sections) { (section: EntriesSection) in
                             ForEach(section.posts) { (post: EntryPost) in
-                                //swiftlint:disable line_length
-                                NavigationLink(destination: EntryView().environmentObject(self.store.store(for: post))) {
-                                    EntryRowView(post: post)
-                                    .contextMenu {
-                                        Button(action: {
-                                            self.store.delete(entry: post)
-                                        }, label: {
-                                            Text("Delete")
-                                            Image(systemName: "trash")
-                                        })
+                                EntryRowView(post: post) {
+                                    self.isModal = true
+                                    self.selectedModalEntry = post
+                                }
+                                .sheet(isPresented: self.$isModal, content: {
+                                    self.selectedModalEntry.map { post in
+                                        NavigationView {
+                                            EntryView().environmentObject(self.store.store(for: post))
+                                        }
                                     }
+                                })
+                                .contextMenu {
+                                    Button(action: {
+                                        self.store.delete(entry: post)
+                                    }, label: {
+                                        Text("Delete")
+                                        Image(systemName: "trash")
+                                    })
                                 }
                             }
                         }
