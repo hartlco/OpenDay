@@ -3,6 +3,7 @@ import KeyboardObserving
 import EntryRowView
 import MapView
 import Models
+import KingfisherSwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var store: EntriesStore
@@ -31,12 +32,10 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                ScrollView(.vertical) {
-                    VStack(alignment: .leading) {
+                List {
                         ForEach(store.sections) { (section: EntriesSection) in
                             Text(section.title)
                                 .font(Font.title.smallCaps()).bold()
-                                .padding()
                             ForEach(section.posts) { (post: EntryPost) in
                                 EntryRowView(post: post) {
                                     self.isModal = true
@@ -57,7 +56,6 @@ struct ContentView: View {
                                         Image(systemName: "trash")
                                     })
                                 }
-                            }
                         }
                     }
                 }

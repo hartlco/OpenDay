@@ -17,16 +17,27 @@ final class LandmarkAnnotation: NSObject, MKAnnotation {
 public struct MapView: UIViewRepresentable {
     @Binding var locations: [Location]
 
+    private let userInteractionEnabled: Bool
+
     var didSelect: ((Location) -> Void)?
 
     public init(locations: Binding<[Location]>,
+                userInteractionEnabled: Bool = true,
                 didSelect: ((Location) -> Void)? = nil) {
         self._locations = locations
         self.didSelect = didSelect
+        self.userInteractionEnabled = userInteractionEnabled
     }
 
     public func makeUIView(context: Context) -> MKMapView {
         let map = MKMapView()
+
+        if userInteractionEnabled == false {
+            map.isZoomEnabled = false
+            map.isScrollEnabled = false
+            map.isUserInteractionEnabled = false
+        }
+
         map.delegate = context.coordinator
         return map
     }
@@ -44,7 +55,7 @@ public struct MapView: UIViewRepresentable {
             let span = mapView.region.span
             let center = CLLocationCoordinate2D(latitude: first.location.latitude,
                                                 longitude: first.location.longitude)
-            let region = MKCoordinateRegion(center: center, span: span)
+            let region = MKCoordinateRegion(center: center, latitudinalMeters: 50000, longitudinalMeters: 50000)
             mapView.setRegion(region, animated: true)
         }
     }
