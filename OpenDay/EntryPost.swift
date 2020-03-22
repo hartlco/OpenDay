@@ -18,7 +18,7 @@ public class EntryPost: NSManagedObject, Identifiable {
 
     static let formatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM"
+        formatter.dateFormat = "MMMM yyyy"
         return formatter
     }()
 

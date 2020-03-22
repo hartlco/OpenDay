@@ -32,8 +32,11 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 ScrollView(.vertical) {
-                    VStack {
+                    VStack(alignment: .leading) {
                         ForEach(store.sections) { (section: EntriesSection) in
+                            Text(section.title)
+                                .font(Font.title.smallCaps()).bold()
+                                .padding()
                             ForEach(section.posts) { (post: EntryPost) in
                                 EntryRowView(post: post) {
                                     self.isModal = true
@@ -61,6 +64,13 @@ struct ContentView: View {
                 .listStyle(DefaultListStyle())
                 HStack {
                     Spacer()
+                    NavigationLink(destination: EntryView().environmentObject(store.storeForNewEntry()),
+                                   label: {
+                                    Image(systemName: "plus.circle.fill")
+                                        .resizable()
+                                        .frame(width: 32.0, height: 32.0, alignment: .center)
+                                        .padding()
+                    })
                     NavigationLink(destination: mapView.sheet(isPresented: $isModal, content: {
                         self.selectedModalEntry.map { post in
                             EntryView().environmentObject(self.store.store(for: post))
@@ -71,13 +81,6 @@ struct ContentView: View {
                         .frame(width: 32.0, height: 32.0, alignment: .center)
                         .padding()
                     }
-                    NavigationLink(destination: EntryView().environmentObject(store.storeForNewEntry()),
-                                   label: {
-                                    Image(systemName: "plus.circle.fill")
-                                        .resizable()
-                                        .frame(width: 32.0, height: 32.0, alignment: .center)
-                                        .padding()
-                    })
                     Spacer()
                 }
             }

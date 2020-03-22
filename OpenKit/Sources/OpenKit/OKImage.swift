@@ -31,7 +31,7 @@ public extension OKImage {
     }
 
     var thumbnail: Data? {
-        let width: CGFloat = 200
+        let width: CGFloat = 120
         let canvas = CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))
 
         #if os(iOS)

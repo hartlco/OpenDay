@@ -37,8 +37,10 @@ public struct EntryRowView: View {
                     .font(.body)
                     .lineLimit(4)
             }
+            .padding([.leading, .trailing], 12.0)
             ScrollView(.horizontal) {
                 HStack(spacing: 12.0) {
+                    Spacer(minLength: 4)
                     ForEach(post.orderedImages ?? [], id: \Models.Image.id) { image in
                         Image(okImageData: image.data!)
                         .resizable()
@@ -46,22 +48,22 @@ public struct EntryRowView: View {
                         .frame(width: 120, height: 160)
                         .cornerRadius(8.0)
                         .clipped()
-                        .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 4)
                     }
                     post.getLocation().map { _ in
                         MapView(locations: $postLocation)
                         .frame(width: 120, height: 160)
                         .cornerRadius(8.0)
-                        .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 4)
                     }
+                    Spacer(minLength: 4)
                 }
+                .padding(.bottom, 14.0)
+                .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 4)
             }
         }
         .contentShape(Rectangle())
         .onTapGesture {
             self.tapped()
         }
-        .padding(12.0)
     }
 
     private static let dateFormatter: DateFormatter = {

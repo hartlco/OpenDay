@@ -21,12 +21,14 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            List(selection: $store.selection) {
+            List {
                 ForEach(store.sections) { section in
                     Section(header: Text(section.title)) {
                         ForEach(section.posts) { (post: EntryPost) in
                             NavigationLink(destination: DetailView(post: post)) {
-                                EntryRowView(post: post)
+                                EntryRowView(post: post) {
+
+                                }
                             }
                             .navigationViewStyle(DoubleColumnNavigationViewStyle())
                             .contextMenu {
