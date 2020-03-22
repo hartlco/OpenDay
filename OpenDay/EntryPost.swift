@@ -48,7 +48,12 @@ public class EntryImage: NSManagedObject, Identifiable {
     @NSManaged public var post: EntryPost?
 }
 
-extension EntryImage: Models.Image { }
+extension EntryImage: Models.Image {
+    //swiftlint:disable identifier_name
+    public var id: String {
+        return objectID.uriRepresentation().absoluteString
+    }
+}
 
 public class EntryLocation: NSManagedObject, Identifiable {
     @NSManaged public var city: String?

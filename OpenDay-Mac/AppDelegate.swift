@@ -28,7 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
         let repositroy = CoreDataEntryRepository(context: persistentContainer.viewContext)
         entriesStore = EntriesStore(repository: repositroy)
 
-        entriesStore.deleteAll()
+//        entriesStore.deleteAll()
 
         let contentView = ContentView().environmentObject(entriesStore)
 

@@ -14,6 +14,7 @@ public protocol Image: class {
     var data: Data? { get set }
     var thumbnail: Data? { get set }
     var imageDate: Date? { get set }
+    var id: String { get }
 }
 
 public protocol Location: class {

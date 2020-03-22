@@ -37,8 +37,16 @@ public struct MapView: UIViewRepresentable {
 
     private func updateAnnotations(from mapView: MKMapView) {
         mapView.removeAnnotations(mapView.annotations)
-      let newAnnotations = locations.map { LandmarkAnnotation(location: $0) }
-      mapView.addAnnotations(newAnnotations)
+        let newAnnotations = locations.map { LandmarkAnnotation(location: $0) }
+        mapView.addAnnotations(newAnnotations)
+
+        if newAnnotations.count == 1, let first = newAnnotations.first {
+            let span = mapView.region.span
+            let center = CLLocationCoordinate2D(latitude: first.location.latitude,
+                                                longitude: first.location.longitude)
+            let region = MKCoordinateRegion(center: center, span: span)
+            mapView.setRegion(region, animated: true)
+        }
     }
 
     public func makeCoordinator() -> Coordinator {

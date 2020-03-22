@@ -1,20 +1,30 @@
 import SwiftUI
 import Models
 import OpenKit
+import MapView
 
 public struct EntryRowView: View {
     public let post: Models.Post
+    @State var postLocation: [Location]
 
     public init(post: Models.Post) {
         self.post = post
+
+        var locations: [Location] = []
+
+        if let postLocation = post.getLocation() {
+            locations.append(postLocation)
+        }
+
+        self._postLocation = State<[Location]>(initialValue: locations)
     }
 
     public var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
-                HStack(alignment: .firstTextBaseline) {
+                HStack(alignment: .center) {
                     Text(post.title ?? "")
-                        .font(Font.headline.smallCaps())
+                        .font(.system(.headline, design: .rounded))
                         .bold()
                     Spacer()
                     Text(EntryRowView.string(from: post.entryDate))
@@ -24,17 +34,27 @@ public struct EntryRowView: View {
                     .font(.body)
                     .lineLimit(4)
             }
-            if (post.orderedImages?.count ?? 0) > 0 {
-                post.orderedImages!.first?.thumbnail.map({ data in
-                    Image(okImageData: data)
-                    .resizable()
-                    .aspectRatio(contentMode: ContentMode.fill)
-                    .frame(maxHeight: 160)
-                    .cornerRadius(4.0)
-                    .clipped()
-                })
+            ScrollView(.horizontal) {
+                HStack(spacing: 12.0) {
+                    ForEach(post.orderedImages ?? [], id: \Models.Image.id) { image in
+                        Image(okImageData: image.data!)
+                        .resizable()
+                        .aspectRatio(contentMode: ContentMode.fill)
+                        .frame(width: 120, height: 160)
+                        .cornerRadius(8.0)
+                        .clipped()
+                        .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 4)
+                    }
+                    post.getLocation().map { _ in
+                        MapView(locations: $postLocation)
+                        .frame(width: 120, height: 160)
+                        .cornerRadius(8.0)
+                        .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 4)
+                    }
+                }
             }
         }
+        .padding(12.0)
     }
 
     private static let dateFormatter: DateFormatter = {
