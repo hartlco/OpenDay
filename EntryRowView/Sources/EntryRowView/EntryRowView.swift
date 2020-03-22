@@ -5,10 +5,13 @@ import MapView
 
 public struct EntryRowView: View {
     public let post: Models.Post
+    public var tapped: () -> Void
+
     @State var postLocation: [Location]
 
-    public init(post: Models.Post) {
+    public init(post: Models.Post, tapped: @escaping () -> Void) {
         self.post = post
+        self.tapped = tapped
 
         var locations: [Location] = []
 
@@ -53,6 +56,10 @@ public struct EntryRowView: View {
                     }
                 }
             }
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            self.tapped()
         }
         .padding(12.0)
     }
