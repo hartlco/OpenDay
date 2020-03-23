@@ -20,12 +20,13 @@ let package = Package(
         // .package(url: /* package url */, from: "1.0.0"),
     .package(path: "../Models"),
     .package(path: "../OpenKit"),
+    .package(path: "../MapView"),
     .package(url: "https://github.com/onevcat/Kingfisher.git", from: "5.0.0")
     ],
     targets: [
         .target(
             name: "EntryRowView",
-            dependencies: ["Models", "OpenKit"]),
+            dependencies: ["Models", "OpenKit", "Kingfisher", "KingfisherSwiftUI", "MapView"]),
         .testTarget(
             name: "EntryRowViewTests",
             dependencies: ["EntryRowView"])

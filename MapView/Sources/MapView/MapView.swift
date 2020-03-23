@@ -86,12 +86,22 @@ public struct MapView: UIViewRepresentable {
 public struct MapView: NSViewRepresentable {
     @Binding var locations: [Location]
 
-    public init(locations: Binding<[Location]>) {
+    private let userInteractionEnabled: Bool
+
+    public init(locations: Binding<[Location]>,
+                userInteractionEnabled: Bool = true) {
         self._locations = locations
+        self.userInteractionEnabled = userInteractionEnabled
     }
 
     public func makeNSView(context: NSViewRepresentableContext<MapView>) -> MKMapView {
-        return MKMapView()
+        let map = MKMapView()
+        if userInteractionEnabled == false {
+            map.isZoomEnabled = false
+            map.isScrollEnabled = false
+        }
+
+        return map
     }
 
     public func updateNSView(_ nsView: MKMapView, context: NSViewRepresentableContext<MapView>) {

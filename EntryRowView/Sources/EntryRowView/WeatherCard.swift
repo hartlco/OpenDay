@@ -6,12 +6,21 @@ struct WeatherCard: View {
 
     var body: some View {
         VStack {
+            #if os(iOS)
             Image(systemName: weather.weatherIcon?.assetName ?? "")
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 40, height: 40)
             Text(String(weather.temperatureCelcius.rounded(.up)))
                 .font(Font.body.bold())
+            #elseif os(macOS)
+            Image(weather.weatherIcon?.assetName ?? "")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 40, height: 40)
+            Text(String(weather.temperatureCelcius.rounded(.up)))
+                .font(Font.body.bold())
+            #endif
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(weather.backgroundColor.opacity(0.4))

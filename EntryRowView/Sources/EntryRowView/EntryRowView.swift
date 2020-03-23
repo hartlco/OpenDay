@@ -25,7 +25,7 @@ public struct EntryRowView: SwiftUI.View {
     }
 
     public var body: some SwiftUI.View {
-        VStack(alignment: .leading) {
+        VStack(alignment: HorizontalAlignment.leading) {
             VStack(alignment: .leading) {
                 HStack(alignment: .center) {
                     Text(post.title ?? "")
