@@ -58,3 +58,30 @@ public extension Weather {
         celcius * 9 / 5 + 32
     }
 }
+
+public extension WeatherIcon {
+    var assetName: String {
+        switch self {
+        case .clearDay:
+            return "sun.max"
+        case .clearNight:
+            return "moon"
+        case .cloudy:
+            return "cloud"
+        case .fog:
+            return "cloud.fog"
+        case .partlyCloudyDay:
+            return "cloud.sun"
+        case .partlyCloudyNight:
+            return "cloud.moon"
+        case .rain:
+            return "cloud.rain"
+        case .sleet:
+            return "cloud.sleet"
+        case .snow:
+            return "snow"
+        case .wind:
+            return "wind"
+        }
+    }
+}

@@ -50,13 +50,6 @@ public struct EntryRowView: SwiftUI.View {
                         .frame(width: 120, height: 160)
                         .cornerRadius(8.0)
                         .clipped()
-
-//                        Image(okImageData: image.data!)
-//                        .resizable()
-//                        .aspectRatio(contentMode: ContentMode.fill)
-//                        .frame(width: 120, height: 160)
-//                        .cornerRadius(8.0)
-//                        .clipped()
                     }
                     post.getLocation().map { (location: Location) in
                         ZStack {
@@ -67,10 +60,15 @@ public struct EntryRowView: SwiftUI.View {
                                 Text(location.city ?? "")
                                     .font(Font.caption.bold())
                                     .frame(maxWidth: .infinity)
-                                    .background(Color.black.opacity(0.8))
+                                    .background(Color.secondary.colorInvert().opacity(0.8))
                             }
                         }
-                            .cornerRadius(8.0)
+                        .cornerRadius(8.0)
+                        .frame(width: 120, height: 160)
+                    }
+                    post.getWeather().map { (weather: Weather) in
+                        WeatherCard(weather: weather)
+                        .cornerRadius(8.0)
                         .frame(width: 120, height: 160)
                     }
                     Spacer(minLength: 4)
@@ -113,7 +111,7 @@ struct AsyncRawImageDataProvider: ImageDataProvider {
 
     func data(handler: @escaping (Result<Data, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
-            guard let data = self.image.data else {
+            guard let data = self.image.thumbnail else {
                 handler(.failure(KingfisherError.requestError(reason: .emptyRequest)))
                 return
             }
