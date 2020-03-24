@@ -37,7 +37,6 @@ public struct EntryRowView: SwiftUI.View {
                 }
                 Text(post.body ?? "")
                     .font(.body)
-                    .lineLimit(4)
             }
             .padding([.leading, .trailing], 8.0)
             ScrollView(.horizontal) {

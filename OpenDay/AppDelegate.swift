@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UITableView.appearance().separatorStyle = .none
+        UITableView.appearance().backgroundColor = .clear
 //        let options = NSPersistentCloudKitContainerSchemaInitializationOptions()
 //        try? persistentContainer.initializeCloudKitSchema(options: options)
 

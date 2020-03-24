@@ -1,5 +1,6 @@
 import SwiftUI
 import OpenKit
+import TextView
 
 struct EntryView: View {
     @EnvironmentObject var store: EntryStore
@@ -7,6 +8,7 @@ struct EntryView: View {
     @State var pickerIsActive: Bool = false
     @State var isEditingContent: Bool = false
     @State var showDateLocationPopup = false
+    @State var bodyTextHeight: CGFloat = 40
 
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -20,9 +22,11 @@ struct EntryView: View {
                 Section(header: Text("Modify")) {
                     TextField("Title", text: self.$store.title)
                         .font(.headline)
-                    NavigationLink(destination: ContentEntryView(bodyString: self.$store.bodyString)) {
-                        Text(self.store.bodyString)
-                    }
+                    ExpandingTextView(placeholder: "Body",
+                                      text: self.$store.bodyString,
+                                      minHeight: self.bodyTextHeight,
+                                      calculatedHeight: self.$bodyTextHeight)
+                        .frame(minHeight: self.bodyTextHeight, maxHeight: self.bodyTextHeight)
                     ForEach(self.store.images) { entryImage in
                         Image(okImageData: entryImage.data!)
                             .resizable()
