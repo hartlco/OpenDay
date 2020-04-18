@@ -27,20 +27,6 @@ public class EntryPost: NSManagedObject, Identifiable {
     }
 }
 
-extension EntryPost: Models.Post {
-    public func getWeather() -> Weather? {
-        return weather
-    }
-
-    public func getLocation() -> Location? {
-        return location
-    }
-
-    public var orderedImages: [Image]? {
-        return Array(images ?? [])
-    }
-}
-
 public class EntryImage: NSManagedObject, Identifiable {
     @NSManaged public var data: Data?
     @NSManaged public var thumbnail: Data?
@@ -62,12 +48,6 @@ public class EntryLocation: NSManagedObject, Identifiable {
     @NSManaged public var longitude: Double
     @NSManaged public var street: String?
     @NSManaged public var post: EntryPost?
-}
-
-extension EntryLocation: Models.Location {
-    public func getPost() -> Post? {
-        return post
-    }
 }
 
 extension EntryLocation {
@@ -92,14 +72,4 @@ public class EntryWeather: NSManagedObject, Identifiable {
     @NSManaged public var temperature: Double
     @NSManaged public var weatherIconString: String?
     @NSManaged public var post: EntryPost?
-}
-
-extension EntryWeather: Models.Weather {
-    public var weatherIcon: WeatherIcon? {
-        guard let weatherIconString = weatherIconString else {
-            return nil
-        }
-
-        return .matched(from: weatherIconString)
-    }
 }

@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
 
         let context = delegate.persistentContainer.viewContext
-        let repository = CoreDataEntryRepository(context: context)
+        let repository = OpenDayRepository()
 
         let store = EntriesStore(repository: repository)
 

@@ -1,8 +1,11 @@
 import SwiftUI
 import OpenKit
 import TextView
+import Models
+import Kingfisher
+import KingfisherSwiftUI
 
-struct EntryView: View {
+struct EntryView: SwiftUI.View {
     @EnvironmentObject var store: EntryStore
 
     @State var pickerIsActive: Bool = false
@@ -16,7 +19,7 @@ struct EntryView: View {
         return formatter
     }
 
-    var body: some View {
+    var body: some SwiftUI.View {
         VStack {
             List {
                 Section(header: Text("Modify")) {
@@ -27,14 +30,14 @@ struct EntryView: View {
                                       minHeight: self.bodyTextHeight,
                                       calculatedHeight: self.$bodyTextHeight)
                         .frame(minHeight: self.bodyTextHeight, maxHeight: self.bodyTextHeight)
-                    ForEach(self.store.images) { entryImage in
-                        Image(okImageData: entryImage.data!)
+                    ForEach(self.store.images) { (entryImage: Models.ImageResource) in
+                        self.image(for: entryImage)
                             .resizable()
                             .scaledToFit()
                             .aspectRatio(contentMode: .fill)
                             .contextMenu {
                                 Button(action: {
-                                    self.store.delete(image: entryImage)
+//                                    self.store.delete(image: entryImage)
                                 }, label: {
                                     Text("Delete")
                                     Image(systemName: "trash")
@@ -79,14 +82,14 @@ struct EntryView: View {
                               secondaryButton: .cancel())
                     }
                     NavigationLink(destination: LocationSearchView { location in
-                        self.store.currentLocation = location
+//                        self.store.currentLocation = location
                     }.environmentObject(store.locationSearchViewModel)) {
                                     Text("Search Location")
                     }.buttonStyle(DefaultButtonStyle())
                 }
-                store.currentWeather.map { (weather: EntryWeather) in
+                store.currentWeather.map { (weather: Models.Weather) in
                     Section(header: Text("Weather")) {
-                        Text(weather.weatherIconString ?? "")
+                        Text(weather.weatherSymbol?.rawValue ?? "")
                     }
                 }
             }
@@ -105,5 +108,31 @@ struct EntryView: View {
             }
         }
         .keyboardObserving()
+    }
+
+    private func image(for resource: Models.ImageResource) -> KFImage {
+        switch resource {
+        case .local(let data, _):
+            return KFImage(source: .provider(AsyncRawImageDataProvider(data: data)))
+        case .remote(let url):
+            return KFImage(url)
+        }
+    }
+}
+
+/// Represents an image data provider for a raw data object.
+struct AsyncRawImageDataProvider: ImageDataProvider {
+    let data: Data
+
+    init(data: Data) {
+        self.cacheKey = String(data.hashValue)
+        self.data = data
+    }
+    var cacheKey: String
+
+    func data(handler: @escaping (Result<Data, Error>) -> Void) {
+        DispatchQueue.global(qos: .background).async {
+            handler(.success(self.data))
+        }
     }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-public enum WeatherIcon: String {
+public enum WeatherIcon: String, Codable {
     case clearDay = "clear-day"
     case clearNight = "clear-night"
     case rain
@@ -40,18 +40,18 @@ public enum WeatherIcon: String {
     }
 }
 
-public protocol Weather {
-    var weatherIcon: WeatherIcon? { get }
-    var temperature: Double { get }
+public struct Weather: Codable {
+    public let weatherSymbol: WeatherIcon?
+    public var fahrenheit: Double
 }
 
 public extension Weather {
     var temperatureFahrenheit: Double {
-        return temperature
+        return fahrenheit
     }
 
     var temperatureCelcius: Double {
-          (temperature - 32) * 5 / 9
+          (fahrenheit - 32) * 5 / 9
     }
 
     static func convertToFahrenheit(from celcius: Double) -> Double {

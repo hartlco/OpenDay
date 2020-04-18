@@ -4,20 +4,21 @@ import OpenKit
 import MapView
 import Kingfisher
 import KingfisherSwiftUI
+import OpenDayService
 
 public struct EntryRowView: SwiftUI.View {
-    public let post: Models.Post
+    public let post: Entry
     public var tapped: () -> Void
 
     @State var postLocation: [Location]
 
-    public init(post: Models.Post, tapped: @escaping () -> Void) {
+    public init(post: Entry, tapped: @escaping () -> Void) {
         self.post = post
         self.tapped = tapped
 
         var locations: [Location] = []
 
-        if let postLocation = post.getLocation() {
+        if let postLocation = post.location {
             locations.append(postLocation)
         }
 
@@ -32,25 +33,25 @@ public struct EntryRowView: SwiftUI.View {
                         .font(.system(.headline, design: .rounded))
                         .bold()
                     Spacer()
-                    Text(EntryRowView.string(from: post.entryDate))
+                    Text(EntryRowView.string(from: post.date))
                         .font(Font.caption.smallCaps())
                 }
-                Text(post.body ?? "")
+                Text(post.bodyText ?? "")
                     .font(.body)
             }
             .padding([.leading, .trailing], 8.0)
             ScrollView(.horizontal) {
                 HStack(spacing: 8.0) {
                     Spacer(minLength: 4)
-                    ForEach(post.orderedImages ?? [], id: \Models.Image.id) { image in
-                        KFImage(source: .provider(AsyncRawImageDataProvider(image: image)))
+                    ForEach(post.images) { image in
+                        self.image(for: image)
                         .resizable()
                         .aspectRatio(contentMode: ContentMode.fill)
                         .frame(width: 120, height: 160)
                         .cornerRadius(8.0)
                         .clipped()
                     }
-                    post.getLocation().map { (location: Location) in
+                    post.location.map { (location: Location) in
                         ZStack {
                             MapView(locations: $postLocation,
                                     userInteractionEnabled: false)
@@ -65,7 +66,7 @@ public struct EntryRowView: SwiftUI.View {
                         .cornerRadius(8.0)
                         .frame(width: 120, height: 160)
                     }
-                    post.getWeather().map { (weather: Weather) in
+                    post.weather.map { (weather: Weather) in
                         WeatherCard(weather: weather)
                         .cornerRadius(8.0)
                         .frame(width: 120, height: 160)
@@ -96,26 +97,30 @@ public struct EntryRowView: SwiftUI.View {
         return dateFormatter.string(from: date)
     }
 
+    private func image(for resource: Models.ImageResource) -> KFImage {
+        switch resource {
+        case .local(let data, _):
+            return KFImage(source: .provider(AsyncRawImageDataProvider(data: data)))
+        case .remote(let url):
+            return KFImage(url)
+        }
+    }
+
 }
 
 /// Represents an image data provider for a raw data object.
 struct AsyncRawImageDataProvider: ImageDataProvider {
-    let image: Models.Image
+    let data: Data
 
-    init(image: Models.Image) {
-        self.cacheKey = image.id
-        self.image = image
+    init(data: Data) {
+        self.cacheKey = String(data.hashValue)
+        self.data = data
     }
     var cacheKey: String
 
     func data(handler: @escaping (Result<Data, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
-            guard let data = self.image.thumbnail else {
-                handler(.failure(KingfisherError.requestError(reason: .emptyRequest)))
-                return
-            }
-
-            handler(.success(data))
+            handler(.success(self.data))
         }
     }
 }

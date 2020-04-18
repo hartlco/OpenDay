@@ -1,17 +1,18 @@
 import SwiftUI
 import LocationService
+import Models
 
 struct LocationSearchView: View {
     @EnvironmentObject var viewModel: LocationSearchViewModel
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
-    var didSelectLocation: (LocationServiceLocation) -> Void
+    var didSelectLocation: (Models.Location) -> Void
 
     var body: some View {
         List {
             TextField("Search - Enter City Name", text: $viewModel.searchText)
                 .modifier(ClearButton(text: $viewModel.searchText))
-            ForEach(viewModel.locations) { location in
+            ForEach(viewModel.locations) { (location: Models.Location) in
                 Text(self.viewModel.text(for: location)).onTapGesture {
                     self.didSelectLocation(location)
                     self.mode.wrappedValue.dismiss()

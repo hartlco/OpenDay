@@ -66,7 +66,7 @@ public final class LocationService: NSObject {
                                                 } else {
                                                     let location = LocationServiceLocation(latitude: location.coordinate.latitude,
 
-                                                                                           longitude: location.coordinate.longitude)
+                                                                                           longitude: location.coordinate.longitude, isoCountryCode: nil)
 
                                                     promise(Result.success(location))
                                                 }
@@ -135,7 +135,7 @@ extension LocationService: CLLocationManagerDelegate {
                                                 self.runningPromise?(Result.success(location))
                                             } else {
                                                 let location = LocationServiceLocation(latitude: firstLocation.coordinate.latitude,
-                                                                        longitude: firstLocation.coordinate.longitude)
+                                                                                       longitude: firstLocation.coordinate.longitude, isoCountryCode: nil)
                                                 self.runningPromise?(Result.success(location))
                                             }
         })
@@ -156,7 +156,7 @@ public struct LocationServiceLocation: Identifiable {
 
     public init(latitude: Double,
                 longitude: Double,
-                isoCountryCode: String? = nil,
+                isoCountryCode: String?,
                 street: String? = nil,
                 city: String? = nil) {
         self.latitude = latitude
@@ -164,17 +164,5 @@ public struct LocationServiceLocation: Identifiable {
         self.isoCountryCode = isoCountryCode
         self.street = street
         self.city = city
-    }
-
-    public func localizedString(from locale: Locale) -> String {
-        let values = [
-            street,
-            city,
-            locale.localizedString(forRegionCode: isoCountryCode ?? "")
-        ]
-
-        return values.compactMap {
-            $0
-        }.joined(separator: ", ")
     }
 }

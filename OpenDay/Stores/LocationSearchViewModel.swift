@@ -1,6 +1,7 @@
 import Foundation
 import LocationService
 import Combine
+import Models
 
 final class LocationSearchViewModel: ObservableObject {
     @Published var searchText: String = "" {
@@ -10,7 +11,7 @@ final class LocationSearchViewModel: ObservableObject {
             }
         }
     }
-    @Published var locations = [LocationServiceLocation]()
+    @Published var locations = [Models.Location]()
 
     private var throttleCancellable: AnyCancellable?
     private var loadLocationsCancellable: AnyCancellable?
@@ -32,11 +33,11 @@ final class LocationSearchViewModel: ObservableObject {
             .sink(receiveCompletion: { _ in
 
             }, receiveValue: { [unowned self] locations in
-                self.locations = locations
+//                self.locations = locations
             })
     }
 
-    func text(for location: LocationServiceLocation) -> String {
+    func text(for location: Models.Location) -> String {
         return location.localizedString(from: locale)
     }
 }

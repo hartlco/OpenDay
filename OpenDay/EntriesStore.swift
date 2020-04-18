@@ -32,24 +32,20 @@ final class EntriesStore: ObservableObject {
 
             self.sections = entries
 
-            self.locations = entries.map {
-                return $0.posts
-            }.flatMap {
-                return $0
-            }.compactMap { post in
-                return post.location
-            }
+//            self.locations = entries.map {
+//                return $0.posts
+//            }.flatMap {
+//                return $0
+//            }.compactMap { post in
+//                return post.location
+//            }
         }
 
         repository.load()
         dateFormatter.dateFormat = "EEE dd"
     }
 
-    func store(for entry: Post) -> EntryStore {
-        guard let entry = entry as? EntryPost else {
-            fatalError("Missmatched Typed")
-        }
-
+    func store(for entry: Entry) -> EntryStore {
         return EntryStore(repository: repository, entry: entry)
     }
 
@@ -58,15 +54,15 @@ final class EntriesStore: ObservableObject {
     }
 
     func delete(entry: EntryPost) {
-        repository.delete(entry: entry)
+//        repository.delete(entry: entry)
     }
 
     func deleteAll() {
-        for section in sections {
-            for entry in section.posts {
-                delete(entry: entry)
-            }
-        }
+//        for section in sections {
+//            for entry in section.posts {
+//                delete(entry: entry)
+//            }
+//        }
     }
 
     var hasSelectedEntry: Bool {

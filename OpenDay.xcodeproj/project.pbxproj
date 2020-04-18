@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C506EBFC2448316B00970DD3 /* OpenDayRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C506EBFB2448316B00970DD3 /* OpenDayRepository.swift */; };
+		C506EBFF24483EA800970DD3 /* OpenDayService in Frameworks */ = {isa = PBXBuildFile; productRef = C506EBFE24483EA800970DD3 /* OpenDayService */; };
 		C52055A1241C23A900FE0AB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52055A0241C23A900FE0AB6 /* AppDelegate.swift */; };
 		C52055A3241C23A900FE0AB6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52055A2241C23A900FE0AB6 /* ContentView.swift */; };
 		C52055A8241C23AB00FE0AB6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C52055A7241C23AB00FE0AB6 /* Assets.xcassets */; };
@@ -17,7 +19,6 @@
 		C52055B7241C244600FE0AB6 /* EntryPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53329AF240B766B007389DF /* EntryPost.swift */; };
 		C52055B9241C246200FE0AB6 /* LocationService in Frameworks */ = {isa = PBXBuildFile; productRef = C52055B8241C246200FE0AB6 /* LocationService */; };
 		C52055BB241C258D00FE0AB6 /* EntryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F962417714700309AC2 /* EntryRepository.swift */; };
-		C52055BC241C259000FE0AB6 /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F982417800D00309AC2 /* CoreDataRepository.swift */; };
 		C52055BD241C261300FE0AB6 /* EntriesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C558AAF82413974C00DBB148 /* EntriesStore.swift */; };
 		C52055BE241C262B00FE0AB6 /* EntryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C558AAFC24139D5500DBB148 /* EntryStore.swift */; };
 		C52055BF241C273C00FE0AB6 /* LocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F932416D93600309AC2 /* LocationSearchViewModel.swift */; };
@@ -49,7 +50,6 @@
 		C5C39F922416D7B200309AC2 /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F912416D7B200309AC2 /* LocationSearchView.swift */; };
 		C5C39F942416D93600309AC2 /* LocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F932416D93600309AC2 /* LocationSearchViewModel.swift */; };
 		C5C39F972417714700309AC2 /* EntryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F962417714700309AC2 /* EntryRepository.swift */; };
-		C5C39F992417800D00309AC2 /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F982417800D00309AC2 /* CoreDataRepository.swift */; };
 		C5D40E2F2421E6C700DBDE85 /* Secrets in Frameworks */ = {isa = PBXBuildFile; productRef = C5D40E2E2421E6C700DBDE85 /* Secrets */; };
 		C5D40E312421EC8600DBDE85 /* Secrets in Frameworks */ = {isa = PBXBuildFile; productRef = C5D40E302421EC8600DBDE85 /* Secrets */; };
 		C5D40E332421EC8B00DBDE85 /* WeatherService in Frameworks */ = {isa = PBXBuildFile; productRef = C5D40E322421EC8B00DBDE85 /* WeatherService */; };
@@ -60,6 +60,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C506EBFB2448316B00970DD3 /* OpenDayRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDayRepository.swift; sourceTree = "<group>"; };
+		C506EBFD244832A400970DD3 /* OpenDayService */ = {isa = PBXFileReference; lastKnownFileType = folder; path = OpenDayService; sourceTree = "<group>"; };
 		C520559E241C23A900FE0AB6 /* OpenDay-Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenDay-Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C52055A0241C23A900FE0AB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C52055A2241C23A900FE0AB6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -95,7 +97,6 @@
 		C5C39F912416D7B200309AC2 /* LocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchView.swift; sourceTree = "<group>"; };
 		C5C39F932416D93600309AC2 /* LocationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationSearchViewModel.swift; path = Stores/LocationSearchViewModel.swift; sourceTree = "<group>"; };
 		C5C39F962417714700309AC2 /* EntryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryRepository.swift; sourceTree = "<group>"; };
-		C5C39F982417800D00309AC2 /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
 		C5D40E2D2421E62A00DBDE85 /* Secrets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Secrets; sourceTree = "<group>"; };
 		C5D45EDB241DF6A800B5F109 /* MapView */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MapView; sourceTree = "<group>"; };
 		C5DA7A8F2412DEF400F4F398 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -134,6 +135,7 @@
 				C558AB002414C28600DBB148 /* LocationService in Frameworks */,
 				C52055C7241CA31000FE0AB6 /* Models in Frameworks */,
 				C5B2BC52240ABDE9009E3E2C /* CloudKit.framework in Frameworks */,
+				C506EBFF24483EA800970DD3 /* OpenDayService in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +188,7 @@
 		C5B2BC2C240ABDB5009E3E2C = {
 			isa = PBXGroup;
 			children = (
+				C506EBFD244832A400970DD3 /* OpenDayService */,
 				C5D40E2D2421E62A00DBDE85 /* Secrets */,
 				C5A895FD242098FF00025403 /* WeatherService */,
 				C57C0DB9241E5F9A0056EB2F /* DayOneKit */,
@@ -253,7 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				C5C39F962417714700309AC2 /* EntryRepository.swift */,
-				C5C39F982417800D00309AC2 /* CoreDataRepository.swift */,
+				C506EBFB2448316B00970DD3 /* OpenDayRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				C5D45EDC241DF76B00B5F109 /* MapView */,
 				C5D40E302421EC8600DBDE85 /* Secrets */,
 				C5D40E322421EC8B00DBDE85 /* WeatherService */,
+				C506EBFE24483EA800970DD3 /* OpenDayService */,
 			);
 			productName = OpenDay;
 			productReference = C5B2BC35240ABDB6009E3E2C /* OpenDay.app */;
@@ -416,7 +420,6 @@
 				C52055B7241C244600FE0AB6 /* EntryPost.swift in Sources */,
 				C52055BD241C261300FE0AB6 /* EntriesStore.swift in Sources */,
 				C52055A1241C23A900FE0AB6 /* AppDelegate.swift in Sources */,
-				C52055BC241C259000FE0AB6 /* CoreDataRepository.swift in Sources */,
 				C52055BB241C258D00FE0AB6 /* EntryRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,12 +429,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5B2BC3E240ABDB6009E3E2C /* OpenDay.xcdatamodeld in Sources */,
+				C506EBFC2448316B00970DD3 /* OpenDayRepository.swift in Sources */,
 				C5C39F972417714700309AC2 /* EntryRepository.swift in Sources */,
 				C5B2BC39240ABDB6009E3E2C /* AppDelegate.swift in Sources */,
 				C558AAFD24139D5500DBB148 /* EntryStore.swift in Sources */,
 				C5C39F942416D93600309AC2 /* LocationSearchViewModel.swift in Sources */,
 				C558AB0624153ED900DBB148 /* ContentEntryView.swift in Sources */,
-				C5C39F992417800D00309AC2 /* CoreDataRepository.swift in Sources */,
 				C5C39F922416D7B200309AC2 /* LocationSearchView.swift in Sources */,
 				C53329B0240B766B007389DF /* EntryPost.swift in Sources */,
 				C558AAF92413974C00DBB148 /* EntriesStore.swift in Sources */,
@@ -720,6 +723,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C506EBFE24483EA800970DD3 /* OpenDayService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OpenDayService;
+		};
 		C52055B8241C246200FE0AB6 /* LocationService */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LocationService;

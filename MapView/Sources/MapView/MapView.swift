@@ -8,14 +8,15 @@ final class LandmarkAnnotation: NSObject, MKAnnotation {
 
     init(location: Location) {
         self.location = location
-        self.coordinate = .init(latitude: location.latitude, longitude: location.longitude)
+        self.coordinate = .init(latitude: location.coordinates.latitude,
+                                longitude: location.coordinates.longitude)
     }
 }
 
 #if os(iOS)
 
 public struct MapView: UIViewRepresentable {
-    @Binding var locations: [Location]
+    @Binding var locations: [Models.Location]
 
     private let userInteractionEnabled: Bool
 
@@ -53,8 +54,8 @@ public struct MapView: UIViewRepresentable {
 
         if newAnnotations.count == 1, let first = newAnnotations.first {
             let span = mapView.region.span
-            let center = CLLocationCoordinate2D(latitude: first.location.latitude,
-                                                longitude: first.location.longitude)
+            let center = CLLocationCoordinate2D(latitude: first.location.coordinates.latitude,
+                                                longitude: first.location.coordinates.longitude)
             let region = MKCoordinateRegion(center: center, latitudinalMeters: 50000, longitudinalMeters: 50000)
             mapView.setRegion(region, animated: true)
         }

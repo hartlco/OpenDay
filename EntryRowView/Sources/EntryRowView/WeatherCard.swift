@@ -7,7 +7,7 @@ struct WeatherCard: View {
     var body: some View {
         VStack {
             #if os(iOS)
-            Image(systemName: weather.weatherIcon?.assetName ?? "")
+            Image(systemName: weather.weatherSymbol?.assetName ?? "")
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 40, height: 40)
@@ -29,7 +29,7 @@ struct WeatherCard: View {
 
 extension Weather {
     var backgroundColor: Color {
-        switch weatherIcon {
+        switch weatherSymbol {
         case .clearDay, .partlyCloudyDay:
             return Color.blue
         case .clearNight, .partlyCloudyNight:

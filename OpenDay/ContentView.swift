@@ -4,18 +4,19 @@ import EntryRowView
 import MapView
 import Models
 import KingfisherSwiftUI
+import OpenDayService
 
 struct ContentView: View {
     @EnvironmentObject var store: EntriesStore
 
     @State var isModal: Bool = false
-    @State var selectedModalEntry: Post?
+    @State var selectedModalEntry: Entry?
 
     var modal: some View {
         Text("Modal")
     }
 
-    func tapGesture(for post: Post) -> some Gesture {
+    func tapGesture(for post: Entry) -> some Gesture {
         return TapGesture().onEnded {
             self.isModal = true
             self.selectedModalEntry = post
@@ -25,7 +26,7 @@ struct ContentView: View {
     var mapView: some View {
         return MapView(locations: $store.locations) { location in
             self.isModal = true
-            self.selectedModalEntry = location.getPost()
+//            self.selectedModalEntry = location.getPost()
         }.edgesIgnoringSafeArea(.vertical)
     }
 
@@ -33,10 +34,10 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 List {
-                        ForEach(store.sections) { (section: EntriesSection) in
+                    ForEach(store.sections) { (section: EntriesSection) in
                             Text(section.title)
                                 .font(Font.title.smallCaps()).bold()
-                            ForEach(section.posts) { (post: EntryPost) in
+                            ForEach(section.posts) { (post: Entry) in
                                 EntryRowView(post: post) {
                                     self.isModal = true
                                     self.selectedModalEntry = post
@@ -50,7 +51,7 @@ struct ContentView: View {
                                 })
                                 .contextMenu {
                                     Button(action: {
-                                        self.store.delete(entry: post)
+//                                        self.store.delete(entry: post)
                                     }, label: {
                                         Text("Delete")
                                         Image(systemName: "trash")
@@ -82,7 +83,7 @@ struct ContentView: View {
                     Spacer()
                 }
             }
-            .navigationBarTitle("Entries")
+//            .navigationBarTitle("Entries")
         }
     }
 }
