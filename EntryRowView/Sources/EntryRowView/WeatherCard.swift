@@ -11,7 +11,7 @@ struct WeatherCard: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 40, height: 40)
-            Text(String(weather.temperatureCelcius.rounded(.up)))
+            Text(String(weather.temperatureCelcius))
                 .font(Font.body.bold())
             #elseif os(macOS)
             Image(weather.weatherIcon?.assetName ?? "")

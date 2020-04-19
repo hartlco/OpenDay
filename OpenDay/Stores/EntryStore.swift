@@ -202,12 +202,8 @@ final class EntryStore: ObservableObject {
         }, receiveValue: { [weak self] weatherData in
             guard let self = self else { return }
 
-            if self.currentWeather == nil {
-//                self.currentWeather = self.repository.newWeather()
-            }
-
-//            self.currentWeather?.temperature = weatherData.temperatureFahrenheit
-//            self.currentWeather?.weatherIconString = weatherData.icon.rawValue
+            self.currentWeather = Weather(weatherSymbol: WeatherIcon.matched(from: weatherData.icon.rawValue),
+                                          fahrenheit: Int(weatherData.temperatureFahrenheit))
         })
     }
 }

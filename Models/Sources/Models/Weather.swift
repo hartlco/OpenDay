@@ -42,15 +42,20 @@ public enum WeatherIcon: String, Codable {
 
 public struct Weather: Codable {
     public let weatherSymbol: WeatherIcon?
-    public var fahrenheit: Double
+    public var fahrenheit: Int
+
+    public init(weatherSymbol: WeatherIcon?, fahrenheit: Int) {
+        self.weatherSymbol = weatherSymbol
+        self.fahrenheit = fahrenheit
+    }
 }
 
 public extension Weather {
-    var temperatureFahrenheit: Double {
+    var temperatureFahrenheit: Int {
         return fahrenheit
     }
 
-    var temperatureCelcius: Double {
+    var temperatureCelcius: Int {
           (fahrenheit - 32) * 5 / 9
     }
 

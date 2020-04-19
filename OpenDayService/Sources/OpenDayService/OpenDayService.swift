@@ -38,7 +38,6 @@ public final class OpenDayService {
                 let encoder = JSONEncoder()
                 encoder.dateEncodingStrategy = .iso8601
                 encoder.keyEncodingStrategy = .convertToSnakeCase
-                let data = try? encoder.encode(entry)                
                 return try? encoder.encode(entry)
             }
         }
