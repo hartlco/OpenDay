@@ -48,27 +48,46 @@ public enum ImageResource: Codable, Identifiable {
         case decoding(String)
     }
 
+    enum CodingKeys: String, CodingKey {
+        case type
+        case value
+    }
+
     public init(from decoder: Decoder) throws {
-        let value = try? decoder.singleValueContainer()
-        if let url = try? value?.decode(URL.self) {
-            self = .remote(url: url)
-            return
-        } else if let data = try? value?.decode(Data.self) {
-            self = .local(data: data, creationDate: nil)
-            return
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard let typeString = try? container.decode(String.self, forKey: .type),
+            let valueString = try? container.decode(String.self, forKey: .value) else {
+            throw CodingError.decoding("ImageResource couldn't be decoded")
         }
 
-        throw CodingError.decoding("ImageResource couldn't be decoded")
+        switch typeString {
+        case "Remote":
+            guard let url = URL(string: valueString) else {
+                throw CodingError.decoding("ImageResource couldn't be decoded")
+            }
+
+            self = .remote(url: url)
+        case "Local":
+            guard let data = Data(base64Encoded: valueString) else {
+                throw CodingError.decoding("ImageResource couldn't be decoded")
+            }
+
+            self = .local(data: data, creationDate: nil)
+        default:
+            throw CodingError.decoding("ImageResource couldn't be decoded")
+        }
     }
 
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
+        var container = encoder.container(keyedBy: CodingKeys.self)
 
         switch self {
         case .local(let data, _):
-            try? container.encode(data)
+            try? container.encode("Local", forKey: .type)
+            try? container.encode(data.base64EncodedString(), forKey: .value)
         case .remote(let url):
-            try? container.encode(url)
+            try? container.encode("Remote", forKey: .type)
+            try? container.encode(url.absoluteString, forKey: .value)
         }
     }
 
