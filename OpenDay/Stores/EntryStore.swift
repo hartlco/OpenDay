@@ -69,7 +69,12 @@ final class EntryStore: ObservableObject {
 //        entryImage.data = imageAsset.image.data
 //        entryImage.thumbnail = imageAsset.image.thumbnail
 //        entryImage.imageDate = imageAsset.creationDate
-//        images.append(entryImage)
+        guard let imageData = imageAsset.image.data else {
+            return
+        }
+
+        let image = ImageResource.local(data: imageData, creationDate: imageAsset.creationDate)
+        images.append(image)
     }
 
     func updateLocation() {
@@ -129,6 +134,7 @@ final class EntryStore: ObservableObject {
             let entry = Models.Entry(title: title,
                                      bodyText: bodyString,
                                      date: entryDate,
+                                     images: images,
                                      location: currentLocation,
                                      weather: currentWeather)
 
