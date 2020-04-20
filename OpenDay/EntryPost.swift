@@ -50,24 +50,6 @@ public class EntryLocation: NSManagedObject, Identifiable {
     @NSManaged public var post: EntryPost?
 }
 
-extension EntryLocation {
-    func update(from location: LocationServiceLocation) {
-        self.city = location.city
-        self.longitude = location.longitude
-        self.latitude = location.latitude
-        self.isoCountryCode = location.isoCountryCode
-        self.street = location.street
-    }
-
-    var locationServiceLocation: LocationServiceLocation {
-        return LocationServiceLocation(latitude: latitude,
-                                       longitude: longitude,
-                                       isoCountryCode: isoCountryCode,
-                                       street: street,
-                                       city: city)
-    }
-}
-
 public class EntryWeather: NSManagedObject, Identifiable {
     @NSManaged public var temperature: Double
     @NSManaged public var weatherIconString: String?

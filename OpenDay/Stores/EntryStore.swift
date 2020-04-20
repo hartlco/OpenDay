@@ -83,13 +83,7 @@ final class EntryStore: ObservableObject {
         }, receiveValue: { [weak self] location in
             guard let self = self else { return }
 
-            let coordinates = Models.Location.Coordinates(longitude: location.longitude,
-                                                          latitude: location.latitude)
-
-            self.currentLocation = Models.Location(coordinates: coordinates,
-                                                   isoCountryCode: location.isoCountryCode ?? "",
-                                                   city: location.city,
-                                                   name: location.street)
+            self.currentLocation = location
         })
     }
 
@@ -111,12 +105,7 @@ final class EntryStore: ObservableObject {
             }, receiveValue: { [weak self] location in
                 guard let self = self else { return }
 
-                let coordinates = Location.Coordinates(longitude: location.longitude,
-                                                       latitude: location.latitude)
-                self.currentLocation = Location(coordinates: coordinates,
-                                                isoCountryCode: location.isoCountryCode ?? "",
-                                                city: location.city,
-                                                name: location.street)
+                self.currentLocation = location
             })
     }
 

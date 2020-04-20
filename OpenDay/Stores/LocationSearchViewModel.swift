@@ -27,7 +27,7 @@ final class LocationSearchViewModel: ObservableObject {
         loadLocationsCancellable = $searchText
             .debounce(for: .seconds(0.8), scheduler: RunLoop.main)
             .setFailureType(to: Error.self)
-            .flatMap({ [unowned self] (text) -> Future<[LocationServiceLocation], Error> in
+            .flatMap({ [unowned self] (text) -> Future<[Location], Error> in
                 return self.locationService.getLocations(from: text)
             })
             .sink(receiveCompletion: { _ in
