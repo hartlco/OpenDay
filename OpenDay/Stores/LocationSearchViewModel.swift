@@ -11,7 +11,7 @@ final class LocationSearchViewModel: ObservableObject {
             }
         }
     }
-    @Published var locations = [Models.Location]()
+    @Published var locations = [Location]()
 
     private var throttleCancellable: AnyCancellable?
     private var loadLocationsCancellable: AnyCancellable?
@@ -33,7 +33,7 @@ final class LocationSearchViewModel: ObservableObject {
             .sink(receiveCompletion: { _ in
 
             }, receiveValue: { [unowned self] locations in
-//                self.locations = locations
+                self.locations = locations
             })
     }
 

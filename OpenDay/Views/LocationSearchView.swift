@@ -6,7 +6,7 @@ struct LocationSearchView: View {
     @EnvironmentObject var viewModel: LocationSearchViewModel
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
-    var didSelectLocation: (Models.Location) -> Void
+    var didSelectLocation: (Location) -> Void
 
     var body: some View {
         List {

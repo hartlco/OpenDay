@@ -82,7 +82,7 @@ struct EntryView: SwiftUI.View {
                               secondaryButton: .cancel())
                     }
                     NavigationLink(destination: LocationSearchView { location in
-//                        self.store.currentLocation = location
+                        self.store.currentLocation = location
                     }.environmentObject(store.locationSearchViewModel)) {
                                     Text("Search Location")
                     }.buttonStyle(DefaultButtonStyle())
