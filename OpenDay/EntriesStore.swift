@@ -53,8 +53,8 @@ final class EntriesStore: ObservableObject {
         return EntryStore(repository: repository)
     }
 
-    func delete(entry: EntryPost) {
-//        repository.delete(entry: entry)
+    func delete(entry: Models.Entry) {
+        repository.delete(entry: entry)
     }
 
     func deleteAll() {
@@ -70,11 +70,11 @@ final class EntriesStore: ObservableObject {
     }
 
     func deleteSelectedEntry() {
-        guard let selectedEntry = selection else {
-            return
-        }
-
-        delete(entry: selectedEntry)
-        selection = nil
+//        guard let selectedEntry = selection else {
+//            return
+//        }
+//
+//        delete(entry: selectedEntry)
+//        selection = nil
     }
 }

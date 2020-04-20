@@ -51,7 +51,7 @@ struct ContentView: View {
                                 })
                                 .contextMenu {
                                     Button(action: {
-//                                        self.store.delete(entry: post)
+                                        self.store.delete(entry: post)
                                     }, label: {
                                         Text("Delete")
                                         Image(systemName: "trash")

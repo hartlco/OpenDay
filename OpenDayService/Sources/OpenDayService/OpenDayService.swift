@@ -11,6 +11,7 @@ public final class OpenDayService {
     public enum Endpoint {
         case entries
         case createEntry(_ entry: Entry)
+        case deleteEntry(_ entry: Entry)
 
         var path: String {
             switch self {
@@ -18,6 +19,8 @@ public final class OpenDayService {
                 return "entries"
             case .createEntry:
                 return "entry"
+            case .deleteEntry(let entry):
+                return "entry/\(entry.id ?? "")"
             }
         }
 
@@ -27,12 +30,14 @@ public final class OpenDayService {
                 return "GET"
             case .createEntry:
                 return "POST"
+            case .deleteEntry:
+                return "DELETE"
             }
         }
 
         var httpBody: Data? {
             switch self {
-            case .entries:
+            case .entries, .deleteEntry:
                 return nil
             case .createEntry(let entry):
                 let encoder = JSONEncoder()

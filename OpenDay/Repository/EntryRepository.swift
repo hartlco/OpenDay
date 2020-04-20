@@ -19,8 +19,8 @@ final class EntriesSection: Identifiable {
 protocol EntryRepository {
     var didChange: (([EntriesSection]) -> Void)? { get set }
     func load()
-
     func add(entry: Models.Entry)
+    func delete(entry: Models.Entry)
 //    func newEntry() -> EntryPost
 //    func newImage() -> EntryImage
 //    func newLocation() -> EntryLocation

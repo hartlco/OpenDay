@@ -6,6 +6,7 @@ import Models
 final class OpenDayRepository: EntryRepository {
     private var loadCancellable: AnyCancellable?
     private var addCancellable: AnyCancellable?
+    private var deleteCancellable: AnyCancellable?
 
     var didChange: (([EntriesSection]) -> Void)?
 
@@ -31,7 +32,17 @@ final class OpenDayRepository: EntryRepository {
         addCancellable = future.sink(receiveCompletion: { _ in
 
         }, receiveValue: { okString in
-            print("OK string")
+            print("Add: \(okString)")
+        })
+    }
+
+    func delete(entry: Entry) {
+        let future: Future<String, Error> = openDayService.perform(endpoint: .deleteEntry(entry))
+
+        deleteCancellable = future.sink(receiveCompletion: { _ in
+
+        }, receiveValue: { okString in
+            print("Delete: \(okString)")
         })
     }
 

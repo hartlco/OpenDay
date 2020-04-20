@@ -22,7 +22,7 @@ final class EntryStore: ObservableObject {
     @Published var currentLocation: Models.Location?
     @Published var currentWeather: Weather?
 
-    private var lastInsertedImageAsset: ImageResource?
+    private var lastInsertedImageAsset: ImageAsset?
     private var entry: Entry?
 
     private let repository: EntryRepository
@@ -64,7 +64,7 @@ final class EntryStore: ObservableObject {
     }
 
     func append(imageAsset: ImageAsset) {
-//        lastInsertedImageAsset = imageAsset
+        lastInsertedImageAsset = imageAsset
 //        let entryImage = repository.newImage()
 //        entryImage.data = imageAsset.image.data
 //        entryImage.thumbnail = imageAsset.image.thumbnail
@@ -94,25 +94,30 @@ final class EntryStore: ObservableObject {
     }
 
     func useLastImageAssetsDateAndLocation() {
-//        guard let lastAsset = lastInsertedImageAsset else {
-//            return
-//        }
-//
-//        entryDate = lastAsset.creationDate ?? entryDate
-//
-//        guard let assetLocation = lastAsset.location else {
-//            return
-//        }
+        guard let lastAsset = lastInsertedImageAsset else {
+            return
+        }
 
-//        locationFromImageCancellable = locationService.getLocation(from: assetLocation)
-//            .receive(on: RunLoop.main)
-//            .sink(receiveCompletion: { _ in
-//
-//            }, receiveValue: { [weak self] location in
-//                guard let self = self else { return }
-//
-//                self.currentLocation = location
-//            })
+        entryDate = lastAsset.creationDate ?? entryDate
+
+        guard let assetLocation = lastAsset.location else {
+            return
+        }
+
+        locationFromImageCancellable = locationService.getLocation(from: assetLocation)
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { _ in
+
+            }, receiveValue: { [weak self] location in
+                guard let self = self else { return }
+
+                let coordinates = Location.Coordinates(longitude: location.longitude,
+                                                       latitude: location.latitude)
+                self.currentLocation = Location(coordinates: coordinates,
+                                                isoCountryCode: location.isoCountryCode ?? "",
+                                                city: location.city,
+                                                name: location.street)
+            })
     }
 
     func delete(image: EntryImage) {
@@ -130,7 +135,6 @@ final class EntryStore: ObservableObject {
         }
 
         if entry == nil {
-//            entry = repository.newEntry()
             let entry = Models.Entry(title: title,
                                      bodyText: bodyString,
                                      date: entryDate,
