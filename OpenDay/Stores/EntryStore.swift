@@ -109,13 +109,12 @@ final class EntryStore: ObservableObject {
             })
     }
 
-    func delete(image: EntryImage) {
-//        guard let index = images.firstIndex(of: image) else {
-//            return
-//        }
+    func delete(image: ImageResource) {
+        guard let index = images.firstIndex(of: image) else {
+            return
+        }
 
-//        images.remove(at: index)
-//        repository.delete(image: image)
+        images.remove(at: index)
     }
 
     func save() {
@@ -135,21 +134,14 @@ final class EntryStore: ObservableObject {
             return
         }
 
-//        entry?.title = self.title
-//        entry?.body = self.bodyString
-//        entry?.entryDate = self.entryDate
-//        entry?.weather = self.currentWeather
-//        entry?.images = Set(self.images)
-
-        if let currentLocation = currentLocation {
-            if entry?.location == nil {
-//                entry?.location = repository.newLocation()
-            }
-
-//            entry?.location?.update(from: currentLocation)
-        }
-
-//        repository.save()
+        let newEntry = Entry(id: entry?.id,
+                             title: title,
+                             bodyText: bodyString,
+                             date: entryDate,
+                             images: images,
+                             location: currentLocation,
+                             weather: currentWeather)
+        repository.update(entry: newEntry)
     }
 
     var locationSearchViewModel: LocationSearchViewModel {
@@ -165,20 +157,21 @@ final class EntryStore: ObservableObject {
     }
 
     private var needsToSave: Bool {
-//        guard let entry = entry else {
-//            return true
-//        }
-//
-//        if entry.title != title ||
-//            entry.body != bodyString ||
-//            entry.entryDate != entryDate ||
-//            entry.location?.latitude != currentLocation?.latitude ||
-//            entry.location?.latitude != currentLocation?.latitude ||
-//            entry.images != Set(images) {
-//            return true
-//        }
+        guard let entry = entry else {
+            return true
+        }
 
-        return true
+        if entry.title != title ||
+            entry.bodyText != bodyString ||
+            entry.date != entryDate ||
+            entry.location?.coordinates.latitude != currentLocation?.coordinates.latitude ||
+            entry.location?.coordinates
+                .latitude != currentLocation?.coordinates.latitude ||
+            entry.images != images {
+            return true
+        }
+
+        return false
     }
 
     private func setupWeatherBinding() {

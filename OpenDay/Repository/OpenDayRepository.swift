@@ -7,6 +7,7 @@ final class OpenDayRepository: EntryRepository {
     private var loadCancellable: AnyCancellable?
     private var addCancellable: AnyCancellable?
     private var deleteCancellable: AnyCancellable?
+    private var updateCancellable: AnyCancellable?
 
     var didChange: (([EntriesSection]) -> Void)?
 
@@ -46,41 +47,13 @@ final class OpenDayRepository: EntryRepository {
         })
     }
 
-    func newEntry() -> EntryPost {
-        fatalError()
+    func update(entry: Entry) {
+        let future: Future<String, Error> = openDayService.perform(endpoint: .updateEntry(entry))
+
+        updateCancellable = future.sink(receiveCompletion: { _ in
+
+        }, receiveValue: { okString in
+            print("Update: \(okString)")
+        })
     }
-
-    func newImage() -> EntryImage {
-        fatalError()
-    }
-
-    func newLocation() -> EntryLocation {
-        fatalError()
-    }
-
-    func newWeather() -> EntryWeather {
-        fatalError()
-    }
-
-    func delete(entry: EntryPost) {
-        fatalError()
-    }
-
-    func delete(image: EntryImage) {
-        fatalError()
-    }
-
-    func delete(location: EntryLocation) {
-        fatalError()
-    }
-
-    func delete(weather: EntryWeather) {
-        fatalError()
-    }
-
-    func save() {
-        fatalError()
-    }
-
-
 }

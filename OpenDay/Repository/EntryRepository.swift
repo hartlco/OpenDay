@@ -21,6 +21,7 @@ protocol EntryRepository {
     func load()
     func add(entry: Models.Entry)
     func delete(entry: Models.Entry)
+    func update(entry: Models.Entry)
 //    func newEntry() -> EntryPost
 //    func newImage() -> EntryImage
 //    func newLocation() -> EntryLocation

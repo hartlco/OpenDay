@@ -11,13 +11,14 @@ public struct Entry: Codable, Identifiable {
 
     let body: String
 
-    public init(title: String,
+    public init(id: String? = nil,
+                title: String,
                 bodyText: String,
                 date: Date,
                 images: [ImageResource] = [],
                 location: Location? = nil,
                 weather: Weather? = nil) {
-        self.id = nil
+        self.id = id
         self.title = title
 
         let base64Data = bodyText.data(using: .utf8)
@@ -40,7 +41,7 @@ public struct Entry: Codable, Identifiable {
     }
 }
 
-public enum ImageResource: Codable, Identifiable {
+public enum ImageResource: Codable, Identifiable, Equatable {
     case remote(url: URL)
     case local(data: Data, creationDate: Date?)
 

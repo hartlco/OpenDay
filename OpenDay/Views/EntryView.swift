@@ -37,7 +37,7 @@ struct EntryView: SwiftUI.View {
                             .aspectRatio(contentMode: .fill)
                             .contextMenu {
                                 Button(action: {
-//                                    self.store.delete(image: entryImage)
+                                    self.store.delete(image: entryImage)
                                 }, label: {
                                     Text("Delete")
                                     Image(systemName: "trash")

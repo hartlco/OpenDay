@@ -12,6 +12,7 @@ public final class OpenDayService {
         case entries
         case createEntry(_ entry: Entry)
         case deleteEntry(_ entry: Entry)
+        case updateEntry(_ entry: Entry)
 
         var path: String {
             switch self {
@@ -20,6 +21,8 @@ public final class OpenDayService {
             case .createEntry:
                 return "entry"
             case .deleteEntry(let entry):
+                return "entry/\(entry.id ?? "")"
+            case .updateEntry(let entry):
                 return "entry/\(entry.id ?? "")"
             }
         }
@@ -32,6 +35,8 @@ public final class OpenDayService {
                 return "POST"
             case .deleteEntry:
                 return "DELETE"
+            case .updateEntry:
+                return "PUT"
             }
         }
 
@@ -39,7 +44,7 @@ public final class OpenDayService {
             switch self {
             case .entries, .deleteEntry:
                 return nil
-            case .createEntry(let entry):
+            case .createEntry(let entry), .updateEntry(let entry):
                 let encoder = JSONEncoder()
                 encoder.dateEncodingStrategy = .iso8601
                 encoder.keyEncodingStrategy = .convertToSnakeCase
