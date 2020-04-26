@@ -32,13 +32,13 @@ final class EntriesStore: ObservableObject {
 
             self.sections = entries
 
-//            self.locations = entries.map {
-//                return $0.posts
-//            }.flatMap {
-//                return $0
-//            }.compactMap { post in
-//                return post.location
-//            }
+            self.locations = entries.map {
+                return $0.posts
+            }.flatMap {
+                return $0
+            }.compactMap { post in
+                return post.location
+            }
         }
 
         repository.load()
@@ -70,11 +70,11 @@ final class EntriesStore: ObservableObject {
     }
 
     func deleteSelectedEntry() {
-//        guard let selectedEntry = selection else {
-//            return
-//        }
-//
-//        delete(entry: selectedEntry)
-//        selection = nil
+        guard let selectedEntry = selection else {
+            return
+        }
+
+        delete(entry: selectedEntry)
+        selection = nil
     }
 }
