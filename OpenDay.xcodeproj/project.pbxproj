@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C506EBFC2448316B00970DD3 /* OpenDayRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C506EBFB2448316B00970DD3 /* OpenDayRepository.swift */; };
 		C506EBFF24483EA800970DD3 /* OpenDayService in Frameworks */ = {isa = PBXBuildFile; productRef = C506EBFE24483EA800970DD3 /* OpenDayService */; };
+		C512CA3A245691E20073A691 /* OpenDayService in Frameworks */ = {isa = PBXBuildFile; productRef = C512CA39245691E20073A691 /* OpenDayService */; };
+		C512CA3B2456927C0073A691 /* OpenDayRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C506EBFB2448316B00970DD3 /* OpenDayRepository.swift */; };
 		C52055A1241C23A900FE0AB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52055A0241C23A900FE0AB6 /* AppDelegate.swift */; };
 		C52055A3241C23A900FE0AB6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52055A2241C23A900FE0AB6 /* ContentView.swift */; };
 		C52055A8241C23AB00FE0AB6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C52055A7241C23AB00FE0AB6 /* Assets.xcassets */; };
@@ -33,7 +35,6 @@
 		C558AB002414C28600DBB148 /* LocationService in Frameworks */ = {isa = PBXBuildFile; productRef = C558AAFF2414C28600DBB148 /* LocationService */; };
 		C558AB0424153EAC00DBB148 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C558AB0324153EAC00DBB148 /* EntryView.swift */; };
 		C558AB0624153ED900DBB148 /* ContentEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C558AB0524153ED900DBB148 /* ContentEntryView.swift */; };
-		C57C0DBB241E61230056EB2F /* 1.json in Resources */ = {isa = PBXBuildFile; fileRef = C57C0DBA241E61230056EB2F /* 1.json */; };
 		C57C0DBD241E625F0056EB2F /* DayOneKit in Frameworks */ = {isa = PBXBuildFile; productRef = C57C0DBC241E625F0056EB2F /* DayOneKit */; };
 		C5859DEB240B9EE900711C16 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C5859DEA240B9EE900711C16 /* KingfisherSwiftUI */; };
 		C5A895FF2420A70B00025403 /* WeatherService in Frameworks */ = {isa = PBXBuildFile; productRef = C5A895FE2420A70B00025403 /* WeatherService */; };
@@ -78,7 +79,6 @@
 		C558AB0324153EAC00DBB148 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		C558AB0524153ED900DBB148 /* ContentEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentEntryView.swift; sourceTree = "<group>"; };
 		C57C0DB9241E5F9A0056EB2F /* DayOneKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DayOneKit; sourceTree = "<group>"; };
-		C57C0DBA241E61230056EB2F /* 1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = 1.json; path = "../../../Documents/Export - All Entries (2020-03-15)/1.json"; sourceTree = "<group>"; };
 		C5A895FD242098FF00025403 /* WeatherService */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WeatherService; sourceTree = "<group>"; };
 		C5B2BC35240ABDB6009E3E2C /* OpenDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5B2BC38240ABDB6009E3E2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +108,7 @@
 				C57C0DBD241E625F0056EB2F /* DayOneKit in Frameworks */,
 				C5D45EDF241DFD0900B5F109 /* MapView in Frameworks */,
 				C52055CE241CBCFE00FE0AB6 /* EntryRowView in Frameworks */,
+				C512CA3A245691E20073A691 /* OpenDayService in Frameworks */,
 				C5D40E2F2421E6C700DBDE85 /* Secrets in Frameworks */,
 				C52055C2241C9B9400FE0AB6 /* OpenKit in Frameworks */,
 				C52055B5241C23CB00FE0AB6 /* CloudKit.framework in Frameworks */,
@@ -142,7 +143,6 @@
 		C520559F241C23A900FE0AB6 /* OpenDay-Mac */ = {
 			isa = PBXGroup;
 			children = (
-				C57C0DBA241E61230056EB2F /* 1.json */,
 				C52055A0241C23A900FE0AB6 /* AppDelegate.swift */,
 				C52055A2241C23A900FE0AB6 /* ContentView.swift */,
 				C52055A7241C23AB00FE0AB6 /* Assets.xcassets */,
@@ -282,6 +282,7 @@
 				C57C0DBC241E625F0056EB2F /* DayOneKit */,
 				C5A895FE2420A70B00025403 /* WeatherService */,
 				C5D40E2E2421E6C700DBDE85 /* Secrets */,
+				C512CA39245691E20073A691 /* OpenDayService */,
 			);
 			productName = "OpenDay-Mac";
 			productReference = C520559E241C23A900FE0AB6 /* OpenDay-Mac.app */;
@@ -367,7 +368,6 @@
 				C52055AE241C23AB00FE0AB6 /* Main.storyboard in Resources */,
 				C52055AB241C23AB00FE0AB6 /* Preview Assets.xcassets in Resources */,
 				C52055A8241C23AB00FE0AB6 /* Assets.xcassets in Resources */,
-				C57C0DBB241E61230056EB2F /* 1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +411,7 @@
 			files = (
 				C52055BF241C273C00FE0AB6 /* LocationSearchViewModel.swift in Sources */,
 				C52055B6241C242500FE0AB6 /* OpenDay.xcdatamodeld in Sources */,
+				C512CA3B2456927C0073A691 /* OpenDayRepository.swift in Sources */,
 				C52055A3241C23A900FE0AB6 /* ContentView.swift in Sources */,
 				C52055BE241C262B00FE0AB6 /* EntryStore.swift in Sources */,
 				C52055BD241C261300FE0AB6 /* EntriesStore.swift in Sources */,
@@ -718,6 +719,10 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		C506EBFE24483EA800970DD3 /* OpenDayService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OpenDayService;
+		};
+		C512CA39245691E20073A691 /* OpenDayService */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OpenDayService;
 		};

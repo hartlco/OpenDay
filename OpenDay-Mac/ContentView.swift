@@ -2,16 +2,17 @@ import SwiftUI
 import OpenKit
 import EntryRowView
 import MapView
+import Models
 
 struct DetailView: View {
-    let post: EntryPost
+    let post: Entry
 
     var body: some View {
         VStack {
-            Text(post.title ?? "")
+            Text(post.title)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-            Text(post.body ?? "")
-            Text(post.weather?.weatherIconString ?? "")
+            Text(post.bodyText)
+            Text(post.weather?.weatherSymbol?.rawValue ?? "")
         }
     }
 }
@@ -24,7 +25,7 @@ struct ContentView: View {
             List {
                 ForEach(store.sections) { section in
                     Section(header: Text(section.title)) {
-                        ForEach(section.posts) { (post: EntryPost) in
+                        ForEach(section.posts) { (post: Entry) in
                             NavigationLink(destination: DetailView(post: post)) {
                                 EntryRowView(post: post) {
 

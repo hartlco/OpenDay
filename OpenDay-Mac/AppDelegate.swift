@@ -25,72 +25,70 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
     var weatherCancellable: AnyCancellable?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        let repositroy = CoreDataEntryRepository(context: persistentContainer.viewContext)
+        let repositroy = OpenDayRepository()
         entriesStore = EntriesStore(repository: repositroy)
 
 //        entriesStore.deleteAll()
 
         let contentView = ContentView().environmentObject(entriesStore)
 
-        let openPanel = NSOpenPanel()
-        openPanel.allowsMultipleSelection = false
-        openPanel.canChooseDirectories = true
-        openPanel.canCreateDirectories = false
-        openPanel.canChooseFiles = false
-        openPanel.begin { result in
-            if result == NSApplication.ModalResponse.OK {
-                guard let url = openPanel.url else {
-                    return
-                }
-
-                let manager = DayOneKitDataReader(fileURL: url)
-                let data = manager.importedData(for: "J")
-
-                for entry in data.entries {
-                    let newEntry =  repositroy.newEntry()
-                    newEntry.title = entry.title
-                    newEntry.body = entry.body
-                    newEntry.entryDate = entry.convertedDate
-
-                    if let location = entry.location {
-                        let newLocation = repositroy.newLocation()
-                        newLocation.longitude = location.longitude ?? 0.0
-                        newLocation.latitude = location.latitude ?? 0.0
-                        newLocation.city = location.administrativeArea
-                        newLocation.street = location.placeName
-                        newLocation.isoCountryCode = location.countryCode
-
-                        newEntry.location = newLocation
-                    }
-
-                    if let photos = entry.photos {
-                        var images = Set<EntryImage>()
-                        for photo in photos {
-                            guard let data = try? Data(contentsOf: photo.fileURL(for: url)) else {
-                                print("Coudlnt read file: \(photo.fileURL(for: url))")
-                                continue
-                            }
-
-                            let newPhoto = repositroy.newImage()
-                            newPhoto.data = data
-                            newPhoto.thumbnail = OKImage(data: data)?.thumbnail
-                            images.insert(newPhoto)
-                        }
-
-                        newEntry.images = images
-                    }
-
-                    if let weather = entry.weather {
-                        let newWeather = repositroy.newWeather()
-                        newWeather.temperature = EntryWeather.convertToFahrenheit(from: Double(weather.temperatureCelsius))
-                        newWeather.weatherIconString = Models.WeatherIcon.matched(from: weather.weatherCode)?.rawValue
-                        newEntry.weather = newWeather
-                    }
-                }
-
-                repositroy.save()
-            }
-        }
+//        let openPanel = NSOpenPanel()
+//        openPanel.allowsMultipleSelection = false
+//        openPanel.canChooseDirectories = true
+//        openPanel.canCreateDirectories = false
+//        openPanel.canChooseFiles = false
+//        openPanel.begin { result in
+//            if result == NSApplication.ModalResponse.OK {
+//                guard let url = openPanel.url else {
+//                    return
+//                }
+//
+//                let manager = DayOneKitDataReader(fileURL: url)
+//                let data = manager.importedData(for: "J")
+//
+//                for entry in data.entries {
+//                    let newEntry =  repositroy.newEntry()
+//                    newEntry.title = entry.title
+//                    newEntry.body = entry.body
+//                    newEntry.entryDate = entry.convertedDate
+//
+//                    if let location = entry.location {
+//                        let newLocation = repositroy.newLocation()
+//                        newLocation.longitude = location.longitude ?? 0.0
+//                        newLocation.latitude = location.latitude ?? 0.0
+//                        newLocation.city = location.administrativeArea
+//                        newLocation.street = location.placeName
+//                        newLocation.isoCountryCode = location.countryCode
+//
+//                        newEntry.location = newLocation
+//                    }
+//
+//                    if let photos = entry.photos {
+//                        var images = Set<EntryImage>()
+//                        for photo in photos {
+//                            guard let data = try? Data(contentsOf: photo.fileURL(for: url)) else {
+//                                print("Coudlnt read file: \(photo.fileURL(for: url))")
+//                                continue
+//                            }
+//
+//                            let newPhoto = repositroy.newImage()
+//                            newPhoto.data = data
+//                            newPhoto.thumbnail = OKImage(data: data)?.thumbnail
+//                            images.insert(newPhoto)
+//                        }
+//
+//                        newEntry.images = images
+//                    }
+//
+//                    if let weather = entry.weather {
+//                        let newWeather = repositroy.newWeather()
+//                        newWeather.temperature = EntryWeather.convertToFahrenheit(from: Double(weather.temperatureCelsius))
+//                        newWeather.weatherIconString = Models.WeatherIcon.matched(from: weather.weatherCode)?.rawValue
+//                        newEntry.weather = newWeather
+//                    }
+//                }
+//            }
+//        }
 
         // Create the window and set the content view. 
         window = NSWindow(
