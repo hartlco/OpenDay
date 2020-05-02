@@ -29,7 +29,6 @@
 		C52055C9241CA83600FE0AB6 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = C52055C8241CA83600FE0AB6 /* Models */; };
 		C52055CC241CBB6600FE0AB6 /* EntryRowView in Frameworks */ = {isa = PBXBuildFile; productRef = C52055CB241CBB6600FE0AB6 /* EntryRowView */; };
 		C52055CE241CBCFE00FE0AB6 /* EntryRowView in Frameworks */ = {isa = PBXBuildFile; productRef = C52055CD241CBCFE00FE0AB6 /* EntryRowView */; };
-		C558AAF7241392D300DBB148 /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = C558AAF6241392D300DBB148 /* KeyboardObserving */; };
 		C558AAF92413974C00DBB148 /* EntriesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C558AAF82413974C00DBB148 /* EntriesStore.swift */; };
 		C558AAFD24139D5500DBB148 /* EntryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C558AAFC24139D5500DBB148 /* EntryStore.swift */; };
 		C558AB002414C28600DBB148 /* LocationService in Frameworks */ = {isa = PBXBuildFile; productRef = C558AAFF2414C28600DBB148 /* LocationService */; };
@@ -45,6 +44,7 @@
 		C5B2BC45240ABDB7009E3E2C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5B2BC44240ABDB7009E3E2C /* Preview Assets.xcassets */; };
 		C5B2BC48240ABDB7009E3E2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5B2BC46240ABDB7009E3E2C /* LaunchScreen.storyboard */; };
 		C5B2BC52240ABDE9009E3E2C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5B2BC51240ABDE9009E3E2C /* CloudKit.framework */; };
+		C5BF0DE4245D4BF20070950F /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = C5BF0DE3245D4BF20070950F /* KeyboardObserving */; };
 		C5C39F922416D7B200309AC2 /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F912416D7B200309AC2 /* LocationSearchView.swift */; };
 		C5C39F942416D93600309AC2 /* LocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F932416D93600309AC2 /* LocationSearchViewModel.swift */; };
 		C5C39F972417714700309AC2 /* EntryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C39F962417714700309AC2 /* EntryRepository.swift */; };
@@ -123,9 +123,9 @@
 			files = (
 				C5D45EDD241DF76B00B5F109 /* MapView in Frameworks */,
 				C52055CC241CBB6600FE0AB6 /* EntryRowView in Frameworks */,
-				C558AAF7241392D300DBB148 /* KeyboardObserving in Frameworks */,
 				C5D40E332421EC8B00DBDE85 /* WeatherService in Frameworks */,
 				C5D40E312421EC8600DBDE85 /* Secrets in Frameworks */,
+				C5BF0DE4245D4BF20070950F /* KeyboardObserving in Frameworks */,
 				C5DA7A93241386A200F4F398 /* TextView in Frameworks */,
 				C52055C4241C9B9B00FE0AB6 /* OpenKit in Frameworks */,
 				C558AB002414C28600DBB148 /* LocationService in Frameworks */,
@@ -302,7 +302,6 @@
 			name = OpenDay;
 			packageProductDependencies = (
 				C5DA7A92241386A200F4F398 /* TextView */,
-				C558AAF6241392D300DBB148 /* KeyboardObserving */,
 				C558AAFF2414C28600DBB148 /* LocationService */,
 				C52055C3241C9B9B00FE0AB6 /* OpenKit */,
 				C52055C6241CA31000FE0AB6 /* Models */,
@@ -311,6 +310,7 @@
 				C5D40E302421EC8600DBDE85 /* Secrets */,
 				C5D40E322421EC8B00DBDE85 /* WeatherService */,
 				C506EBFE24483EA800970DD3 /* OpenDayService */,
+				C5BF0DE3245D4BF20070950F /* KeyboardObserving */,
 			);
 			productName = OpenDay;
 			productReference = C5B2BC35240ABDB6009E3E2C /* OpenDay.app */;
@@ -344,7 +344,7 @@
 			);
 			mainGroup = C5B2BC2C240ABDB5009E3E2C;
 			packageReferences = (
-				C558AAF5241392D300DBB148 /* XCRemoteSwiftPackageReference "KeyboardObserving" */,
+				C5BF0DE2245D4BF20070950F /* XCRemoteSwiftPackageReference "KeyboardObserving" */,
 			);
 			productRefGroup = C5B2BC36240ABDB6009E3E2C /* Products */;
 			projectDirPath = "";
@@ -695,12 +695,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C558AAF5241392D300DBB148 /* XCRemoteSwiftPackageReference "KeyboardObserving" */ = {
+		C5BF0DE2245D4BF20070950F /* XCRemoteSwiftPackageReference "KeyboardObserving" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nickffox/KeyboardObserving.git";
+			repositoryURL = "https://github.com/nickffox/KeyboardObserving";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.2.1;
+				minimumVersion = 0.3.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -742,11 +742,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = EntryRowView;
 		};
-		C558AAF6241392D300DBB148 /* KeyboardObserving */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C558AAF5241392D300DBB148 /* XCRemoteSwiftPackageReference "KeyboardObserving" */;
-			productName = KeyboardObserving;
-		};
 		C558AAFF2414C28600DBB148 /* LocationService */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LocationService;
@@ -758,6 +753,11 @@
 		C5A895FE2420A70B00025403 /* WeatherService */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = WeatherService;
+		};
+		C5BF0DE3245D4BF20070950F /* KeyboardObserving */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C5BF0DE2245D4BF20070950F /* XCRemoteSwiftPackageReference "KeyboardObserving" */;
+			productName = KeyboardObserving;
 		};
 		C5D40E2E2421E6C700DBDE85 /* Secrets */ = {
 			isa = XCSwiftPackageProductDependency;

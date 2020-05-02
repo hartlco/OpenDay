@@ -11,7 +11,7 @@ final class OpenDayRepository: EntryRepository {
 
     var didChange: (([EntriesSection]) -> Void)?
 
-    private let openDayService = OpenDayService(baseURL: URL(string: "http://192.168.10.26:8000")!,
+    private let openDayService = OpenDayService(baseURL: URL(string: "http://192.168.10.50:8000")!,
                                                 urlSession: .shared)
 
     func load() {
