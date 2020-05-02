@@ -36,7 +36,6 @@
 		C558AB0424153EAC00DBB148 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C558AB0324153EAC00DBB148 /* EntryView.swift */; };
 		C558AB0624153ED900DBB148 /* ContentEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C558AB0524153ED900DBB148 /* ContentEntryView.swift */; };
 		C57C0DBD241E625F0056EB2F /* DayOneKit in Frameworks */ = {isa = PBXBuildFile; productRef = C57C0DBC241E625F0056EB2F /* DayOneKit */; };
-		C5859DEB240B9EE900711C16 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C5859DEA240B9EE900711C16 /* KingfisherSwiftUI */; };
 		C5A895FF2420A70B00025403 /* WeatherService in Frameworks */ = {isa = PBXBuildFile; productRef = C5A895FE2420A70B00025403 /* WeatherService */; };
 		C5B2BC39240ABDB6009E3E2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B2BC38240ABDB6009E3E2C /* AppDelegate.swift */; };
 		C5B2BC3B240ABDB6009E3E2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B2BC3A240ABDB6009E3E2C /* SceneDelegate.swift */; };
@@ -123,7 +122,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5D45EDD241DF76B00B5F109 /* MapView in Frameworks */,
-				C5859DEB240B9EE900711C16 /* KingfisherSwiftUI in Frameworks */,
 				C52055CC241CBB6600FE0AB6 /* EntryRowView in Frameworks */,
 				C558AAF7241392D300DBB148 /* KeyboardObserving in Frameworks */,
 				C5D40E332421EC8B00DBDE85 /* WeatherService in Frameworks */,
@@ -303,7 +301,6 @@
 			);
 			name = OpenDay;
 			packageProductDependencies = (
-				C5859DEA240B9EE900711C16 /* KingfisherSwiftUI */,
 				C5DA7A92241386A200F4F398 /* TextView */,
 				C558AAF6241392D300DBB148 /* KeyboardObserving */,
 				C558AAFF2414C28600DBB148 /* LocationService */,
@@ -347,7 +344,6 @@
 			);
 			mainGroup = C5B2BC2C240ABDB5009E3E2C;
 			packageReferences = (
-				C5859DE9240B9EE900711C16 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				C558AAF5241392D300DBB148 /* XCRemoteSwiftPackageReference "KeyboardObserving" */,
 			);
 			productRefGroup = C5B2BC36240ABDB6009E3E2C /* Products */;
@@ -707,14 +703,6 @@
 				minimumVersion = 0.2.1;
 			};
 		};
-		C5859DE9240B9EE900711C16 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.13.2;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -766,11 +754,6 @@
 		C57C0DBC241E625F0056EB2F /* DayOneKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DayOneKit;
-		};
-		C5859DEA240B9EE900711C16 /* KingfisherSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C5859DE9240B9EE900711C16 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = KingfisherSwiftUI;
 		};
 		C5A895FE2420A70B00025403 /* WeatherService */ = {
 			isa = XCSwiftPackageProductDependency;
