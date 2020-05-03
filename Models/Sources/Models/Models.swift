@@ -8,6 +8,7 @@ public struct Entry: Codable, Identifiable {
     public let images: [ImageResource]
     public let location: Location?
     public let weather: Weather?
+    public let tags: [String]?
 
     let body: String
 
@@ -17,7 +18,8 @@ public struct Entry: Codable, Identifiable {
                 date: Date,
                 images: [ImageResource] = [],
                 location: Location? = nil,
-                weather: Weather? = nil) {
+                weather: Weather? = nil,
+                tags: [String]? = nil) {
         self.id = id
         self.title = title
 
@@ -30,6 +32,7 @@ public struct Entry: Codable, Identifiable {
         self.images = images
         self.location = location
         self.weather = weather
+        self.tags = tags
     }
 
     public var bodyText: String {
