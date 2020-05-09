@@ -54,7 +54,7 @@ struct ContentView: View {
             ForEach(store.sections) { (section: EntriesSection) in
                 Text(section.title)
                     .font(Font.title.smallCaps()).bold()
-                ForEach(section.posts) { (post: Entry) in
+                ForEach(section.entries) { (post: Entry) in
                     EntryRowView(post: post) {
                         self.isModal = true
                         self.selectedModalEntry = post

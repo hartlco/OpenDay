@@ -33,7 +33,7 @@ final class EntriesStore: ObservableObject {
             self.sections = entries
 
             self.locations = entries.map {
-                return $0.posts
+                return $0.entries
             }.flatMap {
                 return $0
             }.compactMap { post in

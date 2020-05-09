@@ -15,15 +15,14 @@ final class OpenDayRepository: EntryRepository {
                                                 urlSession: .shared)
 
     func load() {
-        let future: Future<[Entry], Error> = openDayService.perform(endpoint: .entries)
+        let future: Future<[EntriesSection], Error> = openDayService.perform(endpoint: .entries)
 
         loadCancellable = future.sink(receiveCompletion: { _ in
 
         }, receiveValue: { [weak self] entries in
             guard let self = self else { return }
 
-            let section = EntriesSection(title: "March", posts: entries)
-            self.didChange?([section])
+            self.didChange?(entries)
         })
     }
 

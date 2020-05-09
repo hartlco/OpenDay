@@ -1,5 +1,20 @@
 import Foundation
 
+public struct EntriesSection: Codable, Identifiable {
+    public init(title: String,
+                entries: [Entry]) {
+        self.title = title
+        self.entries = entries
+    }
+
+    public var id: String {
+        return title
+    }
+
+    public let title: String
+    public let entries: [Entry]
+}
+
 public struct Entry: Codable, Identifiable {
     //swiftlint:disable identifier_name
     public let id: String?
