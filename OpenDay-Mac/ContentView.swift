@@ -25,7 +25,7 @@ struct ContentView: View {
             List {
                 ForEach(store.sections) { section in
                     Section(header: Text(section.title)) {
-                        ForEach(section.posts) { (post: Entry) in
+                        ForEach(section.entries) { (post: Entry) in
                             NavigationLink(destination: DetailView(post: post)) {
                                 EntryRowView(post: post) {
 

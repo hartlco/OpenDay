@@ -2,9 +2,57 @@ import Foundation
 import Combine
 import Models
 
+public protocol Client {
+    func dataTask(request: URLRequest, completion: @escaping (Data?, Error?) -> Void)
+}
+
+extension URLSession: Client {
+    public func dataTask(request: URLRequest, completion: @escaping (Data?, Error?) -> Void) {
+        dataTask(with: request) { data, _, error in
+            completion(data, error)
+        }.resume()
+    }
+}
+
+extension URLSession {
+    func synchronousDataTask(urlrequest: URLRequest) -> (data: Data?, response: URLResponse?, error: Error?) {
+        var data: Data?
+        var response: URLResponse?
+        var error: Error?
+
+        let semaphore = DispatchSemaphore(value: 0)
+
+        let dataTask = self.dataTask(with: urlrequest) {
+            data = $0
+            response = $1
+            error = $2
+
+            semaphore.signal()
+        }
+        dataTask.resume()
+
+        _ = semaphore.wait(timeout: .distantFuture)
+
+        return (data, response, error)
+    }
+}
+
+public struct SynchronousClient: Client {
+    private let urlSession: URLSession
+
+    public init(urlSession: URLSession) {
+        self.urlSession = urlSession
+    }
+
+    public func dataTask(request: URLRequest, completion: @escaping (Data?, Error?) -> Void) {
+        let (data, _, error) = urlSession.synchronousDataTask(urlrequest: request)
+        completion(data, error)
+    }
+}
+
 public final class OpenDayService {
     private let baseURL: URL
-    private let urlSession: URLSession
+    private let client: Client
 
     private let decoder = JSONDecoder()
 
@@ -54,9 +102,9 @@ public final class OpenDayService {
     }
 
     public init(baseURL: URL,
-                urlSession: URLSession) {
+                client: Client) {
         self.baseURL = baseURL
-        self.urlSession = urlSession
+        self.client = client
 
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         decoder.dateDecodingStrategy = .iso8601
@@ -70,7 +118,7 @@ public final class OpenDayService {
         request.httpBody = endpoint.httpBody
 
         return Future<T, Error> { promise in
-            let task = self.urlSession.dataTask(with: request) { data, _, error in
+            self.client.dataTask(request: request) { data, error in
                         guard let data = data else { return }
 
                         do {
@@ -87,7 +135,6 @@ public final class OpenDayService {
                             }
                         }
                     }
-                    task.resume()
         }
     }
 }

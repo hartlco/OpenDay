@@ -11,8 +11,15 @@ final class OpenDayRepository: EntryRepository {
 
     var didChange: (([EntriesSection]) -> Void)?
 
-    private let openDayService = OpenDayService(baseURL: URL(string: "http://192.168.10.50:8000")!,
-                                                urlSession: .shared)
+    private let client: Client
+    private let openDayService: OpenDayService
+
+    init(client: Client) {
+        self.client = client
+
+        self.openDayService = OpenDayService(baseURL: URL(string: "http://192.168.10.50:8000")!,
+                                             client: client)
+    }
 
     func load() {
         let future: Future<[EntriesSection], Error> = openDayService.perform(endpoint: .entries)

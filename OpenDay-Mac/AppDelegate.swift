@@ -15,6 +15,7 @@ import Combine
 import Secrets
 import Models
 import OpenKit
+import OpenDayService
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
@@ -25,70 +26,75 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
     var weatherCancellable: AnyCancellable?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        let repositroy = OpenDayRepository()
+        let repositroy = OpenDayRepository(client: URLSession.shared)
         entriesStore = EntriesStore(repository: repositroy)
 
 //        entriesStore.deleteAll()
 
         let contentView = ContentView().environmentObject(entriesStore)
 
-//        let openPanel = NSOpenPanel()
-//        openPanel.allowsMultipleSelection = false
-//        openPanel.canChooseDirectories = true
-//        openPanel.canCreateDirectories = false
-//        openPanel.canChooseFiles = false
-//        openPanel.begin { result in
-//            if result == NSApplication.ModalResponse.OK {
-//                guard let url = openPanel.url else {
-//                    return
-//                }
-//
-//                let manager = DayOneKitDataReader(fileURL: url)
-//                let data = manager.importedData(for: "J")
-//
-//                for entry in data.entries {
-//                    let newEntry =  repositroy.newEntry()
-//                    newEntry.title = entry.title
-//                    newEntry.body = entry.body
-//                    newEntry.entryDate = entry.convertedDate
-//
-//                    if let location = entry.location {
-//                        let newLocation = repositroy.newLocation()
-//                        newLocation.longitude = location.longitude ?? 0.0
-//                        newLocation.latitude = location.latitude ?? 0.0
-//                        newLocation.city = location.administrativeArea
-//                        newLocation.street = location.placeName
-//                        newLocation.isoCountryCode = location.countryCode
-//
-//                        newEntry.location = newLocation
-//                    }
-//
-//                    if let photos = entry.photos {
-//                        var images = Set<EntryImage>()
-//                        for photo in photos {
-//                            guard let data = try? Data(contentsOf: photo.fileURL(for: url)) else {
-//                                print("Coudlnt read file: \(photo.fileURL(for: url))")
-//                                continue
-//                            }
-//
-//                            let newPhoto = repositroy.newImage()
-//                            newPhoto.data = data
-//                            newPhoto.thumbnail = OKImage(data: data)?.thumbnail
-//                            images.insert(newPhoto)
-//                        }
-//
-//                        newEntry.images = images
-//                    }
-//
-//                    if let weather = entry.weather {
-//                        let newWeather = repositroy.newWeather()
-//                        newWeather.temperature = EntryWeather.convertToFahrenheit(from: Double(weather.temperatureCelsius))
-//                        newWeather.weatherIconString = Models.WeatherIcon.matched(from: weather.weatherCode)?.rawValue
-//                        newEntry.weather = newWeather
-//                    }
-//                }
-//            }
-//        }
+        let openPanel = NSOpenPanel()
+        openPanel.allowsMultipleSelection = false
+        openPanel.canChooseDirectories = true
+        openPanel.canCreateDirectories = false
+        openPanel.canChooseFiles = false
+        openPanel.begin { result in
+            let syncClient = SynchronousClient(urlSession: .shared)
+            let repo = OpenDayRepository(client: syncClient)
+
+            if result == NSApplication.ModalResponse.OK {
+                guard let url = openPanel.url else {
+                    return
+                }
+
+                let manager = DayOneKitDataReader(fileURL: url)
+                let data = manager.importedData(for: "J")
+
+                for entry in data.entries {
+                    var modelLocation: Models.Location? = nil
+
+                    if let location = entry.location {
+                        let coordinates = Models.Location.Coordinates(longitude: location.longitude ?? 0.0,
+                                                                      latitude: location.latitude ?? 0.0)
+
+                        modelLocation = Models.Location(coordinates: coordinates,
+                                                   isoCountryCode: location.countryCode ?? "",
+                                                   city: location.administrativeArea,
+                                                   name: location.placeName)
+                    }
+
+                    var images = [ImageResource]()
+
+                    if let photos = entry.photos {
+                        for photo in photos {
+                            guard let data = try? Data(contentsOf: photo.fileURL(for: url)) else {
+                                print("Coudlnt read file: \(photo.fileURL(for: url))")
+                                continue
+                            }
+
+                            images.append(.local(data: data, creationDate: nil))
+                        }
+                    }
+
+                    var modelWeather: Models.Weather? = nil
+
+                    if let weather = entry.weather {
+                        modelWeather = Models.Weather(weatherSymbol: Models.WeatherIcon.matched(from: weather.weatherCode),
+                                                      fahrenheit: weather.temperatureCelsius)
+                    }
+
+                    let modelEntry = Models.Entry(id: nil,
+                                             title: entry.title,
+                                             bodyText: entry.body,
+                                             date: entry.convertedDate ?? Date(),
+                                             images: images,
+                                             location: modelLocation,
+                                             weather: modelWeather,
+                                             tags: [])
+                    repo.add(entry: modelEntry)
+                }
+            }
+        }
 
         // Create the window and set the content view. 
         window = NSWindow(
